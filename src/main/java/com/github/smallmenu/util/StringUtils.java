@@ -1,11 +1,11 @@
 package com.github.smallmenu.util;
 
 /**
- * StrUtil
+ * StrUtils
  *
  * @author smallmenu
  */
-public class StrUtils {
+public class StringUtils {
     public static final String EMPTY = "";
     public static final String EMPTY_JSON = "{}";
 
@@ -15,10 +15,36 @@ public class StrUtils {
     public static final String DOT = ".";
     public static final String DOUBLE_DOT = "..";
     public static final String SLASH = "/";
+    public static final String BACKSLASH = "\\";
+    public static final String UNDERLINE = "_";
+    public static final String DASHED = "-";
+    public static final String COMMA = ",";
 
     public static final String CR = "\r";
     public static final String LF = "\n";
     public static final String CRLF = "\r\n";
+
+    public static final String HTML_NBSP = "&nbsp;";
+    public static final String HTML_AMP = "&amp;";
+    public static final String HTML_LT = "&lt;";
+    public static final String HTML_GT = "&gt;";
+
+    /**
+     * 禁止实例化
+     */
+    private StringUtils() {
+        throw new AssertionError();
+    }
+
+    /**
+     * 检测对象是否为字符串类
+     *
+     * @param value 被检查的对象
+     * @return boolean
+     */
+    public static boolean isString(Object value) {
+        return value instanceof CharSequence;
+    }
 
     /**
      * 除去字符串空白，如果字符串是<code>null</code>，依然返回<code>null</code>。

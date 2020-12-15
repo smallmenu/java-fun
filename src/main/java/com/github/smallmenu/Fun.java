@@ -2,9 +2,7 @@ package com.github.smallmenu;
 
 import com.github.smallmenu.date.DatePattern;
 import com.github.smallmenu.date.Strtotime;
-import com.github.smallmenu.util.CharUtils;
-import com.github.smallmenu.util.FunUtils;
-import com.github.smallmenu.util.StrUtils;
+import com.github.smallmenu.util.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -12,12 +10,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Java With Fun
+ * Java With Fun (ctions)
  *
  * @author smallmenu
  */
 final public class Fun {
-
     /**
      * 禁止实例化
      */
@@ -44,7 +41,7 @@ final public class Fun {
     }
 
     /**
-     * 返回系统空闲内存
+     * 返回系统空闲堆内存
      *
      * @return long
      */
@@ -53,7 +50,7 @@ final public class Fun {
     }
 
     /**
-     * 返回系统最大内存
+     * 返回系统最大堆内存，-Xmx 值
      *
      * @return long
      */
@@ -62,7 +59,7 @@ final public class Fun {
     }
 
     /**
-     * 返回系统当前使用内存
+     * 返回系统当前使用堆内存
      *
      * @return long
      */
@@ -71,7 +68,7 @@ final public class Fun {
     }
 
     /**
-     * 返回系统当前占用内存
+     * 返回系统当前已申请堆内存
      *
      * @return long
      */
@@ -80,52 +77,51 @@ final public class Fun {
     }
 
     /**
-     * 格式化返回系统当前空闲内存
+     * 格式化返回系统当前空闲堆内存
      *
-     * @param sizeFormat 格式化单位
+     * @param format 格式化单位
      * @return long
      */
-    public static long freeMemory(final String sizeFormat) {
+    public static long freeMemory(final String format) {
         long memory = Runtime.getRuntime().freeMemory();
-        return sizeFormat != null ? FunUtils.sizeFormat(memory, sizeFormat) : memory;
-
+        return format != null ? SizeUtils.format(memory, format) : memory;
     }
 
     /**
-     * 格式化返回系统使用空闲内存
+     * 格式化返回系统使用空闲堆内存
      *
-     * @param sizeFormat 格式化单位
+     * @param format 格式化单位
      * @return long
      */
-    public static long usedMemory(final String sizeFormat) {
+    public static long usedMemory(final String format) {
         long memory = totalMemory() - freeMemory();
-        return sizeFormat != null ? FunUtils.sizeFormat(memory, sizeFormat) : memory;
+        return format != null ? SizeUtils.format(memory, format) : memory;
     }
 
     /**
-     * 格式化返回系统当前最大内存
+     * 格式化返回系统当前最大堆内存
      *
-     * @param sizeFormat 格式化单位
+     * @param format 格式化单位
      * @return long
      */
-    public static long maxMemory(final String sizeFormat) {
+    public static long maxMemory(final String format) {
         long memory = Runtime.getRuntime().maxMemory();
-        return sizeFormat != null ? FunUtils.sizeFormat(memory, sizeFormat) : memory;
+        return format != null ? SizeUtils.format(memory, format) : memory;
     }
 
     /**
-     * 格式化返回系统当前占用内存
+     * 格式化返回系统当前已申请堆内存
      *
-     * @param sizeFormat 格式化单位
+     * @param format 格式化单位
      * @return long
      */
-    public static long totalMemory(final String sizeFormat) {
+    public static long totalMemory(final String format) {
         long memory = Runtime.getRuntime().totalMemory();
-        return sizeFormat != null ? FunUtils.sizeFormat(memory, sizeFormat) : memory;
+        return format != null ? SizeUtils.format(memory, format) : memory;
     }
 
     /**
-     * 检测字符串是否为空白。（null、""、不可见字符如空格）
+     * 检测字符串是否为空白。（null、""、" "、不可见字符如空格）
      *
      * @param str 待检测字符串
      * @return boolean
@@ -147,13 +143,13 @@ final public class Fun {
     }
 
     /**
-     * 检测字符串是否全部为空
+     * 检测字符串是否全部为空白
      *
      * @param strs 字符串列表
      * @return boolean
      */
     public static boolean blankAll(final CharSequence... strs) {
-        if (emptyArray(strs)) {
+        if (ArrayUtils.empty(strs)) {
             return true;
         }
 
@@ -183,7 +179,7 @@ final public class Fun {
      * @return boolean
      */
     public static boolean emptyAll(final CharSequence... strs) {
-        if (emptyArray(strs)) {
+        if (ArrayUtils.empty(strs)) {
             return true;
         }
 
@@ -197,26 +193,16 @@ final public class Fun {
     }
 
     /**
-     * 检测数组是否为空
-     *
-     * @param array  数组
-     * @param <T> T
-     * @return boolean
-     */
-    public static <T> boolean emptyArray(T[] array) {
-        return array == null || array.length == 0;
-    }
-
-    /**
      * 除去字符串头尾部的空白，如果字符串是<code>null</code>，依然返回<code>null</code>。
      * <p>
-     * 和<code>String.trim</code>不同，此方法使用<code>CharUtil.isBlankChar</code> 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * 和<code>String.trim</code>不同，此方法使用<code>CharUtil.isBlankChar</code> 来判定空白
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      *
      * @param str 待处理字符串
      * @return String
      */
     public static String trim(final CharSequence str) {
-        return (null == str) ? null : StrUtils.trim(str, 0);
+        return (null == str) ? null : StringUtils.trim(str, 0);
     }
 
     /**
@@ -226,7 +212,7 @@ final public class Fun {
      * @return String
      */
     public static String ltrim(final CharSequence str) {
-        return (null == str) ? null : StrUtils.trim(str, -1);
+        return (null == str) ? null : StringUtils.trim(str, -1);
     }
 
     /**
@@ -236,25 +222,25 @@ final public class Fun {
      * @return String
      */
     public static String rtrim(final CharSequence str) {
-        return (null == str) ? null : StrUtils.trim(str, 1);
+        return (null == str) ? null : StringUtils.trim(str, 1);
     }
 
 
     /**
      * 除去字符串头尾部的空白
-     *
+     * <p>
      * 如果是 {@code null}，返回 <code>""</code>
      *
      * @param str 待处理字符串
      * @return String
      */
     public static String trimToEmpty(final CharSequence str) {
-        return str == null ? StrUtils.EMPTY : trim(str);
+        return str == null ? StringUtils.EMPTY : trim(str);
     }
 
     /**
      * 除去字符串头尾部的空白
-     *
+     * <p>
      * 如果字符串是 {@code null} 或者 "" ，返回 {@code null}。
      *
      * @param str 待处理字符串
@@ -262,12 +248,12 @@ final public class Fun {
      */
     public static String trimToNull(final CharSequence str) {
         final String trimStr = trim(str);
-        return StrUtils.EMPTY.equals(trimStr) ? null : trimStr;
+        return StringUtils.EMPTY.equals(trimStr) ? null : trimStr;
     }
 
     /**
      * 字符串转整型
-     *
+     * <p>
      * 如果是 {@code null} 或者 ""，返回 0
      *
      * @param str 字符串
@@ -279,15 +265,15 @@ final public class Fun {
 
     /**
      * 字符串转整型
+     * <p>
+     * 如果是 {@code null} 或者 "" 或者异常，返回默认值
      *
-     * 如果是 {@code null} 或者 "" 或者失败，返回默认值
-     *
-     * @param str 字符串
+     * @param str          字符串
      * @param defalutValue 默认值
      * @return int
      */
     public static int toInt(final String str, final int defalutValue) {
-        if(str == null) {
+        if (str == null) {
             return defalutValue;
         }
         try {
@@ -299,7 +285,7 @@ final public class Fun {
 
     /**
      * 字符串转整型
-     *
+     * <p>
      * 如果是 {@code null} 或者 ""，返回 0
      *
      * @param str 字符串
@@ -311,19 +297,7 @@ final public class Fun {
 
     /**
      * 字符串转整型
-     *
-     * 如果是 {@code null} 或者 ""，返回 0
-     *
-     * @param str 字符串
-     * @return long
-     */
-    public static long longval(final String str) {
-        return toLong(str);
-    }
-
-    /**
-     * 字符串转整型
-     *
+     * <p>
      * 如果是 {@code null} 或者 ""，返回 0
      *
      * @param str 字符串
@@ -331,6 +305,26 @@ final public class Fun {
      */
     public static long toLong(final String str) {
         return toLong(str, 0);
+    }
+
+    /**
+     * 字符串转整型
+     * <p>
+     * 如果是 {@code null} 或者 "" 或者失败，返回默认值
+     *
+     * @param str          字符串
+     * @param defalutValue 默认值
+     * @return long
+     */
+    public static long toLong(final String str, final long defalutValue) {
+        if (str == null) {
+            return defalutValue;
+        }
+        try {
+            return Long.parseLong(str);
+        } catch (final NumberFormatException nfe) {
+            return defalutValue;
+        }
     }
 
     /**
@@ -350,12 +344,12 @@ final public class Fun {
     /**
      * 查找指定字符串是否包含指定字符列表中的任意一个字符
      *
-     * @param str       指定字符串
+     * @param str        指定字符串
      * @param searchStrs 被查找的字符串数组
      * @return 是否包含任意一个字符
      */
     public static boolean containsAny(CharSequence str, CharSequence... searchStrs) {
-        if (empty(str) || emptyArray(searchStrs)) {
+        if (empty(str) || ArrayUtils.empty(searchStrs)) {
             return false;
         }
         for (CharSequence checkStr : searchStrs) {
@@ -375,7 +369,7 @@ final public class Fun {
      * @return boolean
      */
     public static boolean equals(CharSequence str1, CharSequence str2) {
-        return StrUtils.equals(str1, str2, false);
+        return StringUtils.equals(str1, str2, false);
     }
 
     /**
@@ -386,18 +380,21 @@ final public class Fun {
      * @return boolean
      */
     public static boolean equalsIgnoreCase(CharSequence str1, CharSequence str2) {
-        return StrUtils.equals(str1, str2, true);
+        return StringUtils.equals(str1, str2, true);
     }
 
     /**
      * 是否以指定字符串开头
+     *
+     * 如果给定的字符串和开头字符串都为 null 则返回 true ，否则任意一个值为 null 返回 false
+     * 如果给定的字符串不为 null，开头字符串为 "" 空字符串，返回true
      *
      * @param str    被监测字符串
      * @param prefix 开头字符串
      * @return boolean
      */
     public static boolean startWith(CharSequence str, CharSequence prefix) {
-        return StrUtils.startWith(str, prefix, false);
+        return StringUtils.startWith(str, prefix, false);
     }
 
     /**
@@ -408,7 +405,7 @@ final public class Fun {
      * @return boolean
      */
     public static boolean startWithIgnoreCase(CharSequence str, CharSequence prefix) {
-        return StrUtils.startWith(str, prefix, true);
+        return StringUtils.startWith(str, prefix, true);
     }
 
     /**
@@ -419,7 +416,7 @@ final public class Fun {
      * @return boolean
      */
     public static boolean endWith(CharSequence str, CharSequence suffix) {
-        return StrUtils.endWith(str, suffix, false);
+        return StringUtils.endWith(str, suffix, false);
     }
 
     /**
@@ -430,7 +427,7 @@ final public class Fun {
      * @return boolean
      */
     public static boolean endWithIgnoreCase(CharSequence str, CharSequence suffix) {
-        return StrUtils.endWith(str, suffix, true);
+        return StringUtils.endWith(str, suffix, true);
     }
 
     /**
@@ -444,25 +441,74 @@ final public class Fun {
     }
 
     /**
-     * 字符串转整型
      *
-     * 如果是 {@code null} 或者 "" 或者失败，返回默认值
-     *
-     * @param str 字符串
-     * @param defalutValue 默认值
-     * @return long
+     * @param cs
+     * @return
      */
-    public static long toLong(final String str, final long defalutValue) {
-        if(str == null) {
-            return defalutValue;
-        }
-        try {
-            return Long.parseLong(str);
-        } catch (final NumberFormatException nfe) {
-            return defalutValue;
-        }
+    public static String str(CharSequence cs) {
+        return null == cs ? null : cs.toString();
     }
 
+    /**
+     * 移除字符串中所有给定字符串
+     *
+     * @param str         字符串
+     * @param remove 被移除的字符串
+     * @return String
+     */
+    public static String remove(final CharSequence str, final CharSequence remove) {
+        if (empty(str)) {
+            return str(str);
+        }
+        return str.toString().replace(remove, StringUtils.EMPTY);
+    }
+
+    /**
+     * 移除字符串中所有给定字符串
+     *
+     * @param str         字符串
+     * @param removes     被移除的字符串，一个或多个
+     * @return String
+     */
+    public static String removeAny(final CharSequence str, final CharSequence... removes) {
+        String result = str(str);
+        if (empty(str)) {
+            for (CharSequence remove : removes) {
+                result = remove(result, remove);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 去除字符串中指定的多个字符，如有多个则全部去除
+     *
+     * @param str   字符串
+     * @param chars 字符列表
+     * @return String
+     */
+    public static String removeAny(final CharSequence str, char... chars) {
+        if (null == str || ArrayUtils.empty(chars)) {
+            return str(str);
+        }
+        final int len = str.length();
+        if (0 == len) {
+            return str(str);
+        }
+        final StringBuilder builder = new StringBuilder(len);
+        char c;
+        for (int i = 0; i < len; i++) {
+            c = str.charAt(i);
+            if (!ArrayUtils.contains(chars, c)) {
+                builder.append(c);
+            }
+        }
+        return builder.toString();
+    }
+
+    public static String removeLines(final CharSequence str) {
+        return removeAny(str, CharUtils.CR, CharUtils.LF);
+    }
 
     /**
      * 根据格式化参数返回时间字符串
@@ -496,8 +542,8 @@ final public class Fun {
     /**
      * 根据格式化参数，时间戳参数，返回时间字符串
      *
-     * @param pattern 日期时间格式
-     * @param timestamp  时间戳
+     * @param pattern   日期时间格式
+     * @param timestamp 时间戳
      * @return String
      */
     public static String date(final String pattern, final long timestamp) {
@@ -533,5 +579,105 @@ final public class Fun {
      */
     public static long strtotime(final String dateString, final Long timestamp) {
         return Strtotime.parse(dateString, timestamp);
+    }
+
+    /**
+     * 获得随机数[0, 2^32)
+     *
+     * @return int
+     */
+    public static int randomInt() {
+        return RandomUtils.randomInt();
+    }
+
+    /**
+     * 获得指定范围内的随机数
+     *
+     * @param min 最小数（包含）
+     * @param max 最大数（不包含）
+     * @return int
+     */
+    public static int randomInt(int min, int max) {
+        return RandomUtils.randomInt(min, max);
+    }
+
+    /**
+     * 获得指定范围内的随机数 [0,limit)
+     *
+     * @param limit 限制随机数的范围，不包括这个数
+     * @return int
+     */
+    public static int randomInt(int limit) {
+        return RandomUtils.randomInt(limit);
+    }
+
+    /**
+     * 获得随机数[0, 2^32)
+     *
+     * @return int
+     */
+    public static long randomLong() {
+        return RandomUtils.randomLong();
+    }
+
+    /**
+     * 获得指定范围内的随机数
+     *
+     * @param min 最小数（包含）
+     * @param max 最大数（不包含）
+     * @return int
+     */
+    public static long randomLong(long min, long max) {
+        return RandomUtils.randomLong(min, max);
+    }
+
+    /**
+     * 获得指定范围内的随机数 [0,limit)
+     *
+     * @param limit 限制随机数的范围，不包括这个数
+     * @return 随机数
+     */
+    public static long randomLong(long limit) {
+        return RandomUtils.randomLong(limit);
+    }
+
+    /**
+     * 获得一个随机的字符串（只包含数字和字符）
+     *
+     * @param length 字符串的长度
+     * @return String
+     */
+    public static String randomString(int length) {
+        return RandomUtils.randomString(length);
+    }
+
+    /**
+     * 获得一个随机的字符串，排除指定的字符串集
+     *
+     * @param length 字符串的长度
+     * @return String
+     */
+    public static String randomStringExcepts(int length, String... excepts) {
+        return RandomUtils.randomStringExcept(length, excepts);
+    }
+
+    /**
+     * 获得一个只包含数字的字符串
+     *
+     * @param length 字符串的长度
+     * @return String
+     */
+    public static String randomStringNumber(int length) {
+        return RandomUtils.randomStringNumber(length);
+    }
+
+    /**
+     * 获得一个只包含字符的字符串
+     *
+     * @param length 字符串的长度
+     * @return String
+     */
+    public static String randomStringChar(int length) {
+        return RandomUtils.randomStringChar(length);
     }
 }
