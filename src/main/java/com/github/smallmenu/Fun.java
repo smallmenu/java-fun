@@ -4,17 +4,18 @@ import com.github.smallmenu.date.DatePattern;
 import com.github.smallmenu.date.Strtotime;
 import com.github.smallmenu.util.*;
 
+import java.lang.reflect.Array;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Java With Fun (ctions)
+ * Java With Fun(ctions)
  *
  * @author smallmenu
  */
-final public class Fun {
+public class Fun extends FunBase {
     /**
      * 禁止实例化
      */
@@ -73,6 +74,7 @@ final public class Fun {
      * @return long
      */
     public static long totalMemory() {
+        new String();
         return Runtime.getRuntime().totalMemory();
     }
 
@@ -121,6 +123,77 @@ final public class Fun {
     }
 
     /**
+     * 检测是否为空，（可匹配单一对象）
+     *
+     * 如果对象为 null，返回 true
+     * 如果对象为数组，判断数组长度
+     * 如果对象为非数组，判断是否为0
+     * 其他，返回 false
+     *
+     * @param object 数组
+     * @return boolean
+     */
+    public static boolean empty(Object object) {
+        if (object != null) {
+            if (ArrayUtils.isArray(object)) {
+                return 0 == Array.getLength(object);
+            }
+            if (object instanceof Integer) {
+                return 0 == (int) object;
+            }
+            if (object instanceof Long) {
+                return 0 == (long) object;
+            }
+            if (object instanceof Short) {
+                return 0 == (short) object;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检测字符串是否为空。（null、""）
+     *
+     * @param str 待检测字符串
+     * @return boolean
+     */
+    public static boolean empty(final CharSequence str) {
+        return str == null || str.length() == 0;
+    }
+
+    /**
+     * 检测数组是否为空。范型
+     *
+     * @param array 数组
+     * @param <T>   T
+     * @return boolean
+     */
+    public static <T> boolean empty(T[] array) {
+        return array == null || array.length == 0;
+    }
+
+    /**
+     * 检测字符串是否全部为空
+     *
+     * @param strs 字符串列表
+     * @return boolean
+     */
+    public static boolean emptyAll(final CharSequence... strs) {
+        if (empty(strs)) {
+            return true;
+        }
+
+        for (CharSequence str : strs) {
+            if (!empty(str)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * 检测字符串是否为空白。（null、""、" "、不可见字符如空格）
      *
      * @param str 待检测字符串
@@ -163,39 +236,9 @@ final public class Fun {
     }
 
     /**
-     * 检测字符串是否为空。（null、""）
-     *
-     * @param str 待检测字符串
-     * @return boolean
-     */
-    public static boolean empty(final CharSequence str) {
-        return str == null || str.length() == 0;
-    }
-
-    /**
-     * 检测字符串是否全部为空
-     *
-     * @param strs 字符串列表
-     * @return boolean
-     */
-    public static boolean emptyAll(final CharSequence... strs) {
-        if (ArrayUtils.empty(strs)) {
-            return true;
-        }
-
-        for (CharSequence str : strs) {
-            if (!empty(str)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * 除去字符串头尾部的空白，如果字符串是<code>null</code>，依然返回<code>null</code>。
+     * 除去字符串头尾部的空白，如果字符串是 null，依然返回 null
      * <p>
-     * 和<code>String.trim</code>不同，此方法使用<code>CharUtil.isBlankChar</code> 来判定空白
+     * 和 String.trim 不同，此方法使用 CharUtil.isBlankChar  来判定空白
      * 因而可以除去英文字符集之外的其它空白，如中文空格。
      *
      * @param str 待处理字符串
@@ -229,7 +272,7 @@ final public class Fun {
     /**
      * 除去字符串头尾部的空白
      * <p>
-     * 如果是 {@code null}，返回 <code>""</code>
+     * 如果是 null，返回 ""
      *
      * @param str 待处理字符串
      * @return String
@@ -241,7 +284,7 @@ final public class Fun {
     /**
      * 除去字符串头尾部的空白
      * <p>
-     * 如果字符串是 {@code null} 或者 "" ，返回 {@code null}。
+     * 如果字符串是 null 或者 "" ，返回  null。
      *
      * @param str 待处理字符串
      * @return String
@@ -253,8 +296,9 @@ final public class Fun {
 
     /**
      * 字符串转整型
-     * <p>
-     * 如果是 {@code null} 或者 ""，返回 0
+     *
+     * 如果是 null 或者 ""，返回 0
+     * 如果是小数，返回 0
      *
      * @param str 字符串
      * @return int
@@ -265,8 +309,21 @@ final public class Fun {
 
     /**
      * 字符串转整型
-     * <p>
-     * 如果是 {@code null} 或者 "" 或者异常，返回默认值
+     *
+     * 如果是 null 或者 ""，返回 0
+     * 如果是小数，返回 0
+     *
+     * @param str 字符串
+     * @return int
+     */
+    public static int intVal(final String str) {
+        return toInt(str);
+    }
+
+    /**
+     * 字符串转整型
+     *
+     * 如果是 null 或者 "" 或者异常，返回默认值
      *
      * @param str          字符串
      * @param defalutValue 默认值
@@ -286,19 +343,7 @@ final public class Fun {
     /**
      * 字符串转整型
      * <p>
-     * 如果是 {@code null} 或者 ""，返回 0
-     *
-     * @param str 字符串
-     * @return int
-     */
-    public static int intval(final String str) {
-        return toInt(str);
-    }
-
-    /**
-     * 字符串转整型
-     * <p>
-     * 如果是 {@code null} 或者 ""，返回 0
+     * 如果是  null 或者 ""，返回 0
      *
      * @param str 字符串
      * @return int
@@ -310,7 +355,7 @@ final public class Fun {
     /**
      * 字符串转整型
      * <p>
-     * 如果是 {@code null} 或者 "" 或者失败，返回默认值
+     * 如果是  null 或者 "" 或者失败，返回默认值
      *
      * @param str          字符串
      * @param defalutValue 默认值

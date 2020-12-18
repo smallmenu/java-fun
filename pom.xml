@@ -9,7 +9,7 @@
     <version>0.4</version>
 
     <name>java-fun</name>
-    <description>Java With Fun</description>
+    <description>Java With Fun(ctions)</description>
     <url>https://github.com/smallmenu/java-fun</url>
 
     <properties>
@@ -43,8 +43,8 @@
 
     <developers>
         <developer>
-            <name>Looly</name>
-            <email>loolly@gmail.com</email>
+            <name>smallmenu</name>
+            <email>smallmenu@gmail.com</email>
         </developer>
     </developers>
 

@@ -47,10 +47,10 @@ public class StringUtils {
     }
 
     /**
-     * 除去字符串空白，如果字符串是<code>null</code>，依然返回<code>null</code>。
+     * 除去字符串空白，如果字符串是null，依然返回null。
      *
      * @param str  待处理字符串
-     * @param mode 模式（左侧、全部、右侧）
+     * @param mode 模式（左侧-1、全部0、右侧1）
      * @return
      */
     public static String trim(CharSequence str, int mode) {
@@ -132,7 +132,7 @@ public class StringUtils {
     /**
      * 比较两个字符串是否相等
      * <p>
-     * 如果两个字符串相同，或者都是<code>null</code>，则返回<code>true</code>
+     * 如果两个字符串相同，或者都是 null，则返回 true
      *
      * @param str1       要比较的字符串1
      * @param str2       要比较的字符串2

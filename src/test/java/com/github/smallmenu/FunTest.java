@@ -1,13 +1,11 @@
 package com.github.smallmenu;
 
 import com.github.smallmenu.date.DatePattern;
-import com.github.smallmenu.util.ArrayUtils;
 import com.github.smallmenu.util.SizeUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +13,9 @@ import static com.github.smallmenu.Fun.*;
 
 
 public class FunTest {
+    public static class TestClass {
+    }
+
     @Test
     public void testTime() {
         Assert.assertEquals(time(), strtotime());
@@ -45,13 +46,43 @@ public class FunTest {
 
     @Test
     public void testEmpty() {
-        Assert.assertTrue(empty(""));
-        Assert.assertTrue(empty(null));
+        Object obj = null;
+        String str1 = null;
+        String str2 = "";
+        String str3 = "a";
+        String[] strs1 = {};
+        String[] strs2 = {"a", "b"};
+        long[] long1 = {};
+        long[] long2 = {1, 2};
+        Integer[] ints1 = {};
+        Integer[] ints2 = {1, 2};
+        TestClass testObj1 = null;
+        TestClass testObj2 = new TestClass();
+        int inta = 0;
+        int intb = 1;
+        Integer integera = 0;
+        Integer integerb = 1;
 
+        Assert.assertTrue(empty(obj));
+        Assert.assertTrue(empty(str1));
+        Assert.assertTrue(empty(str2));
+        Assert.assertFalse(empty(str3));
+        Assert.assertTrue(empty(strs1));
+        Assert.assertFalse(empty(strs2));
+        Assert.assertTrue(empty(long1));
+        Assert.assertFalse(empty(long2));
+        Assert.assertTrue(empty(ints1));
+        Assert.assertFalse(empty(ints2));
+        Assert.assertTrue(empty(testObj1));
+        Assert.assertFalse(empty(testObj2));
+        Assert.assertTrue(empty(inta));
+        Assert.assertFalse(empty(intb));
+        Assert.assertTrue(empty(integera));
+        Assert.assertTrue(empty(integerb));
+
+        Assert.assertTrue(empty(""));
         Assert.assertFalse(empty(" "));
         Assert.assertFalse(empty("   "));
-
-        Assert.assertTrue(emptyAll("", null));
     }
 
     @Test
@@ -93,13 +124,15 @@ public class FunTest {
     @Test
     public void testToInt() {
         Assert.assertEquals(0, toInt(""));
-        Assert.assertEquals(0, intval(""));
-        Assert.assertEquals(0, intval(" "));
-        Assert.assertEquals(0, intval(null));
-        Assert.assertEquals(1, intval("1"));
-        Assert.assertEquals(1, intval(trim(" 1 ")));
+        Assert.assertEquals(0, intVal(""));
+        Assert.assertEquals(0, intVal(" "));
+        Assert.assertEquals(0, intVal(null));
+        Assert.assertEquals(1, intVal("1"));
+        Assert.assertEquals(1, intVal(trim(" 1 ")));
 
-        Assert.assertEquals(0, intval("1.1"));
+        Assert.assertEquals(0, intVal("1.1"));
+        Assert.assertEquals(42, intVal("42"));
+        Assert.assertEquals(4, intVal("4.2"));
     }
 
     @Test
