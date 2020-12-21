@@ -42,84 +42,39 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回系统空闲堆内存
+     * 返回系统空闲堆内存，单位MB
      *
      * @return long
      */
     public static long freeMemory() {
-        return Runtime.getRuntime().freeMemory();
+        return freeMemory(SizeUtils.MB);
     }
 
     /**
-     * 返回系统最大堆内存，-Xmx 值
+     * 返回系统最大堆内存（-Xmx），单位MB
      *
      * @return long
      */
     public static long maxMemory() {
-        return Runtime.getRuntime().maxMemory();
+        return maxMemory(SizeUtils.MB);
     }
 
     /**
-     * 返回系统当前使用堆内存
+     * 返回系统当前已使用堆内存，单位MB
      *
      * @return long
      */
     public static long usedMemory() {
-        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        return usedMemory(SizeUtils.MB);
     }
 
     /**
-     * 返回系统当前已申请堆内存
+     * 返回系统当前已申请堆内存，单位MB
      *
      * @return long
      */
     public static long totalMemory() {
-        new String();
-        return Runtime.getRuntime().totalMemory();
-    }
-
-    /**
-     * 格式化返回系统当前空闲堆内存
-     *
-     * @param format 格式化单位
-     * @return long
-     */
-    public static long freeMemory(final String format) {
-        long memory = Runtime.getRuntime().freeMemory();
-        return format != null ? SizeUtils.format(memory, format) : memory;
-    }
-
-    /**
-     * 格式化返回系统使用空闲堆内存
-     *
-     * @param format 格式化单位
-     * @return long
-     */
-    public static long usedMemory(final String format) {
-        long memory = totalMemory() - freeMemory();
-        return format != null ? SizeUtils.format(memory, format) : memory;
-    }
-
-    /**
-     * 格式化返回系统当前最大堆内存
-     *
-     * @param format 格式化单位
-     * @return long
-     */
-    public static long maxMemory(final String format) {
-        long memory = Runtime.getRuntime().maxMemory();
-        return format != null ? SizeUtils.format(memory, format) : memory;
-    }
-
-    /**
-     * 格式化返回系统当前已申请堆内存
-     *
-     * @param format 格式化单位
-     * @return long
-     */
-    public static long totalMemory(final String format) {
-        long memory = Runtime.getRuntime().totalMemory();
-        return format != null ? SizeUtils.format(memory, format) : memory;
+        return totalMemory(SizeUtils.MB);
     }
 
     /**
@@ -222,7 +177,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean blankAll(final CharSequence... strs) {
-        if (ArrayUtils.empty(strs)) {
+        if (empty(strs)) {
             return true;
         }
 
@@ -247,27 +202,6 @@ public class Fun extends FunBase {
     public static String trim(final CharSequence str) {
         return (null == str) ? null : StringUtils.trim(str, 0);
     }
-
-    /**
-     * 除去字符串左侧的空白
-     *
-     * @param str 待处理字符串
-     * @return String
-     */
-    public static String ltrim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, -1);
-    }
-
-    /**
-     * 除去字符串右侧的空白
-     *
-     * @param str 待处理字符串
-     * @return String
-     */
-    public static String rtrim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, 1);
-    }
-
 
     /**
      * 除去字符串头尾部的空白
@@ -310,19 +244,6 @@ public class Fun extends FunBase {
     /**
      * 字符串转整型
      *
-     * 如果是 null 或者 ""，返回 0
-     * 如果是小数，返回 0
-     *
-     * @param str 字符串
-     * @return int
-     */
-    public static int intVal(final String str) {
-        return toInt(str);
-    }
-
-    /**
-     * 字符串转整型
-     *
      * 如果是 null 或者 "" 或者异常，返回默认值
      *
      * @param str          字符串
@@ -338,6 +259,19 @@ public class Fun extends FunBase {
         } catch (final NumberFormatException nfe) {
             return defalutValue;
         }
+    }
+
+    /**
+     * 字符串转整型
+     *
+     * 如果是 null 或者 ""，返回 0
+     * 如果是小数，返回 0
+     *
+     * @param str 字符串
+     * @return int
+     */
+    public static int intVal(final String str) {
+        return toInt(str);
     }
 
     /**
@@ -394,7 +328,7 @@ public class Fun extends FunBase {
      * @return 是否包含任意一个字符
      */
     public static boolean containsAny(CharSequence str, CharSequence... searchStrs) {
-        if (empty(str) || ArrayUtils.empty(searchStrs)) {
+        if (empty(str) || empty(searchStrs)) {
             return false;
         }
         for (CharSequence checkStr : searchStrs) {
@@ -533,7 +467,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String removeAny(final CharSequence str, char... chars) {
-        if (null == str || ArrayUtils.empty(chars)) {
+        if (null == str || empty(chars)) {
             return str(str);
         }
         final int len = str.length();
@@ -627,63 +561,23 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得随机数[0, 2^32)
+     * 获得指定范围内的随机数 [0,limit)
      *
+     * @param max 限制随机数的范围，不包括这个数
      * @return int
      */
-    public static int randomInt() {
-        return RandomUtils.randomInt();
-    }
-
-    /**
-     * 获得指定范围内的随机数
-     *
-     * @param min 最小数（包含）
-     * @param max 最大数（不包含）
-     * @return int
-     */
-    public static int randomInt(int min, int max) {
-        return RandomUtils.randomInt(min, max);
+    public static int randomInt(int max) {
+        return RandomUtils.randomInt(max);
     }
 
     /**
      * 获得指定范围内的随机数 [0,limit)
      *
-     * @param limit 限制随机数的范围，不包括这个数
-     * @return int
-     */
-    public static int randomInt(int limit) {
-        return RandomUtils.randomInt(limit);
-    }
-
-    /**
-     * 获得随机数[0, 2^32)
-     *
-     * @return int
-     */
-    public static long randomLong() {
-        return RandomUtils.randomLong();
-    }
-
-    /**
-     * 获得指定范围内的随机数
-     *
-     * @param min 最小数（包含）
-     * @param max 最大数（不包含）
-     * @return int
-     */
-    public static long randomLong(long min, long max) {
-        return RandomUtils.randomLong(min, max);
-    }
-
-    /**
-     * 获得指定范围内的随机数 [0,limit)
-     *
-     * @param limit 限制随机数的范围，不包括这个数
+     * @param max 限制随机数的范围，不包括这个数
      * @return 随机数
      */
-    public static long randomLong(long limit) {
-        return RandomUtils.randomLong(limit);
+    public static long randomLong(long max) {
+        return RandomUtils.randomLong(max);
     }
 
     /**
@@ -724,5 +618,29 @@ public class Fun extends FunBase {
      */
     public static String randomStringChar(int length) {
         return RandomUtils.randomStringChar(length);
+    }
+
+    public static String base64Encode(final CharSequence value) {
+        return null;
+    }
+
+    public static String base64Decode(final CharSequence value) {
+        return null;
+    }
+
+    public static String md5(final CharSequence value) {
+        return null;
+    }
+
+    public static String sha1(final CharSequence value) {
+        return null;
+    }
+
+    public static String sha256(final CharSequence value) {
+        return null;
+    }
+
+    public static String sha512(final CharSequence value) {
+        return null;
     }
 }

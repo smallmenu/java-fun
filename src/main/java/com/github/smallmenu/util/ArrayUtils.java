@@ -42,37 +42,6 @@ public class ArrayUtils extends ArrayBaseUtils {
     }
 
     /**
-     * 检测字符串是否为空。（null、""）
-     *
-     * @param str 待检测字符串
-     * @return boolean
-     */
-    public static boolean empty(final CharSequence str) {
-        return str == null || str.length() == 0;
-    }
-
-    /**
-     * 检测数组是否为空，数组是范型的
-     *
-     * @param array 数组
-     * @param <T>   T
-     * @return boolean
-     */
-    public static <T> boolean empty(T[] array) {
-        return array == null || array.length == 0;
-    }
-
-    public static boolean empty(Object array) {
-        if (array != null) {
-            if (isArray(array)) {
-                return 0 == Array.getLength(array);
-            }
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * 数组中是否包含元素
      *
      * @param <T>   数组元素类型

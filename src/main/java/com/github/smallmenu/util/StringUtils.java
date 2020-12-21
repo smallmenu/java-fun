@@ -141,7 +141,7 @@ public class StringUtils {
      */
     public static boolean equals(CharSequence str1, CharSequence str2, boolean ignoreCase) {
         if (null == str1) {
-            // 只有两个都为null才判断相等
+            // 只有两个都为 null 才判断相等
             return str2 == null;
         }
         if (null == str2) {

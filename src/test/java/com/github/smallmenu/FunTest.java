@@ -24,6 +24,10 @@ public class FunTest {
 
     @Test
     public void testMemory() {
+        System.out.println(maxMemoryByte());
+        System.out.println(totalMemoryByte());
+        System.out.println(freeMemoryByte());
+        System.out.println(usedMemoryByte());
         System.out.println(maxMemory());
         System.out.println(totalMemory());
         System.out.println(freeMemory());
