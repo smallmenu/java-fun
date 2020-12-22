@@ -1,4 +1,4 @@
-package com.github.smallmenu.date;
+package com.github.smallmenu.constant;
 
 /**
  * DatePattern

@@ -1,6 +1,6 @@
 package com.github.smallmenu;
 
-import com.github.smallmenu.date.DatePattern;
+import com.github.smallmenu.constant.DatePattern;
 import com.github.smallmenu.util.SizeUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -225,5 +225,34 @@ public class FunTest {
     public void testRemove() {
         Assert.assertEquals("HellWrld0", remove("HelloWorld0", "o"));
         Assert.assertEquals("HellWrld", removeAny("HelloWorld0", "o", "0"));
+    }
+
+    @Test
+    public void testRandom() {
+        System.out.println(randomInt());
+        System.out.println(randomInt(100));
+        System.out.println(randomInt(100, 10000));
+        System.out.println(randomLong());
+        System.out.println(randomLong(100));
+        System.out.println(randomLong(100, 10000));
+        System.out.println(randomString(16));
+        System.out.println(randomStringChar(16));
+        System.out.println(randomStringNumber(16));
+        System.out.println(randomStringExcepts(16, "0"));
+    }
+
+    @Test
+    public void testMd5() {
+        StringBuffer sb = new StringBuffer("123456abc");
+        Assert.assertEquals("df10ef8509dc176d733d59549e7dbfaf", md5(sb));
+        Assert.assertEquals("df10ef8509dc176d733d59549e7dbfaf", md5("123456abc"));
+    }
+
+    @Test
+    public void testSha() {
+        Assert.assertEquals("a172ffc990129fe6f68b50f6037c54a1894ee3fd", sha1("123456abc"));
+        Assert.assertEquals("931145d4ddd1811be545e4ac88a81f1fdbfaf0779c437efba16b884595274d11", sha256("123456abc"));
+        Assert.assertEquals("2545507ada3a26999b11ec0324ae76e0cdef629c4a28b24be3965d24e1c406180a8ef79626c77fb3f556bfd59ab54920", sha384("123456abc"));
+        Assert.assertEquals("8756869d440a13e93979197b5d7839c823de87c2b115bce0dee62030af3b5b63114a517f1ab02509bfefa88527369ae0ad7946990f27dcb37711a7d6fb9bc893", sha512("123456abc"));
     }
 }

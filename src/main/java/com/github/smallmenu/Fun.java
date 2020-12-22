@@ -1,6 +1,6 @@
 package com.github.smallmenu;
 
-import com.github.smallmenu.date.DatePattern;
+import com.github.smallmenu.constant.DatePattern;
 import com.github.smallmenu.date.Strtotime;
 import com.github.smallmenu.util.*;
 
@@ -620,27 +620,71 @@ public class Fun extends FunBase {
         return RandomUtils.randomStringChar(length);
     }
 
-    public static String base64Encode(final CharSequence value) {
+    public static String base64Encode(final CharSequence str) {
         return null;
     }
 
-    public static String base64Decode(final CharSequence value) {
+    public static String base64Decode(final CharSequence str) {
         return null;
     }
 
-    public static String md5(final CharSequence value) {
-        return null;
+    public static String md5(final byte[] data) {
+        return DigestUtils.md5Hex(data);
     }
 
-    public static String sha1(final CharSequence value) {
-        return null;
+    public static String md5(final String str) {
+        return DigestUtils.md5Hex(str);
     }
 
-    public static String sha256(final CharSequence value) {
-        return null;
+    public static String md5(final CharSequence str) {
+        return DigestUtils.md5Hex(str.toString());
     }
 
-    public static String sha512(final CharSequence value) {
-        return null;
+    public static String sha1(final byte[] data) {
+        return DigestUtils.sha1Hex(data);
+    }
+
+    public static String sha1(final String str) {
+        return DigestUtils.sha1Hex(str);
+    }
+
+    public static String sha1(final CharSequence str) {
+        return DigestUtils.sha1Hex(str.toString());
+    }
+
+    public static String sha256(final byte[] data) {
+        return DigestUtils.sha256Hex(data);
+    }
+
+    public static String sha256(final String str) {
+        return DigestUtils.sha256Hex(str);
+    }
+
+    public static String sha256(final CharSequence str) {
+        return DigestUtils.sha256Hex(str.toString());
+    }
+
+    public static String sha384(final byte[] data) {
+        return DigestUtils.sha384Hex(data);
+    }
+
+    public static String sha384(final String str) {
+        return DigestUtils.sha384Hex(str);
+    }
+
+    public static String sha384(final CharSequence str) {
+        return DigestUtils.sha384Hex(str.toString());
+    }
+
+    public static String sha512(final byte[] data) {
+        return DigestUtils.sha512Hex(data);
+    }
+
+    public static String sha512(final String str) {
+        return DigestUtils.sha512Hex(str);
+    }
+
+    public static String sha512(final CharSequence str) {
+        return DigestUtils.sha512Hex(str.toString());
     }
 }

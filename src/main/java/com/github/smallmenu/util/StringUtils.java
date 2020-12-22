@@ -1,5 +1,8 @@
 package com.github.smallmenu.util;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 /**
  * StrUtils
  *
@@ -155,5 +158,32 @@ public class StringUtils {
             return str1.toString().contentEquals(str2);
 
         }
+    }
+
+    /**
+     * 字符串获取 Bytes，UTF8
+     * 如果字符串为 null，返回 null
+     *
+     * @param str
+     * @return byte[]
+     */
+    public static byte[] getBytesUtf8(final CharSequence str) {
+        return getBytes(str, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 字符串获取 Bytes
+     * 如果字符串为 null，返回 null
+     *
+     * @param str
+     * @param charset
+     * @return byte[]
+     */
+    public static byte[] getBytes(final CharSequence str, final Charset charset) {
+        if (str == null) {
+            return null;
+        }
+
+        return str.toString().getBytes(charset);
     }
 }
