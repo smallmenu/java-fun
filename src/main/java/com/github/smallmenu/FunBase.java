@@ -2,7 +2,6 @@ package com.github.smallmenu;
 
 import com.github.smallmenu.util.RandomUtils;
 import com.github.smallmenu.util.SizeUtils;
-import com.github.smallmenu.util.StringUtils;
 
 public class FunBase {
     /**
@@ -200,26 +199,6 @@ public class FunBase {
      */
     public static boolean empty(boolean[] array) {
         return array == null || array.length == 0;
-    }
-
-    /**
-     * 除去字符串左侧的空白
-     *
-     * @param str 待处理字符串
-     * @return String
-     */
-    public static String ltrim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, -1);
-    }
-
-    /**
-     * 除去字符串右侧的空白
-     *
-     * @param str 待处理字符串
-     * @return String
-     */
-    public static String rtrim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, 1);
     }
 
     /**

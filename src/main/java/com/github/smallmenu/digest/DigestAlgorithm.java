@@ -6,10 +6,29 @@ package com.github.smallmenu.digest;
  * @author smallmenu
  */
 public enum DigestAlgorithm {
+    /**
+     * MD5
+     */
     MD5("MD5"),
+
+    /**
+     * SHA1
+     */
     SHA1("SHA-1"),
+
+    /**
+     * SHA256
+     */
     SHA256("SHA-256"),
+
+    /**
+     * SHA384
+     */
     SHA384("SHA-384"),
+
+    /**
+     * SHA512
+     */
     SHA512("SHA-512");
 
     private final String value;
@@ -17,16 +36,16 @@ public enum DigestAlgorithm {
     /**
      * 构造
      *
-     * @param value 算法字符串表示
+     * @param value
      */
     DigestAlgorithm(String value) {
         this.value = value;
     }
 
     /**
-     * 获取算法字符串表示
+     * value()
      *
-     * @return 算法字符串表示
+     * @return String
      */
     public String value() {
         return this.value;

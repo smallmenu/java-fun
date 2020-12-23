@@ -56,7 +56,7 @@ public class StringUtils {
      * @param mode 模式（左侧-1、全部0、右侧1）
      * @return
      */
-    public static String trim(CharSequence str, int mode) {
+    public static String trim(String str, int mode) {
         if (str == null) {
             return null;
         }
@@ -167,8 +167,65 @@ public class StringUtils {
      * @param str
      * @return byte[]
      */
+    public static byte[] getBytesUtf8(final String str) {
+        return getBytes(str, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 字符串获取 Bytes，UTF8
+     * 如果字符串为 null，返回 null
+     *
+     * @param str
+     * @return byte[]
+     */
     public static byte[] getBytesUtf8(final CharSequence str) {
         return getBytes(str, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 字符串获取 Bytes
+     * 如果字符串为 null，返回 null
+     *
+     * @param str
+     * @return byte[]
+     */
+    public static byte[] getBytes(final String str) {
+        if (str == null) {
+            return null;
+        }
+
+        return str.getBytes();
+    }
+
+    /**
+     * 字符串获取 Bytes
+     * 如果字符串为 null，返回 null
+     *
+     * @param str
+     * @return byte[]
+     */
+    public static byte[] getBytes(final CharSequence str) {
+        if (str == null) {
+            return null;
+        }
+
+        return str.toString().getBytes();
+    }
+
+    /**
+     * 字符串获取 Bytes
+     * 如果字符串为 null，返回 null
+     *
+     * @param str
+     * @param charset
+     * @return byte[]
+     */
+    public static byte[] getBytes(final String str, final Charset charset) {
+        if (str == null) {
+            return null;
+        }
+
+        return str.getBytes(charset);
     }
 
     /**
