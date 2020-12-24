@@ -3,6 +3,11 @@ package com.github.smallmenu;
 import com.github.smallmenu.util.RandomUtils;
 import com.github.smallmenu.util.SizeUtils;
 
+/**
+ * Java With Fun(ctions)
+ *
+ * @author smallmenu
+ */
 public class FunBase {
     /**
      * 禁止实例化
@@ -119,6 +124,16 @@ public class FunBase {
      */
     public static boolean empty(short value) {
         return value == 0;
+    }
+
+    /**
+     * 检测是否为空
+     *
+     * @param value
+     * @return
+     */
+    public static boolean empty(boolean value) {
+        return value == false;
     }
 
     /**

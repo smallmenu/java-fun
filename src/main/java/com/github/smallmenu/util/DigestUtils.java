@@ -6,6 +6,8 @@ import com.github.smallmenu.digest.Hex;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static com.github.smallmenu.Fun.bytes;
+
 /**
  * DigestUtils
  *
@@ -94,7 +96,7 @@ public class DigestUtils {
      * @return byte[]
      */
     public static byte[] md5(final String str) {
-        return md5(StringUtils.getBytesUtf8(str));
+        return md5(bytes(str));
     }
 
     /**
@@ -130,7 +132,7 @@ public class DigestUtils {
      * @return byte[]
      */
     public static byte[] sha1(final String str) {
-        return sha1(StringUtils.getBytesUtf8(str));
+        return sha1(bytes(str));
     }
 
     /**
@@ -166,7 +168,7 @@ public class DigestUtils {
      * @return byte[]
      */
     public static byte[] sha256(final String str) {
-        return sha256(StringUtils.getBytesUtf8(str));
+        return sha256(bytes(str));
     }
 
     /**
@@ -202,7 +204,7 @@ public class DigestUtils {
      * @return byte[]
      */
     public static byte[] sha384(final String str) {
-        return sha384(StringUtils.getBytesUtf8(str));
+        return sha384(bytes(str));
     }
 
     /**
@@ -238,7 +240,7 @@ public class DigestUtils {
      * @return byte[]
      */
     public static byte[] sha512(final String str) {
-        return sha512(StringUtils.getBytesUtf8(str));
+        return sha512(bytes(str));
     }
 
     /**

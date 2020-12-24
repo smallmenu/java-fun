@@ -5,11 +5,14 @@ import com.github.smallmenu.date.Strtotime;
 import com.github.smallmenu.util.*;
 
 import java.lang.reflect.Array;
+import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Java With Fun(ctions)
@@ -79,8 +82,52 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测是否为空，（可匹配单一对象）
+     * 字符串获取 Bytes
      *
+     * @param str 字符串
+     * @return byte[]
+     */
+    public static byte[] bytes(CharSequence str) {
+        if (str == null) {
+            return null;
+        }
+
+        return str.toString().getBytes();
+    }
+
+    /**
+     * 字符串获取 Bytes
+     *
+     * @param str     字符串
+     * @param charset 字符集
+     * @return byte[]
+     */
+    public static byte[] bytes(CharSequence str, Charset charset) {
+        if (str == null) {
+            return null;
+        }
+
+        if (null == charset) {
+            return str.toString().getBytes();
+        }
+
+        return str.toString().getBytes(charset);
+    }
+
+    /**
+     * 字符串获取 Bytes
+     *
+     * @param str     字符串
+     * @param charset 字符集
+     * @return byte[]
+     */
+    public static byte[] bytes(CharSequence str, String charset) {
+        return bytes(str, blank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * 检测是否为空，（可匹配单一对象）
+     * <p>
      * 如果对象为 null，返回 true
      * 如果对象为数组，判断数组长度
      * 如果对象为非数组，判断是否为0
@@ -102,6 +149,9 @@ public class Fun extends FunBase {
             }
             if (object instanceof Short) {
                 return 0 == (short) object;
+            }
+            if (object instanceof Boolean) {
+                return false == (boolean) object;
             }
             return false;
         }
@@ -128,6 +178,27 @@ public class Fun extends FunBase {
     public static <T> boolean empty(T[] array) {
         return array == null || array.length == 0;
     }
+
+    /**
+     * 检测是否为空。Map
+     *
+     * @param map 列表
+     * @return boolean
+     */
+    public static boolean empty(Map<?, ?> map) {
+        return map == null || map.isEmpty();
+    }
+
+    /**
+     * 检测是否为空。Collection
+     *
+     * @param collection 集合
+     * @return boolean
+     */
+    public static boolean empty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
 
     /**
      * 检测字符串是否全部为空
@@ -194,14 +265,14 @@ public class Fun extends FunBase {
     /**
      * 除去字符串头尾部的空白，如果字符串是 null，依然返回 null
      * <p>
-     * 和 String.trim 不同，此方法使用 CharUtil.isBlankChar  来判定空白
+     * 和 String.trim 不同，此方法使用 CharUtils.isBlankChar()  来判定空白
      * 因而可以除去英文字符集之外的其它空白，如中文空格。
      *
      * @param str 待处理字符串
      * @return String
      */
-    public static String trim(final String str) {
-        return (null == str) ? null : StringUtils.trim(str, 0);
+    public static String trim(final CharSequence str) {
+        return (null == str) ? null : StringUtils.trim(str, null, 0);
     }
 
     /**
@@ -210,8 +281,8 @@ public class Fun extends FunBase {
      * @param str 待处理字符串
      * @return String
      */
-    public static String ltrim(final String str) {
-        return (null == str) ? null : StringUtils.trim(str, -1);
+    public static String ltrim(final CharSequence str) {
+        return (null == str) ? null : StringUtils.trim(str, null, -1);
     }
 
     /**
@@ -220,9 +291,21 @@ public class Fun extends FunBase {
      * @param str 待处理字符串
      * @return String
      */
-    public static String rtrim(final String str) {
-        return (null == str) ? null : StringUtils.trim(str, 1);
+    public static String rtrim(final CharSequence str) {
+        return (null == str) ? null : StringUtils.trim(str, null, 1);
     }
+
+    /**
+     * 除去字符串两侧的指定字符串集合
+     *
+     * @param str
+     * @param trimStr
+     * @return
+     */
+    public static String trim(final CharSequence str, final CharSequence trimStr) {
+        return (null == str) ? null : StringUtils.trim(str, trimStr, 0);
+    }
+
 
     /**
      * 除去字符串头尾部的空白
@@ -232,7 +315,7 @@ public class Fun extends FunBase {
      * @param str 待处理字符串
      * @return String
      */
-    public static String trimToEmpty(final String str) {
+    public static String trimToEmpty(final CharSequence str) {
         return str == null ? StringUtils.EMPTY : trim(str);
     }
 
@@ -244,14 +327,14 @@ public class Fun extends FunBase {
      * @param str 待处理字符串
      * @return String
      */
-    public static String trimToNull(final String str) {
+    public static String trimToNull(final CharSequence str) {
         final String trimStr = trim(str);
         return StringUtils.EMPTY.equals(trimStr) ? null : trimStr;
     }
 
     /**
      * 字符串转整型
-     *
+     * <p>
      * 如果是 null 或者 ""，返回 0
      * 如果是小数，返回 0
      *
@@ -264,7 +347,7 @@ public class Fun extends FunBase {
 
     /**
      * 字符串转整型
-     *
+     * <p>
      * 如果是 null 或者 "" 或者异常，返回默认值
      *
      * @param str          字符串
@@ -344,19 +427,6 @@ public class Fun extends FunBase {
                 return defaultValue;
             }
         }
-    }
-
-    /**
-     * 字符串转整型
-     * <p>
-     * 如果是 null 或者 ""，返回 0
-     * 如果是小数，返回 0
-     *
-     * @param str 字符串
-     * @return int
-     */
-    public static int intVal(final String str) {
-        return toInt(str);
     }
 
     /**
@@ -509,45 +579,221 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获取字符串的长度，如果为 null 返回 0
+     * 获取字符串的字符长度，如果为 null 返回 0
+     * <p>
+     * 中英文数字均是1
      *
      * @param str 字符串
      * @return int
      */
-    public static int strlen(final CharSequence str) {
+    public static int length(final CharSequence str) {
         return str == null ? 0 : str.length();
+    }
+
+    /**
+     * 字符串转小写
+     *
+     * @param str 字符串
+     * @return String
+     */
+    public static String lowerCase(final CharSequence str) {
+        return str == null ? null : str.toString().toLowerCase();
+    }
+
+    /**
+     * 字符串转大写
+     *
+     * @param str 字符串
+     * @return String
+     */
+    public static String upperCase(final CharSequence str) {
+        return str == null ? null : str.toString().toUpperCase();
+    }
+
+    /**
+     * 截取字符串左侧指定长度
+     *
+     * @param str    字符串
+     * @param length 长度
+     * @return String
+     */
+    public static String left(final String str, final int length) {
+        if (str == null) {
+            return null;
+        }
+        if (length < 0) {
+            return StringUtils.EMPTY;
+        }
+        if (str.length() <= length) {
+            return str;
+        }
+        return str.substring(0, length);
+    }
+
+    /**
+     * 截取字符串右侧指定长度
+     *
+     * @param str    字符串
+     * @param length 长度
+     * @return String
+     */
+    public static String right(final String str, final int length) {
+        if (str == null) {
+            return null;
+        }
+        if (length < 0) {
+            return StringUtils.EMPTY;
+        }
+        if (str.length() <= length) {
+            return str;
+        }
+        return str.substring(str.length() - length);
+    }
+
+
+    /**
+     * 查找字符串，返回位置
+     *
+     * @param str       字符串
+     * @param searchStr 查找字符串
+     * @return
+     */
+    public static int indexOf(final CharSequence str, final CharSequence searchStr) {
+        if (str == null || searchStr == null) {
+            return StringUtils.INDEX_NOT_FOUND;
+        }
+        return StringUtils.indexOf(str, searchStr, 0, false);
+    }
+
+    /**
+     * 查找字符串，返回位置
+     *
+     * @param str       字符串
+     * @param searchStr 查找字符串
+     * @param start     起始位置
+     * @return int
+     */
+    public static int indexOf(final CharSequence str, final CharSequence searchStr, int start) {
+        if (str == null || searchStr == null) {
+            return StringUtils.INDEX_NOT_FOUND;
+        }
+        return StringUtils.indexOf(str, searchStr, start, false);
+    }
+
+    /**
+     * 查找字符串，返回位置，忽略大小写
+     *
+     * @param str       字符串
+     * @param searchStr 查找字符串
+     * @return int
+     */
+    public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
+        if (str == null || searchStr == null) {
+            return StringUtils.INDEX_NOT_FOUND;
+        }
+        return StringUtils.indexOf(str, searchStr, 0, true);
+    }
+
+    /**
+     * 查找字符串，返回位置，忽略大小写
+     *
+     * @param str       字符串
+     * @param searchStr 查找字符串
+     * @param start     起始位置
+     * @return int
+     */
+    public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr, int start) {
+        if (str == null || searchStr == null) {
+            return StringUtils.INDEX_NOT_FOUND;
+        }
+        return StringUtils.indexOf(str, searchStr, start, true);
     }
 
     /**
      * CharSequence toString()
      *
-     * @param cs
-     * @return
+     * @param cs 字符串
+     * @return String
      */
     public static String str(final CharSequence cs) {
         return null == cs ? null : cs.toString();
     }
 
     /**
+     * 反转字符串
+     *
+     * @param str 字符串
+     * @return
+     */
+    public static String reverse(final String str) {
+        if (str == null) {
+            return null;
+        }
+        return new StringBuilder(str).reverse().toString();
+    }
+
+    public static String strpad(final String str, final int length, final String padStr) {
+        return null;
+    }
+
+    public static String split() {
+        return null;
+    }
+
+    public static String join() {
+        return null;
+    }
+
+    public static String replace() {
+        return null;
+    }
+
+    /**
      * 移除字符串中所有给定字符串
      *
-     * @param str         字符串
+     * @param str    字符串
      * @param remove 被移除的字符串
      * @return String
      */
     public static String remove(final CharSequence str, final CharSequence remove) {
-        if (empty(str)) {
+        if (empty(str) || empty(remove)) {
             return str(str);
         }
         return str.toString().replace(remove, StringUtils.EMPTY);
     }
 
-    public static String removeStart() {
-        return null;
+    /**
+     * 移除字符串左侧中所有给定字符串
+     *
+     * @param str    字符串
+     * @param remove 被移除的字符串
+     * @return String
+     */
+    public static String removePrefix(final CharSequence str, final CharSequence remove) {
+        if (empty(str) || empty(remove)) {
+            return str(str);
+        }
+        if (str.toString().startsWith(remove.toString())) {
+            return str.toString().substring(remove.length());
+        }
+        return str.toString();
     }
 
-    public static String removeEnd() {
-        return null;
+    /**
+     * 移除字符串右侧中所有给定字符串
+     *
+     * @param str    字符串
+     * @param remove 被移除的字符串
+     * @return String
+     */
+    public static String removeSuffix(final CharSequence str, final CharSequence remove) {
+        if (empty(str) || empty(remove)) {
+            return str(str);
+        }
+        if (str.toString().endsWith(remove.toString())) {
+            return str.toString().substring(0, str.length() - remove.length());
+        }
+        return str.toString();
     }
 
     /**
@@ -559,7 +805,7 @@ public class Fun extends FunBase {
      */
     public static String removeAny(final CharSequence str, final CharSequence... removes) {
         String result = str(str);
-        if (empty(str)) {
+        if (!empty(str)) {
             for (CharSequence remove : removes) {
                 result = remove(result, remove);
             }
@@ -669,7 +915,16 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0,Integer.MAX_VALUE)
+     *
+     * @return int
+     */
+    public static int random() {
+        return RandomUtils.randomInt(Integer.MAX_VALUE);
+    }
+
+    /**
+     * 获得指定范围内的随机数 [0,max)
      *
      * @param max 限制随机数的范围，不包括这个数
      * @return int
@@ -679,7 +934,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0,max)
      *
      * @param max 限制随机数的范围，不包括这个数
      * @return 随机数
@@ -733,11 +988,7 @@ public class Fun extends FunBase {
     }
 
     public static String base64Encode(final String str) {
-        return base64Encode(StringUtils.getBytes(str));
-    }
-
-    public static String base64Encode(final CharSequence str) {
-        return base64Encode(str(str).getBytes());
+        return base64Encode(bytes(str));
     }
 
     /**
@@ -761,16 +1012,6 @@ public class Fun extends FunBase {
     }
 
     /**
-     * MD5
-     *
-     * @param str 字符串
-     * @return String
-     */
-    public static String md5(final CharSequence str) {
-        return DigestUtils.md5Hex(str.toString());
-    }
-
-    /**
      * SHA1
      *
      * @param data 字节数组
@@ -788,16 +1029,6 @@ public class Fun extends FunBase {
      */
     public static String sha1(final String str) {
         return DigestUtils.sha1Hex(str);
-    }
-
-    /**
-     * SHA1
-     *
-     * @param str 字符串
-     * @return String
-     */
-    public static String sha1(final CharSequence str) {
-        return DigestUtils.sha1Hex(str.toString());
     }
 
     /**
@@ -821,16 +1052,6 @@ public class Fun extends FunBase {
     }
 
     /**
-     * SHA256
-     *
-     * @param str 字符串
-     * @return String
-     */
-    public static String sha256(final CharSequence str) {
-        return DigestUtils.sha256Hex(str.toString());
-    }
-
-    /**
      * SHA384
      *
      * @param data 字节数组
@@ -851,16 +1072,6 @@ public class Fun extends FunBase {
     }
 
     /**
-     * SHA384
-     *
-     * @param str 字符串
-     * @return String
-     */
-    public static String sha384(final CharSequence str) {
-        return DigestUtils.sha384Hex(str.toString());
-    }
-
-    /**
      * SHA512
      *
      * @param data 字节数组
@@ -878,15 +1089,5 @@ public class Fun extends FunBase {
      */
     public static String sha512(final String str) {
         return DigestUtils.sha512Hex(str);
-    }
-
-    /**
-     * SHA512
-     *
-     * @param str 字符串
-     * @return String
-     */
-    public static String sha512(final CharSequence str) {
-        return DigestUtils.sha512Hex(str.toString());
     }
 }

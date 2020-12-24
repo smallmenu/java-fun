@@ -64,7 +64,7 @@ public class RandomUtils {
     }
 
     /**
-     * 获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0,max)
      *
      * @param max 限制随机数的范围，不包括这个数
      * @return int

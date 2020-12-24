@@ -3,12 +3,16 @@ package com.github.smallmenu.util;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import static com.github.smallmenu.Fun.empty;
+
 /**
- * StrUtils
+ * StringUtils
  *
  * @author smallmenu
  */
 public class StringUtils {
+    public static final int INDEX_NOT_FOUND = -1;
+
     public static final String EMPTY = "";
     public static final String EMPTY_JSON = "{}";
 
@@ -50,13 +54,72 @@ public class StringUtils {
     }
 
     /**
+     * 指定范围内查找字符串
+     *
+     * @param str        字符串
+     * @param searchStr  需要查找位置的字符串
+     * @param start      起始位置
+     * @param ignoreCase 是否忽略大小写
+     * @return 位置
+     * @since 3.2.1
+     */
+    public static int indexOf(final CharSequence str, final CharSequence searchStr, int start, boolean ignoreCase) {
+        if (str == null || searchStr == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (start < 0) {
+            start = 0;
+        }
+
+        final int endLimit = str.length() - searchStr.length() + 1;
+        if (start > endLimit) {
+            return INDEX_NOT_FOUND;
+        }
+        if (searchStr.length() == 0) {
+            return start;
+        }
+
+        if (!ignoreCase) {
+            return str.toString().indexOf(searchStr.toString(), start);
+        }
+
+        for (int i = start; i < endLimit; i++) {
+            if (isSubEquals(str, i, searchStr, 0, searchStr.length(), true)) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    /**
+     * 截取两个字符串的不同部分（长度一致），判断截取的子串是否相同
+     * <p>
+     * 任意一个字符串为 null 返回false
+     *
+     * @param str1       第一个字符串
+     * @param start1     第一个字符串开始的位置
+     * @param str2       第二个字符串
+     * @param start2     第二个字符串开始的位置
+     * @param length     截取长度
+     * @param ignoreCase 是否忽略大小写
+     * @return boolean
+     */
+    public static boolean isSubEquals(final CharSequence str1, int start1, CharSequence str2, int start2, int length, boolean ignoreCase) {
+        if (null == str1 || null == str2) {
+            return false;
+        }
+
+        return str1.toString().regionMatches(ignoreCase, start1, str2.toString(), start2, length);
+    }
+
+    /**
      * 除去字符串空白，如果字符串是null，依然返回null。
      *
      * @param str  待处理字符串
      * @param mode 模式（左侧-1、全部0、右侧1）
      * @return
      */
-    public static String trim(String str, int mode) {
+    public static String trim(final CharSequence str, final CharSequence trimStr, int mode) {
         if (str == null) {
             return null;
         }
@@ -67,16 +130,29 @@ public class StringUtils {
 
         // 扫描字符串头部
         if (mode <= 0) {
-            while ((start < end) && (CharUtils.isBlankChar(str.charAt(start)))) {
-                start++;
+            if (empty(trimStr)) {
+                while ((start < end) && (CharUtils.isBlankChar(str.charAt(start)))) {
+                    start++;
+                }
+            } else {
+                while ((start < end) && (trimStr.toString().indexOf(str.charAt(start)) != INDEX_NOT_FOUND)) {
+                    start++;
+                }
             }
         }
 
         // 扫描字符串尾部
         if (mode >= 0) {
-            while ((start < end) && (CharUtils.isBlankChar(str.charAt(end - 1)))) {
-                end--;
+            if (empty((trimStr))) {
+                while ((start < end) && (CharUtils.isBlankChar(str.charAt(end - 1)))) {
+                    end--;
+                }
+            } else {
+                while ((start < end) && (trimStr.toString().indexOf(str.charAt(end - 1)) != INDEX_NOT_FOUND)) {
+                    end--;
+                }
             }
+
         }
 
         if ((start > 0) || (end < length)) {
@@ -97,7 +173,7 @@ public class StringUtils {
      * @param isIgnoreCase 是否忽略大小写
      * @return boolean
      */
-    public static boolean startWith(CharSequence str, CharSequence prefix, boolean isIgnoreCase) {
+    public static boolean startWith(final CharSequence str, final CharSequence prefix, boolean isIgnoreCase) {
         if (null == str || null == prefix) {
             return null == str && null == prefix;
         }
@@ -120,7 +196,7 @@ public class StringUtils {
      * @param isIgnoreCase 是否忽略大小写
      * @return boolean
      */
-    public static boolean endWith(CharSequence str, CharSequence suffix, boolean isIgnoreCase) {
+    public static boolean endWith(final CharSequence str, final CharSequence suffix, boolean isIgnoreCase) {
         if (null == str || null == suffix) {
             return null == str && null == suffix;
         }
@@ -142,7 +218,7 @@ public class StringUtils {
      * @param ignoreCase 是否忽略大小写
      * @return boolean
      */
-    public static boolean equals(CharSequence str1, CharSequence str2, boolean ignoreCase) {
+    public static boolean equals(final CharSequence str1, final CharSequence str2, boolean ignoreCase) {
         if (null == str1) {
             // 只有两个都为 null 才判断相等
             return str2 == null;
@@ -156,91 +232,6 @@ public class StringUtils {
             return str1.toString().equalsIgnoreCase(str2.toString());
         } else {
             return str1.toString().contentEquals(str2);
-
         }
-    }
-
-    /**
-     * 字符串获取 Bytes，UTF8
-     * 如果字符串为 null，返回 null
-     *
-     * @param str
-     * @return byte[]
-     */
-    public static byte[] getBytesUtf8(final String str) {
-        return getBytes(str, StandardCharsets.UTF_8);
-    }
-
-    /**
-     * 字符串获取 Bytes，UTF8
-     * 如果字符串为 null，返回 null
-     *
-     * @param str
-     * @return byte[]
-     */
-    public static byte[] getBytesUtf8(final CharSequence str) {
-        return getBytes(str, StandardCharsets.UTF_8);
-    }
-
-    /**
-     * 字符串获取 Bytes
-     * 如果字符串为 null，返回 null
-     *
-     * @param str
-     * @return byte[]
-     */
-    public static byte[] getBytes(final String str) {
-        if (str == null) {
-            return null;
-        }
-
-        return str.getBytes();
-    }
-
-    /**
-     * 字符串获取 Bytes
-     * 如果字符串为 null，返回 null
-     *
-     * @param str
-     * @return byte[]
-     */
-    public static byte[] getBytes(final CharSequence str) {
-        if (str == null) {
-            return null;
-        }
-
-        return str.toString().getBytes();
-    }
-
-    /**
-     * 字符串获取 Bytes
-     * 如果字符串为 null，返回 null
-     *
-     * @param str
-     * @param charset
-     * @return byte[]
-     */
-    public static byte[] getBytes(final String str, final Charset charset) {
-        if (str == null) {
-            return null;
-        }
-
-        return str.getBytes(charset);
-    }
-
-    /**
-     * 字符串获取 Bytes
-     * 如果字符串为 null，返回 null
-     *
-     * @param str
-     * @param charset
-     * @return byte[]
-     */
-    public static byte[] getBytes(final CharSequence str, final Charset charset) {
-        if (str == null) {
-            return null;
-        }
-
-        return str.toString().getBytes(charset);
     }
 }

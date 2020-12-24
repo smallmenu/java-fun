@@ -1,7 +1,6 @@
 package com.github.smallmenu.util;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 
 /**
  * ArrayUtils
@@ -9,7 +8,6 @@ import java.util.Arrays;
  * @author smallmenu
  */
 public class ArrayUtils extends ArrayBaseUtils {
-
     private ArrayUtils() {
         throw new AssertionError();
     }
@@ -51,9 +49,28 @@ public class ArrayUtils extends ArrayBaseUtils {
      */
     public static <T> boolean contains(T[] array, T value) {
         if (array != null) {
-            return Arrays.binarySearch(array, value) > INDEX_NOT_FOUND;
+            return indexOf(array, value) > INDEX_NOT_FOUND;
         }
 
         return false;
+    }
+
+    /**
+     * 查找数组指定元素，返回索引
+     *
+     * @param array 数组
+     * @param value 待查找元素
+     * @param <T>   数组范型
+     * @return int
+     */
+    public static <T> int indexOf(T[] array, Object value) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (ObjectUtils.equal(value, array[i])) {
+                    return i;
+                }
+            }
+        }
+        return INDEX_NOT_FOUND;
     }
 }
