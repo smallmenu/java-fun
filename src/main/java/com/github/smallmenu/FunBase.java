@@ -2,6 +2,7 @@ package com.github.smallmenu;
 
 import com.github.smallmenu.util.RandomUtils;
 import com.github.smallmenu.util.SizeUtils;
+import com.github.smallmenu.util.StringUtils;
 
 /**
  * Java With Fun(ctions)
@@ -254,5 +255,237 @@ public class FunBase {
      */
     public static long randomLong(long min, long max) {
         return RandomUtils.randomLong(min, max);
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return 连接后的字符串
+     */
+    public static String join(boolean[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (boolean item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(byte[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (byte item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(char[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (char item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(double[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (double item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(float[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (float item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(int[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (int item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(short[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (short item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符将数组转换为字符串
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static String join(long[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (long item : array) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                sb.append(separator);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
     }
 }

@@ -10,9 +10,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Java With Fun(ctions)
@@ -136,6 +134,9 @@ public class Fun extends FunBase {
         if (object != null) {
             if (ArrayUtils.isArray(object)) {
                 return 0 == Array.getLength(object);
+            }
+            if (StringUtils.isString(object)) {
+                return object.toString().length() == 0;
             }
             if (object instanceof Integer) {
                 return 0 == (int) object;
@@ -835,9 +836,9 @@ public class Fun extends FunBase {
     /**
      * 右侧填充字符串满足最小长度，使用字符填充
      *
-     * @param str    待填充字符串
-     * @param length 长度
-     * @param padStr 填充字符
+     * @param str     待填充字符串
+     * @param length  长度
+     * @param padChar 填充字符
      * @return String
      */
     public static String padLeft(final CharSequence str, final int length, final char padChar) {
@@ -991,8 +992,96 @@ public class Fun extends FunBase {
         return null;
     }
 
-    public static String join(final CharSequence str) {
-        return null;
+    /**
+     * 以 separator 为分隔符将数组转换为字符串，范型
+     *
+     * @param array     数组
+     * @param separator 分隔符
+     * @return String
+     */
+    public static <T> String join(T[] array, CharSequence separator) {
+        if (array == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        for (T item : array) {
+            if (item != null) {
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    sb.append(separator);
+                }
+                sb.append(item);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 以 separator 为分隔符转换为字符串，支持字符串容器
+     *
+     * @param iterable  字符串容器
+     * @param separator 分隔符
+     * @return String
+     */
+    public static <T> String join(final Iterable<?> iterable, String separator) {
+        if (iterable == null) {
+            return null;
+        }
+
+        return join(iterable.iterator(), separator);
+    }
+
+    /**
+     * 以 separator 为分隔符转换为字符串，支持字符串容器
+     *
+     * @param iterator
+     * @param separator
+     * @return
+     */
+    public static String join(final Iterator<?> iterator, String separator) {
+        if (iterator == null) {
+            return null;
+        }
+
+        if (separator == null) {
+            separator = StringUtils.EMPTY;
+        }
+
+        if (!iterator.hasNext()) {
+            return StringUtils.EMPTY;
+        }
+
+        final Object first = iterator.next();
+        if (!iterator.hasNext()) {
+            return Objects.toString(first, "");
+        }
+
+        boolean isFirst = true;
+        final StringBuilder sb = new StringBuilder();
+        if (first != null) {
+            sb.append(first);
+            isFirst = false;
+        }
+
+        while (iterator.hasNext()) {
+            final Object obj = iterator.next();
+            if (obj != null) {
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    sb.append(separator);
+                }
+                sb.append(obj);
+            }
+        }
+        return sb.toString();
     }
 
     /**

@@ -15,7 +15,25 @@ import static com.github.smallmenu.Fun.*;
 
 
 public class FunTest {
-    public static class TestClass {
+    public static class ObjectClass {
+        private Integer id;
+        private String name;
+
+        public ObjectClass() {
+        }
+
+        public ObjectClass(Integer id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "ObjectClass{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
 
     @Test
@@ -63,7 +81,7 @@ public class FunTest {
         String[] strs1 = {};
         long[] long1 = {};
         Integer[] ints1 = {};
-        TestClass testObj1 = null;
+        ObjectClass testObj1 = null;
         int inta = 0;
         boolean boola = false;
         Integer integera = 0;
@@ -90,7 +108,7 @@ public class FunTest {
 
         String str3 = "a";
         String[] strs2 = {"a", "b"};
-        TestClass testObj2 = new TestClass();
+        ObjectClass testObj2 = new ObjectClass();
         long[] long2 = {1, 2};
         int intb = 1;
         boolean boolb = true;
@@ -314,6 +332,103 @@ public class FunTest {
         Assert.assertEquals("abc0000000", padRight("abc", 10, "0"));
         Assert.assertEquals("abc0101010", padRight("abc", 10, "01"));
         Assert.assertEquals("abc0120120", padRight("abc", 10, "012"));
+    }
+
+    @Test
+    public void testJoin() {
+        String a = null;
+        short[] shorts = {};
+        int[] ints = {2, 3, 4};
+        long[] longs = {2, 3, 4};
+        char[] chars = {'A', 'B', 'C'};
+        float[] floats = {1.3F, 2.4F, 3.5F};
+        double[] doubles = {1.3D, 2.4D, 3.5D};
+        boolean[] booleans = {true, false};
+        String[] strs = null;
+        String[] strs1 = {"aa", "bb", "cc"};
+        String[] strs2 = {"aa", null, "cc"};
+        String[] strs3 = {null, "bb", "cc"};
+        String[] strs4 = {};
+        String[] strs5 = {null};
+        String[] strs6 = {null, null, "cc", "dd"};
+        String[] strs7 = {null, null, "", "dd"};
+
+        List<Integer> strList1 = new ArrayList<>();
+        strList1.add(2);
+        strList1.add(3);
+        strList1.add(4);
+
+        List<String> strList2 = new ArrayList<>();
+
+        List<String> strList3 = new ArrayList<>();
+        strList3.add("aa");
+        strList3.add("bb");
+        strList3.add("cc");
+
+        List<String> strList4 = new LinkedList<>();
+        strList4.add("aa");
+        strList4.add(null);
+        strList4.add("cc");
+
+        Set<String> strSets1 = new LinkedHashSet<>();
+        strSets1.add(null);
+        strSets1.add("bb");
+        strSets1.add("cc");
+
+        Set<String> strSets2 = new LinkedHashSet<>();
+        strSets2.add(null);
+        strSets2.add(null);
+        strSets2.add("bb");
+        strSets2.add("cc");
+
+        Set<String> strSets3 = new LinkedHashSet<>();
+        strSets3.add(null);
+        strSets3.add(null);
+        strSets3.add("bb");
+        strSets3.add("cc");
+        strSets3.add(null);
+        strSets3.add("dd");
+
+        Set<String> strSets4 = new LinkedHashSet<>();
+        strSets4.add(null);
+        strSets4.add(null);
+        strSets4.add("bb");
+        strSets4.add("");
+        strSets4.add(null);
+        strSets4.add("dd");
+
+        Set<ObjectClass> objSets = new LinkedHashSet<>();
+        objSets.add(new ObjectClass(1, "aa"));
+        objSets.add(new ObjectClass(2, "bb"));
+
+        Assert.assertNull(join(strs, ","));
+        Assert.assertEquals("234", join(ints, a));
+        Assert.assertEquals("234", join(ints, null));
+        Assert.assertEquals("", join(shorts, ","));
+        Assert.assertEquals("2,3,4", join(ints, ","));
+        Assert.assertEquals("2,3,4", join(longs, ","));
+        Assert.assertEquals("A,B,C", join(chars, ","));
+        Assert.assertEquals("1.3,2.4,3.5", join(floats, ","));
+        Assert.assertEquals("1.3,2.4,3.5", join(doubles, ","));
+        Assert.assertEquals("true,false", join(booleans, ","));
+        Assert.assertEquals("aa,bb,cc", join(strs1, ","));
+        Assert.assertEquals("aa,cc", join(strs2, ","));
+        Assert.assertEquals("bb,cc", join(strs3, ","));
+        Assert.assertEquals("", join(strs4, ","));
+        Assert.assertEquals("", join(strs5, ","));
+        Assert.assertEquals("cc,dd", join(strs6, ","));
+        Assert.assertEquals(",dd", join(strs7, ","));
+
+        Assert.assertEquals("2,3,4", join(strList1, ","));
+        Assert.assertEquals("", join(strList2, ","));
+        Assert.assertEquals("aa,bb,cc", join(strList3, ","));
+        Assert.assertEquals("aa,cc", join(strList4, ","));
+        Assert.assertEquals("bb,cc", join(strSets1, ","));
+        Assert.assertEquals("bb,cc", join(strSets2, ","));
+        Assert.assertEquals("bb,cc,dd", join(strSets3, ","));
+        Assert.assertEquals("bb,,dd", join(strSets4, ","));
+
+        Assert.assertEquals("ObjectClass{id=1, name='aa'};ObjectClass{id=2, name='bb'}", join(objSets, ";"));
     }
 
     @Test
