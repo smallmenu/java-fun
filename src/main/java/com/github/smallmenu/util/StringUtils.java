@@ -1,9 +1,6 @@
 package com.github.smallmenu.util;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
-import static com.github.smallmenu.Fun.empty;
+import static com.github.smallmenu.Fun.*;
 
 /**
  * StringUtils
@@ -173,7 +170,7 @@ public class StringUtils {
      * @param isIgnoreCase 是否忽略大小写
      * @return boolean
      */
-    public static boolean startWith(final CharSequence str, final CharSequence prefix, boolean isIgnoreCase) {
+    public static boolean startsWith(final CharSequence str, final CharSequence prefix, boolean isIgnoreCase) {
         if (null == str || null == prefix) {
             return null == str && null == prefix;
         }
@@ -196,7 +193,7 @@ public class StringUtils {
      * @param isIgnoreCase 是否忽略大小写
      * @return boolean
      */
-    public static boolean endWith(final CharSequence str, final CharSequence suffix, boolean isIgnoreCase) {
+    public static boolean endsWith(final CharSequence str, final CharSequence suffix, boolean isIgnoreCase) {
         if (null == str || null == suffix) {
             return null == str && null == suffix;
         }
@@ -233,5 +230,44 @@ public class StringUtils {
         } else {
             return str1.toString().contentEquals(str2);
         }
+    }
+
+    /**
+     * 字符串替换
+     *
+     * @param str        待替换的字符串
+     * @param searchStr  查找字符串
+     * @param replaceStr 替换字符串
+     * @param max        替换次数
+     * @param ignoreCase 是否忽略大小写
+     * @return String
+     */
+    public static String replace(final CharSequence str, CharSequence searchStr, final CharSequence replaceStr, int max, final boolean ignoreCase) {
+        if (empty(str) || empty(searchStr) || replaceStr == null || max == 0) {
+            return str(str);
+        }
+
+        if (ignoreCase) {
+            searchStr = searchStr.toString().toLowerCase();
+        }
+        int start = 0;
+        int end = ignoreCase ? indexOfIgnoreCase(str, searchStr, start) : indexOf(str, searchStr, start, false);
+        if (end == INDEX_NOT_FOUND) {
+            return str.toString();
+        }
+        final int replLength = searchStr.length();
+        int increase = Math.max(searchStr.length() - replLength, 0);
+        increase *= max < 0 ? 16 : Math.min(max, 64);
+        final StringBuilder buf = new StringBuilder(str.length() + increase);
+        while (end != INDEX_NOT_FOUND) {
+            buf.append(str, start, end).append(replaceStr);
+            start = end + replLength;
+            if (--max == 0) {
+                break;
+            }
+            end = ignoreCase ? indexOfIgnoreCase(str, searchStr, start) : indexOf(str, searchStr, start, false);
+        }
+        buf.append(str, start, str.length());
+        return buf.toString();
     }
 }

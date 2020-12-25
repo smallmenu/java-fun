@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Map;
@@ -541,8 +542,8 @@ public class Fun extends FunBase {
      * @param prefix 开头字符串
      * @return boolean
      */
-    public static boolean startWith(final CharSequence str, final CharSequence prefix) {
-        return StringUtils.startWith(str, prefix, false);
+    public static boolean startsWith(final CharSequence str, final CharSequence prefix) {
+        return StringUtils.startsWith(str, prefix, false);
     }
 
     /**
@@ -552,8 +553,8 @@ public class Fun extends FunBase {
      * @param prefix 开头字符串
      * @return boolean
      */
-    public static boolean startWithIgnoreCase(final CharSequence str, final CharSequence prefix) {
-        return StringUtils.startWith(str, prefix, true);
+    public static boolean startsWithIgnoreCase(final CharSequence str, final CharSequence prefix) {
+        return StringUtils.startsWith(str, prefix, true);
     }
 
     /**
@@ -563,8 +564,8 @@ public class Fun extends FunBase {
      * @param suffix 结尾字符串
      * @return boolean
      */
-    public static boolean endWith(final CharSequence str, final CharSequence suffix) {
-        return StringUtils.endWith(str, suffix, false);
+    public static boolean endsWith(final CharSequence str, final CharSequence suffix) {
+        return StringUtils.endsWith(str, suffix, false);
     }
 
     /**
@@ -574,8 +575,8 @@ public class Fun extends FunBase {
      * @param suffix 结尾字符串
      * @return boolean
      */
-    public static boolean endWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
-        return StringUtils.endWith(str, suffix, true);
+    public static boolean endsWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
+        return StringUtils.endsWith(str, suffix, true);
     }
 
     /**
@@ -596,7 +597,7 @@ public class Fun extends FunBase {
      * @param str 字符串
      * @return String
      */
-    public static String lowerCase(final CharSequence str) {
+    public static String toLowerCase(final CharSequence str) {
         return str == null ? null : str.toString().toLowerCase();
     }
 
@@ -606,7 +607,7 @@ public class Fun extends FunBase {
      * @param str 字符串
      * @return String
      */
-    public static String upperCase(final CharSequence str) {
+    public static String toUpperCase(final CharSequence str) {
         return str == null ? null : str.toString().toUpperCase();
     }
 
@@ -723,7 +724,7 @@ public class Fun extends FunBase {
      * 反转字符串
      *
      * @param str 字符串
-     * @return
+     * @return String
      */
     public static String reverse(final String str) {
         if (str == null) {
@@ -732,7 +733,7 @@ public class Fun extends FunBase {
         return new StringBuilder(str).reverse().toString();
     }
 
-    public static String strpad(final String str, final int length, final String padStr) {
+    public static String pad(final String str, final int length, final String padStr) {
         return null;
     }
 
@@ -740,12 +741,32 @@ public class Fun extends FunBase {
         return null;
     }
 
-    public static String join() {
+    public static String join(final CharSequence str) {
         return null;
     }
 
-    public static String replace() {
-        return null;
+    /**
+     * 字符串替换
+     *
+     * @param str        待替换的字符串
+     * @param searchStr  查找字符串
+     * @param replaceStr 替换字符串
+     * @return String
+     */
+    public static String replace(final CharSequence str, final CharSequence searchStr, final CharSequence replaceStr) {
+        return StringUtils.replace(str, searchStr, replaceStr, -1, false);
+    }
+
+    /**
+     * 字符串替换
+     *
+     * @param str        待替换的字符串
+     * @param searchStr  查找字符串
+     * @param replaceStr 替换字符串
+     * @return String
+     */
+    public static String replaceIgnoreCase(final CharSequence str, final CharSequence searchStr, final CharSequence replaceStr) {
+        return StringUtils.replace(str, searchStr, replaceStr, -1, true);
     }
 
     /**
@@ -983,12 +1004,68 @@ public class Fun extends FunBase {
         return RandomUtils.randomStringChar(length);
     }
 
+    /**
+     * base64Encode
+     *
+     * @param data byte数组
+     * @return String
+     */
     public static String base64Encode(final byte[] data) {
         return Base64.getEncoder().encodeToString(data);
     }
 
+    /**
+     * base64Encode
+     *
+     * @param str 字符串
+     * @return String
+     */
     public static String base64Encode(final String str) {
         return base64Encode(bytes(str));
+    }
+
+    /**
+     * base64Decode
+     *
+     * @param str Base64字符串
+     * @return String
+     */
+    public static String base64Decode(final String str) {
+        return new String(Base64.getDecoder().decode(str));
+    }
+
+    /**
+     * base64URLEncode
+     * <p>
+     * 会将 +、/ 替换为 -、_
+     *
+     * @param data byte数组
+     * @return String
+     */
+    public static String base64URLEncode(final byte[] data) {
+        return Base64.getUrlEncoder().encodeToString(data);
+    }
+
+    /**
+     * base64URLEncode
+     * <p>
+     * 会将 +、/ 替换为 -、_
+     *
+     * @param str 字符串
+     * @return String
+     */
+    public static String base64URLEncode(final String str) {
+        return base64URLEncode(bytes(str));
+    }
+
+    /**
+     * base64URLDecode
+     *
+     * @param str Base64字符串
+     * @return String
+     */
+    public static String base64URLDecode(final String str) {
+        return new String(Base64.getUrlDecoder().decode(str));
     }
 
     /**

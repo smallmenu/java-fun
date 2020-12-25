@@ -196,25 +196,26 @@ public class FunTest {
 
     @Test
     public void testStartEndWith() {
-        Assert.assertFalse(startWith("Hello", null));
-        Assert.assertFalse(startWith(null, ""));
-        Assert.assertTrue(startWith(null, null));
-        Assert.assertTrue(startWith("Hello", ""));
-        Assert.assertTrue(startWith("Hello", "H"));
+        Assert.assertFalse(startsWith("Hello", null));
+        Assert.assertFalse(startsWith(null, ""));
+        Assert.assertTrue(startsWith(null, null));
+        Assert.assertTrue(startsWith("Hello", ""));
+        Assert.assertTrue(startsWith("Hello", "H"));
 
-        Assert.assertTrue(startWithIgnoreCase("Hello", "h"));
+        Assert.assertTrue(startsWithIgnoreCase("Hello", "h"));
 
-        Assert.assertFalse(endWith("Hello", null));
-        Assert.assertFalse(endWith(null, ""));
-        Assert.assertTrue(endWith(null, null));
-        Assert.assertTrue(endWith("Hello", ""));
-        Assert.assertTrue(endWith("Hello", "o"));
+        Assert.assertFalse(endsWith("Hello", null));
+        Assert.assertFalse(endsWith(null, ""));
+        Assert.assertTrue(endsWith(null, null));
+        Assert.assertTrue(endsWith("Hello", ""));
+        Assert.assertTrue(endsWith("Hello", "o"));
 
-        Assert.assertTrue(endWithIgnoreCase("Hello", "O"));
+        Assert.assertTrue(endsWithIgnoreCase("Hello", "O"));
     }
 
     @Test
     public void testDate() {
+        System.out.println(date());
         System.out.println(date(DatePattern.SLASH_DATETIME_PATTERN));
         System.out.println(date(DatePattern.CN_DATETIME_PATTERN));
         System.out.println(date(DatePattern.UTC_SIMPLE_DATETIME_PATTERN));
@@ -258,8 +259,8 @@ public class FunTest {
     @Test
     public void testStrLowerAndUpper() {
         String str = null;
-        Assert.assertEquals("helloworld", lowerCase("HelloWorld"));
-        Assert.assertEquals("HELLOWORLD", upperCase("helloworld"));
+        Assert.assertEquals("helloworld", toLowerCase("HelloWorld"));
+        Assert.assertEquals("HELLOWORLD", toUpperCase("helloworld"));
     }
 
     @Test
@@ -309,6 +310,16 @@ public class FunTest {
     }
 
     @Test
+    public void testReplace() {
+        Assert.assertNull(replace(null, null, null));
+        Assert.assertEquals("", replace("", null, null));
+        Assert.assertEquals("HelloWorld", replace("HelloWorld", null, null));
+        Assert.assertEquals("HellWrld", replace("HelloWorld", "o", ""));
+        Assert.assertEquals("HellKWKrld", replace("HelloWorld", "o", "K"));
+        Assert.assertEquals("Hello-orld", replaceIgnoreCase("HelloWorld", "w", "-"));
+    }
+
+    @Test
     public void testRandom() {
         System.out.println(randomInt());
         System.out.println(randomInt(100));
@@ -345,7 +356,15 @@ public class FunTest {
     @Test
     public void testBase64() {
         Assert.assertEquals("", base64Encode(StringUtils.EMPTY));
+        Assert.assertEquals("MTIzNDU2YWJj", base64Encode(bytes("123456abc")));
         Assert.assertEquals("MTIzNDU2YWJj", base64Encode("123456abc"));
         Assert.assertEquals("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo=", base64Encode("abcdefghijklmnopqrstuvwxyz"));
+        Assert.assertEquals("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M/aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1", base64Encode("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu"));
+        Assert.assertEquals("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1", base64URLEncode("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu"));
+
+        Assert.assertEquals("123456abc", base64Decode("MTIzNDU2YWJj"));
+        Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", base64Decode("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo="));
+        Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64Decode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M/aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
+        Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64URLDecode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
     }
 }
