@@ -10,7 +10,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.Map;
@@ -89,11 +88,7 @@ public class Fun extends FunBase {
      * @return byte[]
      */
     public static byte[] bytes(CharSequence str) {
-        if (str == null) {
-            return null;
-        }
-
-        return str.toString().getBytes();
+        return bytes(str, Charset.defaultCharset());
     }
 
     /**
@@ -200,14 +195,33 @@ public class Fun extends FunBase {
         return collection == null || collection.isEmpty();
     }
 
-
     /**
-     * 检测字符串是否全部为空
+     * 检测字符串列表，是否包含任意一个为空
      *
      * @param strs 字符串列表
      * @return boolean
      */
-    public static boolean emptyAll(final CharSequence... strs) {
+    public static boolean hasEmpty(CharSequence... strs) {
+        if (empty(strs)) {
+            return true;
+        }
+
+        for (CharSequence str : strs) {
+            if (empty(str)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 检测字符串列表，是否全部为空
+     *
+     * @param strs 字符串列表
+     * @return boolean
+     */
+    public static boolean allEmpty(final CharSequence... strs) {
         if (empty(strs)) {
             return true;
         }
@@ -244,12 +258,32 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测字符串是否全部为空白
+     * 检测字符串列表，是否包含任意一个空白
      *
      * @param strs 字符串列表
      * @return boolean
      */
-    public static boolean blankAll(final CharSequence... strs) {
+    public static boolean hasBlank(CharSequence... strs) {
+        if (empty(strs)) {
+            return true;
+        }
+
+        for (CharSequence str : strs) {
+            if (blank(str)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 检测字符串列表，是否全部为空白
+     *
+     * @param strs 字符串列表
+     * @return boolean
+     */
+    public static boolean allBlank(final CharSequence... strs) {
         if (empty(strs)) {
             return true;
         }
@@ -733,8 +767,224 @@ public class Fun extends FunBase {
         return new StringBuilder(str).reverse().toString();
     }
 
-    public static String pad(final String str, final int length, final String padStr) {
-        return null;
+    /**
+     * 重复字符到指定次数
+     *
+     * @param ch     字符
+     * @param repeat 次数
+     * @return String
+     */
+    public static String repeat(final char ch, final int repeat) {
+        if (repeat <= 0) {
+            return StringUtils.EMPTY;
+        }
+        final char[] buf = new char[repeat];
+        for (int i = repeat - 1; i >= 0; i--) {
+            buf[i] = ch;
+        }
+        return new String(buf);
+    }
+
+    /**
+     * 重复字符串到指定次数
+     *
+     * @param str    字符串
+     * @param repeat 次数
+     * @return String
+     */
+    public static String repeat(final CharSequence str, final int repeat) {
+        if (str == null) {
+            return null;
+        }
+
+        if (repeat <= 0) {
+            return StringUtils.EMPTY;
+        }
+
+        final int inputLength = str.length();
+        if (repeat == 1 || inputLength == 0) {
+            return str(str);
+        }
+
+        if (inputLength == 1 && repeat <= StringUtils.PAD_LIMIT) {
+            return repeat(str.charAt(0), repeat);
+        }
+
+        final int outputLength = inputLength * repeat;
+        switch (inputLength) {
+            case 1:
+                return repeat(str.charAt(0), repeat);
+            case 2:
+                final char ch0 = str.charAt(0);
+                final char ch1 = str.charAt(1);
+                final char[] output2 = new char[outputLength];
+                for (int i = repeat * 2 - 2; i >= 0; i--, i--) {
+                    output2[i] = ch0;
+                    output2[i + 1] = ch1;
+                }
+                return new String(output2);
+            default:
+                final StringBuilder buf = new StringBuilder(outputLength);
+                for (int i = 0; i < repeat; i++) {
+                    buf.append(str);
+                }
+                return buf.toString();
+        }
+    }
+
+    /**
+     * 右侧填充字符串满足最小长度，使用字符填充
+     *
+     * @param str    待填充字符串
+     * @param length 长度
+     * @param padStr 填充字符
+     * @return String
+     */
+    public static String padLeft(final CharSequence str, final int length, final char padChar) {
+        if (str == null) {
+            return null;
+        }
+
+        final int pads = length - str.length();
+        if (pads <= 0) {
+            return str.toString();
+        }
+
+        if (pads > StringUtils.PAD_LIMIT) {
+            return padLeft(str, length, String.valueOf(padChar));
+        }
+
+        return repeat(padChar, pads).concat(str.toString());
+    }
+
+
+    /**
+     * 左侧填充字符串满足最小长度，使用默认空格填充
+     *
+     * @param str    待填充字符串
+     * @param length 长度
+     * @return String
+     */
+    public static String padLeft(final CharSequence str, final int length) {
+        return padLeft(str, length, ' ');
+    }
+
+    /**
+     * 左侧填充字符串满足最小长度
+     *
+     * @param str    待填充字符串
+     * @param length 长度
+     * @param padStr 填充字符串
+     * @return String
+     */
+    public static String padLeft(final CharSequence str, final int length, String padStr) {
+        if (str == null) {
+            return null;
+        }
+
+        if (empty(padStr)) {
+            padStr = StringUtils.SPACE;
+        }
+
+        final int padLen = padStr.length();
+        final int strLen = str.length();
+        final int pads = length - strLen;
+        if (pads <= 0) {
+            return str(str);
+        }
+
+        if (padLen == 1 && pads <= StringUtils.PAD_LIMIT) {
+            return padLeft(str, length, padStr.charAt(0));
+        }
+
+        if (pads == padLen) {
+            return padStr.concat(str.toString());
+        } else if (pads < padLen) {
+            return padStr.substring(0, pads).concat(str.toString());
+        } else {
+            final char[] padding = new char[pads];
+            final char[] padChars = padStr.toCharArray();
+            for (int i = 0; i < pads; i++) {
+                padding[i] = padChars[i % padLen];
+            }
+            return new String(padding).concat(str.toString());
+        }
+    }
+
+    /**
+     * 右侧填充字符串满足最小长度。使用字符填充
+     *
+     * @param str    待填充字符
+     * @param length 长度
+     * @return String
+     */
+    public static String padRight(final CharSequence str, final int length, final char padChar) {
+        if (str == null) {
+            return null;
+        }
+
+        final int pads = length - str.length();
+        if (pads <= 0) {
+            return str(str);
+        }
+
+        if (pads > StringUtils.PAD_LIMIT) {
+            return padRight(str, length, String.valueOf(padChar));
+        }
+
+        return str.toString().concat(repeat(padChar, pads));
+    }
+
+    /**
+     * 右侧填充字符串满足最小长度。使用默认空格填充
+     *
+     * @param str    待填充字符串
+     * @param length 长度
+     * @return String
+     */
+    public static String padRight(final CharSequence str, final int length) {
+        return padRight(str, length, ' ');
+    }
+
+    /**
+     * 右侧填充字符串满足最小长度
+     *
+     * @param str    待填充字符串
+     * @param length 长度
+     * @param padStr 填充字符串
+     * @return String
+     */
+    public static String padRight(final CharSequence str, final int length, String padStr) {
+        if (str == null) {
+            return null;
+        }
+
+        if (empty(padStr)) {
+            padStr = StringUtils.SPACE;
+        }
+
+        final int padLen = padStr.length();
+        final int strLen = str.length();
+        final int pads = length - strLen;
+        if (pads <= 0) {
+            return str(str);
+        }
+        if (padLen == 1 && pads <= StringUtils.PAD_LIMIT) {
+            return padRight(str, length, padStr.charAt(0));
+        }
+
+        if (pads == padLen) {
+            return str.toString().concat(padStr);
+        } else if (pads < padLen) {
+            return str.toString().concat(padStr.substring(0, pads));
+        } else {
+            final char[] padding = new char[pads];
+            final char[] padChars = padStr.toCharArray();
+            for (int i = 0; i < pads; i++) {
+                padding[i] = padChars[i % padLen];
+            }
+            return str.toString().concat(new String(padding));
+        }
     }
 
     public static String split() {

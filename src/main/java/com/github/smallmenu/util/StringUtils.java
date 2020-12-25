@@ -33,6 +33,8 @@ public class StringUtils {
     public static final String HTML_LT = "&lt;";
     public static final String HTML_GT = "&gt;";
 
+    public static final int PAD_LIMIT = 8192;
+
     /**
      * 禁止实例化
      */

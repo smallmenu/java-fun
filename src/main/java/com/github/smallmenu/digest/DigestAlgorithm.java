@@ -34,7 +34,7 @@ public enum DigestAlgorithm {
     private final String value;
 
     /**
-     * 构造
+     * Construct
      *
      * @param value
      */

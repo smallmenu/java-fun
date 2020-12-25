@@ -47,7 +47,12 @@ public class FunTest {
         Assert.assertTrue(blank(" "));
         Assert.assertTrue(blank("   "));
 
-        Assert.assertTrue(blankAll("", " ", "   ", null));
+        Assert.assertTrue(hasBlank("a", "b", " "));
+        Assert.assertTrue(hasBlank("a", "b", ""));
+        Assert.assertTrue(hasBlank("a", "b", null));
+        Assert.assertFalse(hasBlank("a", "b", "c"));
+
+        Assert.assertTrue(allBlank("", " ", "   ", null));
     }
 
     @Test
@@ -112,8 +117,11 @@ public class FunTest {
         Assert.assertFalse(empty(" "));
         Assert.assertFalse(empty("   "));
 
-        Assert.assertFalse(emptyAll("a", ""));
-        Assert.assertTrue(emptyAll("", "", ""));
+        Assert.assertTrue(hasEmpty("a", "b", ""));
+        Assert.assertFalse(hasEmpty("a", "b", "c"));
+
+        Assert.assertFalse(allEmpty("a", ""));
+        Assert.assertTrue(allEmpty("", "", ""));
     }
 
     @Test
@@ -277,6 +285,35 @@ public class FunTest {
         Assert.assertEquals(".abc.com", removePrefix("com.abc.com", "com"));
         Assert.assertEquals("com.abc.", removeSuffix("com.abc.com", "com"));
 
+    }
+
+    @Test
+    public void testRepeat() {
+        Assert.assertEquals("", repeat('a', 0));
+        Assert.assertEquals("", repeat('a', -2));
+        Assert.assertEquals("aaa", repeat('a', 3));
+
+        Assert.assertEquals("", repeat("ab", 0));
+        Assert.assertEquals("ababab", repeat("ab", 3));
+    }
+
+    @Test
+    public void testPad() {
+        Assert.assertEquals("abc", padLeft("abc", 1));
+        Assert.assertEquals("abc", padLeft("abc", -1));
+        Assert.assertEquals("       abc", padLeft("abc", 10));
+        Assert.assertEquals("*******abc", padLeft("abc", 10, '*'));
+        Assert.assertEquals("0000000abc", padLeft("abc", 10, "0"));
+        Assert.assertEquals("0101010abc", padLeft("abc", 10, "01"));
+        Assert.assertEquals("0120120abc", padLeft("abc", 10, "012"));
+
+        Assert.assertEquals("abc", padRight("abc", 1));
+        Assert.assertEquals("abc", padRight("abc", -1));
+        Assert.assertEquals("abc       ", padRight("abc", 10));
+        Assert.assertEquals("abc*******", padRight("abc", 10, '*'));
+        Assert.assertEquals("abc0000000", padRight("abc", 10, "0"));
+        Assert.assertEquals("abc0101010", padRight("abc", 10, "01"));
+        Assert.assertEquals("abc0120120", padRight("abc", 10, "012"));
     }
 
     @Test
