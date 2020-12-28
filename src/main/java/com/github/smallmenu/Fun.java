@@ -1005,6 +1005,125 @@ public class Fun extends FunBase {
     }
 
     /**
+     * 字符串截取
+     *
+     * @param str   字符串
+     * @param start 起始索引
+     * @return String
+     */
+    public static String substring(final CharSequence str, int start) {
+        if (str == null) {
+            return null;
+        }
+
+        if (start < 0) {
+            start = str.length() + start;
+        }
+
+        if (start < 0) {
+            start = 0;
+        }
+        if (start > str.length()) {
+            return StringUtils.EMPTY;
+        }
+
+        return str.toString().substring(start);
+    }
+
+    /**
+     * 字符串截取
+     *
+     * @param str   字符串
+     * @param start 起始索引
+     * @param end   结束索引
+     * @return String
+     */
+    public static String substring(final CharSequence str, int start, int end) {
+        if (str == null) {
+            return null;
+        }
+
+        if (end < 0) {
+            end = str.length() + end;
+        }
+        if (start < 0) {
+            start = str.length() + start;
+        }
+
+        if (end > str.length()) {
+            end = str.length();
+        }
+
+        if (start > end) {
+            return StringUtils.EMPTY;
+        }
+
+        if (start < 0) {
+            start = 0;
+        }
+        if (end < 0) {
+            end = 0;
+        }
+
+        return str.toString().substring(start, end);
+    }
+
+    /**
+     * 字符串截取，等同于 substring
+     *
+     * @param str   字符串
+     * @param start 起始索引
+     * @return String
+     */
+    public static String substr(final CharSequence str, int start) {
+        return substring(str, start);
+    }
+
+    /**
+     * 字符串截取
+     *
+     * @param str    字符串
+     * @param start  起始索引
+     * @param length 截取长度
+     * @return String
+     */
+    public static String substr(final CharSequence str, int start, int length) {
+        if (str == null) {
+            return null;
+        }
+
+        int len = str.length();
+        int end;
+
+        if (start < 0) {
+            start = str.length() + start;
+        }
+
+        if (length < 0) {
+            end = len + length;
+        } else {
+            if (start + length >= len) {
+                end = len;
+            } else {
+                end = start + length;
+            }
+        }
+
+        if (start > end) {
+            return StringUtils.EMPTY;
+        }
+
+        if (start < 0) {
+            start = 0;
+        }
+        if (end < 0) {
+            end = 0;
+        }
+
+        return str.toString().substring(start, end);
+    }
+
+    /**
      * 以 separator 为分隔符将数组转换为字符串（范型）
      *
      * @param array     数组

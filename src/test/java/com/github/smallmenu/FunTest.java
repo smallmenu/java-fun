@@ -338,6 +338,20 @@ public class FunTest {
     }
 
     @Test
+    public void testSubstr() {
+        Assert.assertEquals("f", substr("abcdef", -1));
+        Assert.assertEquals("ef", substr("abcdef", -2));
+        Assert.assertEquals("f", substr("abcdef", 5));
+        Assert.assertEquals("", substr("abcdef", 6));
+        Assert.assertEquals("abc", substr("abcdef", 0, 3));
+        Assert.assertEquals("abcdef", substr("abcdef", 0, 6));
+        Assert.assertEquals("abcdef", substr("abcdef", 0, 7));
+        Assert.assertEquals("bcde", substr("abcdef", 1, -1));
+        Assert.assertEquals("cde", substr("abcdef", 2, -1));
+        Assert.assertEquals("", substr("abcdef", 4, -4));
+    }
+
+    @Test
     public void testJoin() {
         String a = null;
         short[] shorts = {};
