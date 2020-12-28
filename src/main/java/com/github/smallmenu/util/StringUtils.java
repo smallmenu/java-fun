@@ -129,7 +129,7 @@ public class StringUtils {
 
         // 扫描字符串头部
         if (mode <= 0) {
-            if (empty(trimStr)) {
+            if (trimStr == null) {
                 while ((start < end) && (CharUtils.isBlankChar(str.charAt(start)))) {
                     start++;
                 }
@@ -142,7 +142,7 @@ public class StringUtils {
 
         // 扫描字符串尾部
         if (mode >= 0) {
-            if (empty((trimStr))) {
+            if (trimStr == null) {
                 while ((start < end) && (CharUtils.isBlankChar(str.charAt(end - 1)))) {
                     end--;
                 }

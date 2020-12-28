@@ -146,11 +146,14 @@ public class FunTest {
     public void testTrim() {
         String str1 = "  HelloWorld  ";
         String str2 = "HelloWorld";
+        String str3 = "\t\tHelloWorld\t\t";
         Assert.assertEquals("HelloWorld", trim(str1));
         Assert.assertEquals("HelloWorld  ", ltrim(str1));
         Assert.assertEquals("  HelloWorld", rtrim(str1));
+        Assert.assertEquals("HelloWorld", trim(str3));
 
-        Assert.assertEquals("HelloWorld", trim(str1, ""));
+        Assert.assertEquals("  HelloWorld  ", trim(str1, ""));
+        Assert.assertEquals("HelloWorld", trim(str1, " "));
         Assert.assertEquals("HelloWorld", trim(str1, null));
         Assert.assertEquals("elloWorl", trim(str1, " Hd"));
         Assert.assertEquals("oWor", trim(str2, "Hdle"));

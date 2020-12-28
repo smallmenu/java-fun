@@ -123,9 +123,11 @@ public class Fun extends FunBase {
      * 检测是否为空，（可匹配单一对象）
      * <p>
      * 如果对象为 null，返回 true
-     * 如果对象为数组，判断数组长度
-     * 如果对象为非数组，判断是否为0
-     * 其他，返回 false
+     * 如果对象为数组，判断数组长度是否为 0
+     * 如果对象为字符串，判断字符串长度是否为 0
+     * 如果对象为数值类型，判断是否为 0
+     * 如果对象为布尔类型，判断是否为 false
+     * 其他情况，默认返回 false
      *
      * @param object 数组
      * @return boolean
@@ -148,7 +150,7 @@ public class Fun extends FunBase {
                 return 0 == (short) object;
             }
             if (object instanceof Boolean) {
-                return false == (boolean) object;
+                return !((boolean) object);
             }
             return false;
         }
@@ -156,7 +158,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测是否为空。（null、""）
+     * 检测字符串是否为空
+     * <p>
+     * 空包含 null、空字符串 ""
      *
      * @param str 待检测字符串
      * @return boolean
@@ -166,7 +170,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测是否为空。数组范型
+     * 检测数组为空（范型）
      *
      * @param array 数组
      * @param <T>   T
@@ -177,7 +181,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测是否为空。Map
+     * 检测 Map 是否为空
      *
      * @param map 列表
      * @return boolean
@@ -187,7 +191,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测是否为空。Collection
+     * 检测 Collection 是否为空
      *
      * @param collection 集合
      * @return boolean
@@ -197,7 +201,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测字符串列表，是否包含任意一个为空
+     * 检测字符串列表，是否包含有空值
      *
      * @param strs 字符串列表
      * @return boolean
@@ -237,7 +241,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测字符串是否为空白。（null、""、" "、不可见字符如空格）
+     * 检测字符串是否为空白
+     * <p>
+     * 空白包含：null、""、" "、以及不可见字符如缩紧
      *
      * @param str 待检测字符串
      * @return boolean
@@ -259,7 +265,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测字符串列表，是否包含任意一个空白
+     * 检测字符串列表，是否包含空白
+     * <p>
+     * 空白包含：null、""、" "、以及不可见字符如缩紧
      *
      * @param strs 字符串列表
      * @return boolean
@@ -302,7 +310,6 @@ public class Fun extends FunBase {
      * 除去字符串头尾部的空白，如果字符串是 null，依然返回 null
      * <p>
      * 和 String.trim 不同，此方法使用 CharUtils.isBlankChar()  来判定空白
-     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      *
      * @param str 待处理字符串
      * @return String
@@ -333,10 +340,12 @@ public class Fun extends FunBase {
 
     /**
      * 除去字符串两侧的指定字符串集合
+     * <p>
+     * 如果 trimStr 为空，则默认使用空白符号
      *
-     * @param str
-     * @param trimStr
-     * @return
+     * @param str     待处理字符串
+     * @param trimStr 需要处理的字符串集合
+     * @return String
      */
     public static String trim(final CharSequence str, final CharSequence trimStr) {
         return (null == str) ? null : StringUtils.trim(str, trimStr, 0);
@@ -344,7 +353,7 @@ public class Fun extends FunBase {
 
 
     /**
-     * 除去字符串头尾部的空白
+     * 除去字符串头尾部的空白，并处理 null 值
      * <p>
      * 如果是 null，返回 ""
      *
@@ -356,9 +365,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 除去字符串头尾部的空白
+     * 除去字符串头尾部的空白，并处理 null 和空字符串 ""
      * <p>
-     * 如果字符串是 null 或者 "" ，返回  null。
+     * 如果字符串是 null 或者 "" ，返回  null
      *
      * @param str 待处理字符串
      * @return String
@@ -371,7 +380,7 @@ public class Fun extends FunBase {
     /**
      * 字符串转整型
      * <p>
-     * 如果是 null 或者 ""，返回 0
+     * 如果是 null 或者 "" 或者异常，返回 0
      * 如果是小数，返回 0
      *
      * @param str 字符串
@@ -468,7 +477,7 @@ public class Fun extends FunBase {
     /**
      * 字符串转整型
      * <p>
-     * 如果是  null 或者 ""，返回 0
+     * 如果是  null 或者 "" 或异常，返回 0
      *
      * @param str 字符串
      * @return int
@@ -480,7 +489,7 @@ public class Fun extends FunBase {
     /**
      * 字符串转整型
      * <p>
-     * 如果是  null 或者 "" 或者失败，返回默认值
+     * 如果是  null 或者 "" 或者异常，返回默认值
      *
      * @param str          字符串
      * @param defalutValue 默认值
@@ -498,7 +507,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串是否包含
+     * 查找字符串是否包含指定字符串
      *
      * @param str       字符串
      * @param searchStr 被查找的字符串
@@ -512,7 +521,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串是否包含
+     * 查找字符串是否包含指定字符串，忽略大小写
      *
      * @param str       字符串
      * @param searchStr 被查找的字符串
@@ -526,7 +535,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找指定字符串是否包含指定字符列表中的任意一个字符
+     * 查找指定字符串，是否包含指定字符列表中的任意一个字符串
      *
      * @param str        指定字符串
      * @param searchStrs 被查找的字符串数组
@@ -557,7 +566,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 比较两个字符串（大小写不敏感）
+     * 比较两个字符串，忽略大小写
      *
      * @param str1 要比较的字符串1
      * @param str2 要比较的字符串2
@@ -568,10 +577,10 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 是否以指定字符串开头
+     * 检测字符串是否以指定字符串开头
      * <p>
      * 如果给定的字符串和开头字符串都为 null 则返回 true ，否则任意一个值为 null 返回 false
-     * 如果给定的字符串不为 null，开头字符串为 "" 空字符串，返回true
+     * 如果给定的字符串不为 null，prefix 字符串为 "" 空字符串，返回true
      *
      * @param str    被监测字符串
      * @param prefix 开头字符串
@@ -594,6 +603,9 @@ public class Fun extends FunBase {
 
     /**
      * 是否以指定字符串结尾
+     * <p>
+     * 如果给定的字符串和开头字符串都为 null 则返回 true ，否则任意一个值为 null 返回 false
+     * 如果给定的字符串不为 null，suffix 字符串为 "" 空字符串，返回true
      *
      * @param str    被监测字符串
      * @param suffix 结尾字符串
@@ -617,7 +629,7 @@ public class Fun extends FunBase {
     /**
      * 获取字符串的字符长度，如果为 null 返回 0
      * <p>
-     * 中英文数字均是1
+     * 使用 String.lenght 方法， 中英文数字均是 1
      *
      * @param str 字符串
      * @return int
@@ -647,7 +659,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 截取字符串左侧指定长度
+     * 截取字符串左侧指定长度的子串
      *
      * @param str    字符串
      * @param length 长度
@@ -667,7 +679,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 截取字符串右侧指定长度
+     * 截取字符串右侧指定长度的子串
      *
      * @param str    字符串
      * @param length 长度
@@ -686,13 +698,12 @@ public class Fun extends FunBase {
         return str.substring(str.length() - length);
     }
 
-
     /**
-     * 查找字符串，返回位置
+     * 查找字符串，返回索引位置
      *
      * @param str       字符串
      * @param searchStr 查找字符串
-     * @return
+     * @return int
      */
     public static int indexOf(final CharSequence str, final CharSequence searchStr) {
         if (str == null || searchStr == null) {
@@ -702,7 +713,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回位置
+     * 查找字符串，返回索引位置
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -717,7 +728,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回位置，忽略大小写
+     * 查找字符串，返回索引位置，忽略大小写
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -731,7 +742,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回位置，忽略大小写
+     * 查找字符串，返回索引位置，忽略大小写
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -746,7 +757,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * CharSequence toString()
+     * CharSequence 转 String
      *
      * @param cs 字符串
      * @return String
@@ -765,6 +776,7 @@ public class Fun extends FunBase {
         if (str == null) {
             return null;
         }
+
         return new StringBuilder(str).reverse().toString();
     }
 
@@ -834,7 +846,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 右侧填充字符串满足最小长度，使用字符填充
+     * 右侧填充字符串到最小长度，使用单一字符填充
      *
      * @param str     待填充字符串
      * @param length  长度
@@ -860,7 +872,7 @@ public class Fun extends FunBase {
 
 
     /**
-     * 左侧填充字符串满足最小长度，使用默认空格填充
+     * 左侧填充字符串到指定长度，使用默认空格填充
      *
      * @param str    待填充字符串
      * @param length 长度
@@ -871,7 +883,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 左侧填充字符串满足最小长度
+     * 左侧填充字符串到指定长度
      *
      * @param str    待填充字符串
      * @param length 长度
@@ -913,7 +925,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 右侧填充字符串满足最小长度。使用字符填充
+     * 右侧填充字符串到指定长度。使用单一字符填充
      *
      * @param str    待填充字符
      * @param length 长度
@@ -937,7 +949,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 右侧填充字符串满足最小长度。使用默认空格填充
+     * 右侧填充字符串到指定长度。使用默认空格填充
      *
      * @param str    待填充字符串
      * @param length 长度
@@ -948,7 +960,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 右侧填充字符串满足最小长度
+     * 右侧填充字符串到指定长度
      *
      * @param str    待填充字符串
      * @param length 长度
@@ -993,7 +1005,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 以 separator 为分隔符将数组转换为字符串，范型
+     * 以 separator 为分隔符将数组转换为字符串（范型）
      *
      * @param array     数组
      * @param separator 分隔符
@@ -1024,7 +1036,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 以 separator 为分隔符转换为字符串，支持字符串容器
+     * 以 separator 为分隔符转换为字符串，支持字符串类容器
      *
      * @param iterable  字符串容器
      * @param separator 分隔符
@@ -1041,9 +1053,9 @@ public class Fun extends FunBase {
     /**
      * 以 separator 为分隔符转换为字符串，支持字符串容器
      *
-     * @param iterator
-     * @param separator
-     * @return
+     * @param iterator  迭代器
+     * @param separator 分隔符
+     * @return String
      */
     public static String join(final Iterator<?> iterator, String separator) {
         if (iterator == null) {
@@ -1097,7 +1109,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 字符串替换
+     * 字符串替换，忽略大小写
      *
      * @param str        待替换的字符串
      * @param searchStr  查找字符串
@@ -1157,7 +1169,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 移除字符串中所有给定字符串
+     * 移除字符串中所有给定字符串列表
      *
      * @param str     字符串
      * @param removes 被移除的字符串，一个或多个
@@ -1174,7 +1186,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 去除字符串中指定的多个字符，如有多个则全部去除
+     * 去除字符串中指定的多个字符集
      *
      * @param str   字符串
      * @param chars 字符列表
@@ -1199,12 +1211,20 @@ public class Fun extends FunBase {
         return builder.toString();
     }
 
+    /**
+     * 去除字符串中换行符
+     *
+     * @param str 字符串
+     * @return String
+     */
     public static String removeLines(final CharSequence str) {
         return removeAny(str, CharUtils.CR, CharUtils.LF);
     }
 
     /**
-     * 根据格式化参数返回时间字符串
+     * 返回默认日期时间字符串
+     * <p>
+     * 默认格式：yyyy-MM-dd HH:mm:ss
      *
      * @return String
      */
@@ -1213,7 +1233,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 根据格式化参数返回时间字符串
+     * 根据时间戳，返回默认日期时间字符串
+     * <p>
+     * 默认格式：yyyy-MM-dd HH:mm:ss
      *
      * @param timestamp 时间戳
      * @return String
@@ -1223,7 +1245,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 根据格式化参数返回时间字符串
+     * 根据格式化参数返回日期时间字符串
      *
      * @param pattern 日期时间格式
      * @return String
@@ -1245,7 +1267,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回当前默认时间戳
+     * 返回当前 Unix 时间戳
      *
      * @return long
      */
@@ -1254,7 +1276,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 通用格式日期时间字符串自动转换时间戳
+     * 将通用格式的日期时间字符串，自动为转换时间戳
      *
      * @param dateString 日期时间字符串
      * @return long
@@ -1266,16 +1288,18 @@ public class Fun extends FunBase {
     /**
      * 以提供的时间戳为基准，返回简单表达式计算后的时间戳
      *
-     * @param dateString 时期时间字符串
-     * @param timestamp  时间戳
+     * @param expString 时期时间字符串
+     * @param timestamp 时间戳
      * @return long
      */
-    public static long strtotime(final String dateString, final Long timestamp) {
-        return Strtotime.parse(dateString, timestamp);
+    public static long strtotime(final String expString, final Long timestamp) {
+        return Strtotime.parse(expString, timestamp);
     }
 
     /**
-     * 获得指定范围内的随机数 [0,Integer.MAX_VALUE)
+     * 获得指定范围内的随机数
+     * <p>
+     * 默认 [0,Integer.MAX_VALUE)
      *
      * @return int
      */
@@ -1284,9 +1308,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得指定范围内的随机数 [0,max)
+     * 获得指定范围内的随机数 [0, max)
      *
-     * @param max 限制随机数的范围，不包括这个数
+     * @param max 限制随机数的范围
      * @return int
      */
     public static int randomInt(int max) {
@@ -1294,9 +1318,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得指定范围内的随机数 [0,max)
+     * 获得指定范围内的随机数 [0, max)
      *
-     * @param max 限制随机数的范围，不包括这个数
+     * @param max 限制随机数的范围
      * @return 随机数
      */
     public static long randomLong(long max) {
@@ -1304,7 +1328,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得一个随机的字符串（只包含数字和字符）
+     * 获得一个指定长度随机的字符串（只包含数字和字符）
      *
      * @param length 字符串的长度
      * @return String
@@ -1314,7 +1338,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得一个随机的字符串，排除指定的字符串集
+     * 获得一个指定长度随机的字符串，排除指定的字符串列表集
      *
      * @param length 字符串的长度
      * @return String
@@ -1324,7 +1348,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得一个只包含数字的字符串
+     * 获得一个指定长度只包含数字的随机字符串
      *
      * @param length 字符串的长度
      * @return String
@@ -1334,7 +1358,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 获得一个只包含字符的字符串
+     * 获得一个指定长度只包含字符的随机字符串
      *
      * @param length 字符串的长度
      * @return String
