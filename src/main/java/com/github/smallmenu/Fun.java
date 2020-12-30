@@ -206,7 +206,7 @@ public class Fun extends FunBase {
      * @param strs 字符串列表
      * @return boolean
      */
-    public static boolean hasEmpty(CharSequence... strs) {
+    public static boolean emptyAny(CharSequence... strs) {
         if (empty(strs)) {
             return true;
         }
@@ -226,7 +226,7 @@ public class Fun extends FunBase {
      * @param strs 字符串列表
      * @return boolean
      */
-    public static boolean allEmpty(final CharSequence... strs) {
+    public static boolean emptyAll(final CharSequence... strs) {
         if (empty(strs)) {
             return true;
         }
@@ -272,7 +272,7 @@ public class Fun extends FunBase {
      * @param strs 字符串列表
      * @return boolean
      */
-    public static boolean hasBlank(CharSequence... strs) {
+    public static boolean blankAny(CharSequence... strs) {
         if (empty(strs)) {
             return true;
         }
@@ -292,7 +292,7 @@ public class Fun extends FunBase {
      * @param strs 字符串列表
      * @return boolean
      */
-    public static boolean allBlank(final CharSequence... strs) {
+    public static boolean blankAll(final CharSequence... strs) {
         if (empty(strs)) {
             return true;
         }
@@ -315,7 +315,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String trim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, null, 0);
+        return (null == str) ? null : StringUtils.trim(str);
     }
 
     /**
@@ -781,6 +781,43 @@ public class Fun extends FunBase {
     }
 
     /**
+     * 数组或对象转 String
+     *
+     * @param obj 数组或对象
+     * @return String
+     */
+    public static String string(Object obj) {
+        if (null == obj) {
+            return null;
+        }
+
+        if (obj instanceof long[]) {
+            return Arrays.toString((long[]) obj);
+        } else if (obj instanceof int[]) {
+            return Arrays.toString((int[]) obj);
+        } else if (obj instanceof short[]) {
+            return Arrays.toString((short[]) obj);
+        } else if (obj instanceof char[]) {
+            return Arrays.toString((char[]) obj);
+        } else if (obj instanceof byte[]) {
+            return Arrays.toString((byte[]) obj);
+        } else if (obj instanceof boolean[]) {
+            return Arrays.toString((boolean[]) obj);
+        } else if (obj instanceof float[]) {
+            return Arrays.toString((float[]) obj);
+        } else if (obj instanceof double[]) {
+            return Arrays.toString((double[]) obj);
+        } else if (ArrayUtils.isArray(obj)) {
+            try {
+                return Arrays.deepToString((Object[]) obj);
+            } catch (Exception ignore) {
+            }
+        }
+
+        return obj.toString();
+    }
+
+    /**
      * 重复字符到指定次数
      *
      * @param ch     字符
@@ -1000,8 +1037,208 @@ public class Fun extends FunBase {
         }
     }
 
-    public static String split() {
-        return null;
+    /**
+     * 分割字符串为数组
+     *
+     * @param str 字符串
+     * @return String[]
+     */
+    public static String[] split(final CharSequence str) {
+        if (str == null) {
+            return new String[]{};
+        }
+
+        return StringUtils.split(str.toString(), 0, false, false);
+    }
+
+    /**
+     * 分割字符串为数组
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return String[]
+     */
+    public static String[] split(final CharSequence str, final char seperator) {
+        if (str == null) {
+            return new String[]{};
+        }
+
+        return StringUtils.split(str.toString(), seperator, 0, false, false, false);
+    }
+
+    /**
+     * 分割字符串为数组
+     *
+     * @param str       字符串
+     * @param seperator 分割字符串
+     * @return String[]
+     */
+    public static String[] split(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return new String[]{};
+        }
+
+        if (seperator == null) {
+            return StringUtils.split(str.toString(), 0, false, false);
+        } else {
+            return StringUtils.split(str.toString(), seperator.toString(), 0, false, false, false);
+        }
+    }
+
+    /**
+     * 分割字符串为列表
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return String[]
+     */
+    public static List<String> splitToList(final CharSequence str) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        return StringUtils.splitToList(str.toString(), 0, false, false);
+    }
+
+    /**
+     * 分割字符串为列表
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return String[]
+     */
+    public static List<String> splitToList(final CharSequence str, final char seperator) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        return StringUtils.splitToList(str.toString(), seperator, 0, false, false, false);
+    }
+
+    /**
+     * 分割字符串为列表
+     *
+     * @param str       字符串
+     * @param seperator 分割字符串
+     * @return String[]
+     */
+    public static List<String> splitToList(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        if (seperator == null) {
+            return StringUtils.splitToList(str.toString(), 0, false, false);
+        } else {
+            return StringUtils.splitToList(str.toString(), seperator.toString(), 0, false, false, false);
+        }
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return String[]
+     */
+    public static String[] splitTrim(final CharSequence str) {
+        if (str == null) {
+            return new String[]{};
+        }
+
+        return StringUtils.split(str.toString(), 0, true, true);
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return String[]
+     */
+    public static String[] splitTrim(final CharSequence str, final char seperator) {
+        if (str == null) {
+            return new String[]{};
+        }
+
+        return StringUtils.split(str.toString(), seperator, 0, true, true, false);
+    }
+
+    /**
+     * 分割字符串为数组
+     *
+     * @param str       字符串
+     * @param seperator 分割字符串
+     * @return String[]
+     */
+    public static String[] splitTrim(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return new String[]{};
+        }
+
+        if (seperator == null) {
+            return StringUtils.split(str.toString(), 0, true, true);
+        } else {
+            return StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+        }
+    }
+
+    /**
+     * 分割字符串为列表
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return String[]
+     */
+    public static List<String> splitTrimToList(final CharSequence str) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        return StringUtils.splitToList(str.toString(), 0, true, true);
+    }
+
+    /**
+     * 分割字符串为列表
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return String[]
+     */
+    public static List<String> splitTrimToList(final CharSequence str, final char seperator) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        return StringUtils.splitToList(str.toString(), seperator, 0, true, true, false);
+    }
+
+    /**
+     * 分割字符串为列表
+     *
+     * @param str       字符串
+     * @param seperator 分割字符串
+     * @return String[]
+     */
+    public static List<String> splitTrimToList(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        if (seperator == null) {
+            return StringUtils.splitToList(str.toString(), 0, true, true);
+        } else {
+            return StringUtils.splitToList(str.toString(), seperator.toString(), 0, true, true, false);
+        }
     }
 
     /**
@@ -1167,6 +1404,10 @@ public class Fun extends FunBase {
         }
 
         return join(iterable.iterator(), separator);
+    }
+
+    public static String regexMatch() {
+        return null;
     }
 
     /**

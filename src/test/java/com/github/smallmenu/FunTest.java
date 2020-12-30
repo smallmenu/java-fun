@@ -65,12 +65,12 @@ public class FunTest {
         Assert.assertTrue(blank(" "));
         Assert.assertTrue(blank("   "));
 
-        Assert.assertTrue(hasBlank("a", "b", " "));
-        Assert.assertTrue(hasBlank("a", "b", ""));
-        Assert.assertTrue(hasBlank("a", "b", null));
-        Assert.assertFalse(hasBlank("a", "b", "c"));
+        Assert.assertTrue(blankAny("a", "b", " "));
+        Assert.assertTrue(blankAny("a", "b", ""));
+        Assert.assertTrue(blankAny("a", "b", null));
+        Assert.assertFalse(blankAny("a", "b", "c"));
 
-        Assert.assertTrue(allBlank("", " ", "   ", null));
+        Assert.assertTrue(blankAll("", " ", "   ", null));
     }
 
     @Test
@@ -135,11 +135,11 @@ public class FunTest {
         Assert.assertFalse(empty(" "));
         Assert.assertFalse(empty("   "));
 
-        Assert.assertTrue(hasEmpty("a", "b", ""));
-        Assert.assertFalse(hasEmpty("a", "b", "c"));
+        Assert.assertTrue(emptyAny("a", "b", ""));
+        Assert.assertFalse(emptyAny("a", "b", "c"));
 
-        Assert.assertFalse(allEmpty("a", ""));
-        Assert.assertTrue(allEmpty("", "", ""));
+        Assert.assertFalse(emptyAll("a", ""));
+        Assert.assertTrue(emptyAll("", "", ""));
     }
 
     @Test
@@ -338,17 +338,50 @@ public class FunTest {
     }
 
     @Test
+    public void testSubstring() {
+        Assert.assertEquals("f", substring("abcdef", -1));
+        Assert.assertEquals("ef", substring("abcdef", -2));
+        Assert.assertEquals("f", substring("abcdef", 5));
+        Assert.assertEquals("", substring("abcdef", 6));
+
+        Assert.assertEquals("bc", substring("abcdef", 1, 3));
+        Assert.assertEquals("bcdef", substring("abcdef", 1, 6));
+        Assert.assertEquals("bcde", substring("abcdef", 1, -1));
+        Assert.assertEquals("", substring("abcdef", 4, -4));
+    }
+
+    @Test
     public void testSubstr() {
         Assert.assertEquals("f", substr("abcdef", -1));
         Assert.assertEquals("ef", substr("abcdef", -2));
         Assert.assertEquals("f", substr("abcdef", 5));
         Assert.assertEquals("", substr("abcdef", 6));
+
         Assert.assertEquals("abc", substr("abcdef", 0, 3));
         Assert.assertEquals("abcdef", substr("abcdef", 0, 6));
         Assert.assertEquals("abcdef", substr("abcdef", 0, 7));
         Assert.assertEquals("bcde", substr("abcdef", 1, -1));
         Assert.assertEquals("cde", substr("abcdef", 2, -1));
         Assert.assertEquals("", substr("abcdef", 4, -4));
+    }
+
+    @Test
+    public void testSplit() {
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, "a b c".split(" "));
+        Assert.assertArrayEquals(new String[]{"a", "", "b", "", "c"}, "a  b  c".split(" "));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, "a#b#c".split("#"));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, "a#b#c#".split("#"));
+        Assert.assertArrayEquals(new String[]{"", "a", "b", "c"}, "#a#b#c#".split("#"));
+        Assert.assertArrayEquals(new String[]{"", "a", "", "b", "", "c"}, "#a##b##c#".split("#"));
+
+        Assert.assertArrayEquals(new String[]{}, splitTrim(null));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a b c"));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a  b  c"));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a  b  c"));
+        Assert.assertArrayEquals(new String[]{"a#b#c"}, splitTrim("a#b#c", null));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a#b#c", "#"));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("#a#b#c#", "#"));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("#a##b##c#", "#"));
     }
 
     @Test

@@ -37,6 +37,21 @@ public class CharUtils {
     }
 
     /**
+     * 比较两个字符是否相等
+     *
+     * @param c1
+     * @param c2
+     * @param ignoreCase
+     * @return
+     */
+    public static boolean equals(char c1, char c2, boolean ignoreCase) {
+        if (ignoreCase) {
+            return Character.toLowerCase(c1) == Character.toLowerCase(c2);
+        }
+        return c1 == c2;
+    }
+
+    /**
      * 是否空白字符
      * <p>
      * 空白字符包括空格、制表符、全角空格和不间断空格

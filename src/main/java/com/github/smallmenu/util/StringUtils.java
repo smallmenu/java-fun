@@ -1,5 +1,11 @@
 package com.github.smallmenu.util;
 
+import com.github.smallmenu.Fun;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static com.github.smallmenu.Fun.*;
 
 /**
@@ -112,11 +118,21 @@ public class StringUtils {
     }
 
     /**
-     * 除去字符串空白，如果字符串是null，依然返回null。
+     * 除去两侧字符串空白，如果字符串是 null，依然返回 null
+     *
+     * @param str 待处理字符串
+     * @return
+     */
+    public static String trim(final CharSequence str) {
+        return trim(str, "", 0);
+    }
+
+    /**
+     * 除去字符串空白，如果字符串是null，依然返回null
      *
      * @param str  待处理字符串
      * @param mode 模式（左侧-1、全部0、右侧1）
-     * @return
+     * @return String
      */
     public static String trim(final CharSequence str, final CharSequence trimStr, int mode) {
         if (str == null) {
@@ -219,11 +235,9 @@ public class StringUtils {
      */
     public static boolean equals(final CharSequence str1, final CharSequence str2, boolean ignoreCase) {
         if (null == str1) {
-            // 只有两个都为 null 才判断相等
             return str2 == null;
         }
         if (null == str2) {
-            // 字符串2空，字符串1非空，直接false
             return false;
         }
 
@@ -252,15 +266,18 @@ public class StringUtils {
         if (ignoreCase) {
             searchStr = searchStr.toString().toLowerCase();
         }
+
         int start = 0;
         int end = ignoreCase ? indexOfIgnoreCase(str, searchStr, start) : indexOf(str, searchStr, start, false);
         if (end == INDEX_NOT_FOUND) {
             return str.toString();
         }
+
         final int replLength = searchStr.length();
         int increase = Math.max(searchStr.length() - replLength, 0);
         increase *= max < 0 ? 16 : Math.min(max, 64);
         final StringBuilder buf = new StringBuilder(str.length() + increase);
+
         while (end != INDEX_NOT_FOUND) {
             buf.append(str, start, end).append(replaceStr);
             start = end + replLength;
@@ -269,7 +286,136 @@ public class StringUtils {
             }
             end = ignoreCase ? indexOfIgnoreCase(str, searchStr, start) : indexOf(str, searchStr, start, false);
         }
+
         buf.append(str, start, str.length());
+
         return buf.toString();
+    }
+
+    public static List<String> splitToList(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
+        if (empty(str)) {
+            return Collections.emptyList();
+        }
+        if (limit == 1) {
+            return splitAddList(new ArrayList<>(1), str, isTrim, ignoreEmpty);
+        }
+
+        final ArrayList<String> list = new ArrayList<>();
+        int len = str.length();
+        int start = 0;
+        for (int i = 0; i < len; i++) {
+            if (CharUtils.isBlankChar(str.charAt(i))) {
+                splitAddList(list, str.substring(start, i), isTrim, ignoreEmpty);
+                start = i + 1;
+
+                if (limit > 0 && list.size() > limit - 2) {
+                    break;
+                }
+            }
+        }
+        return splitAddList(list, str.substring(start, len), true, true);
+    }
+
+    public static List<String> splitToList(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
+        if (empty(str)) {
+            return Collections.emptyList();
+        }
+        if (limit == 1) {
+            return splitAddList(new ArrayList<>(1), str, isTrim, ignoreEmpty);
+        }
+
+        final ArrayList<String> list = new ArrayList<>(limit > 0 ? limit : 16);
+        int len = str.length();
+        int start = 0;
+        for (int i = 0; i < len; i++) {
+            if (CharUtils.equals(separator, str.charAt(i), ignoreCase)) {
+                splitAddList(list, str.substring(start, i), isTrim, ignoreEmpty);
+                start = i + 1;
+
+                if (limit > 0 && list.size() > limit - 2) {
+                    break;
+                }
+            }
+        }
+        return splitAddList(list, str.substring(start, len), isTrim, ignoreEmpty);
+    }
+
+    public static List<String> splitToList(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
+        if (empty(str)) {
+            return Collections.emptyList();
+        }
+
+        if (limit == 1) {
+            return splitAddList(new ArrayList<>(1), str, isTrim, ignoreEmpty);
+        }
+
+        if (empty(separator)) {
+            return splitToList(str, limit, isTrim, ignoreEmpty);
+        } else if (separator.length() == 1) {
+            return splitToList(str, separator.charAt(0), limit, isTrim, ignoreEmpty, ignoreCase);
+        }
+
+        final List<String> list = new ArrayList<>();
+        int len = str.length();
+        int separatorLen = separator.length();
+        int start = 0;
+        int i = 0;
+        while (i < len) {
+            i = indexOf(str, separator, start, ignoreCase);
+            if (i > -1) {
+                splitAddList(list, str.substring(start, i), isTrim, ignoreEmpty);
+                start = i + separatorLen;
+
+                if (limit > 0 && list.size() > limit - 2) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+        return splitAddList(list, str.substring(start, len), isTrim, ignoreEmpty);
+    }
+
+    public static String[] split(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
+        return listToArray(splitToList(str, limit, isTrim, ignoreEmpty));
+    }
+
+    public static String[] split(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
+        return listToArray(splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase));
+    }
+
+    public static String[] split(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
+        return listToArray(splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase));
+    }
+
+    /**
+     * 将 split 后字符串加入 List
+     *
+     * @param list        列表
+     * @param str         字符串
+     * @param trim        是否 trim
+     * @param ignoreEmpty 是否去除空
+     * @return List
+     */
+    private static List<String> splitAddList(List<String> list, String str, boolean trim, boolean ignoreEmpty) {
+        if (trim) {
+            str = Fun.trim(str);
+        }
+
+        if (!ignoreEmpty || !empty(str)) {
+            list.add(str);
+        }
+
+        return list;
+    }
+
+    /**
+     * String List 转换为 Array
+     *
+     * @param list 列表
+     * @return String[]
+     */
+    private static String[] listToArray(List<String> list) {
+        return list.toArray(new String[0]);
     }
 }
