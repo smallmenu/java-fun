@@ -1,6 +1,7 @@
 package com.github.smallmenu.util;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  * ArrayUtils
@@ -72,5 +73,77 @@ public class ArrayUtils extends ArrayBaseUtils {
             }
         }
         return INDEX_NOT_FOUND;
+    }
+
+    /**
+     * 字符串数组转整型数组，忽略错误的值
+     *
+     * @param strings 字符串数组
+     * @return int []
+     */
+    public static int[] stringToIntArray(String[] strings) {
+        if (strings == null) {
+            return EMPTY_INT;
+        }
+
+        int[] numbers = new int[strings.length];
+        int index = 0;
+        for (String string : strings) {
+            try {
+                numbers[index] = Integer.parseInt(string);
+                index++;
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        return Arrays.copyOf(numbers, index);
+    }
+
+    /**
+     * 字符串数组转整型数组，忽略错误的值
+     *
+     * @param strings 字符串数组
+     * @return long []
+     */
+    public static long[] stringToLongArray(String[] strings) {
+        if (strings == null) {
+            return EMPTY_LONG;
+        }
+
+        long[] numbers = new long[strings.length];
+        int index = 0;
+        for (String string : strings) {
+            try {
+                numbers[index] = Long.parseLong(string);
+                index++;
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        return Arrays.copyOf(numbers, index);
+    }
+
+    /**
+     * 字符串数组转整型数组，忽略错误的值
+     *
+     * @param strings 字符串数组
+     * @return short []
+     */
+    public static short[] stringToShortArray(String[] strings) {
+        if (strings == null) {
+            return EMPTY_SHORT;
+        }
+
+        short[] numbers = new short[strings.length];
+        int index = 0;
+        for (String string : strings) {
+            try {
+                numbers[index] = Short.parseShort(string);
+                index++;
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        return Arrays.copyOf(numbers, index);
     }
 }

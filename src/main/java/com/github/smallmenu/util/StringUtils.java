@@ -292,6 +292,15 @@ public class StringUtils {
         return buf.toString();
     }
 
+    /**
+     * 分割字符串为列表
+     *
+     * @param str
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @return
+     */
     public static List<String> splitToList(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
         if (empty(str)) {
             return Collections.emptyList();
@@ -316,6 +325,17 @@ public class StringUtils {
         return splitAddList(list, str.substring(start, len), true, true);
     }
 
+    /**
+     * 分割字符串为列表
+     *
+     * @param str
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @param ignoreCase
+     * @return
+     */
     public static List<String> splitToList(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         if (empty(str)) {
             return Collections.emptyList();
@@ -340,6 +360,17 @@ public class StringUtils {
         return splitAddList(list, str.substring(start, len), isTrim, ignoreEmpty);
     }
 
+    /**
+     * 分割字符串为列表
+     *
+     * @param str
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @param ignoreCase
+     * @return
+     */
     public static List<String> splitToList(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         if (empty(str)) {
             return Collections.emptyList();
@@ -376,16 +407,50 @@ public class StringUtils {
         return splitAddList(list, str.substring(start, len), isTrim, ignoreEmpty);
     }
 
+    /**
+     * 分割字符串为数组
+     *
+     * @param str
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @return
+     */
     public static String[] split(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
-        return listToArray(splitToList(str, limit, isTrim, ignoreEmpty));
+        List<String> list = splitToList(str, limit, isTrim, ignoreEmpty);
+        return list.toArray(ArrayUtils.EMPTY_STRING);
     }
 
+    /**
+     * 分割字符串为数组
+     *
+     * @param str
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @param ignoreCase
+     * @return
+     */
     public static String[] split(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
-        return listToArray(splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase));
+        List<String> list = splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase);
+        return list.toArray(ArrayUtils.EMPTY_STRING);
     }
 
+    /**
+     * 分割字符串为数组
+     *
+     * @param str
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @param ignoreCase
+     * @return
+     */
     public static String[] split(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
-        return listToArray(splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase));
+        List<String> list = splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase);
+        return list.toArray(ArrayUtils.EMPTY_STRING);
     }
 
     /**
@@ -407,15 +472,5 @@ public class StringUtils {
         }
 
         return list;
-    }
-
-    /**
-     * String List 转换为 Array
-     *
-     * @param list 列表
-     * @return String[]
-     */
-    private static String[] listToArray(List<String> list) {
-        return list.toArray(new String[0]);
     }
 }

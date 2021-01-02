@@ -373,6 +373,15 @@ public class FunTest {
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, "a#b#c#".split("#"));
         Assert.assertArrayEquals(new String[]{"", "a", "b", "c"}, "#a#b#c#".split("#"));
         Assert.assertArrayEquals(new String[]{"", "a", "", "b", "", "c"}, "#a##b##c#".split("#"));
+        Assert.assertArrayEquals(new String[]{"", "a", "", "b", "", "c"}, "#a##b##c#".split("#"));
+
+        Assert.assertArrayEquals(new String[]{}, split(null));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, split("a b c"));
+        Assert.assertArrayEquals(new String[]{"a", "", "b", "", "c"}, split("a  b  c"));
+        Assert.assertArrayEquals(new String[]{"a#b#c"}, split("a#b#c", null));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, split("a#b#c", "#"));
+        Assert.assertArrayEquals(new String[]{"", "a", "b", "c", ""}, split("#a#b#c#", "#"));
+        Assert.assertArrayEquals(new String[]{"", "a", "", "b", "", "c", ""}, split("#a##b##c#", "#"));
 
         Assert.assertArrayEquals(new String[]{}, splitTrim(null));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a b c"));
@@ -382,6 +391,22 @@ public class FunTest {
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a#b#c", "#"));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("#a#b#c#", "#"));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("#a##b##c#", "#"));
+        Assert.assertArrayEquals(new String[]{"#a", "b", "c#"}, splitTrim("#a##b##c#", "##"));
+
+        ArrayList<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        Assert.assertEquals(list, splitTrimToList("a b c"));
+        Assert.assertEquals(list, splitTrimToList("a#b#c", '#'));
+        Assert.assertEquals(list, splitTrimToList("a#b#c", "#"));
+        Assert.assertEquals(list, splitTrimToList("#a#b#c#", "#"));
+        Assert.assertEquals(list, splitTrimToList("#a##b##c#", "#"));
+
+        Assert.assertArrayEquals(new int[]{3, 2, 0, 5}, splitTrimToInt("#3##2#0##5#", "#"));
+        Assert.assertArrayEquals(new int[]{3, 1, 0, 5}, splitTrimToInt("#3##1#0#a#5#", "#"));
+        Assert.assertArrayEquals(new long[]{3, 1, 0, 5}, splitTrimToLong("#3##1#0#a#5#", "#"));
+        Assert.assertArrayEquals(new short[]{3, 1, 0, 5}, splitTrimToShort("#3##1#0#a#5#", "#"));
     }
 
     @Test

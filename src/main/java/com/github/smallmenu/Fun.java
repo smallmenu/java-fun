@@ -1045,7 +1045,7 @@ public class Fun extends FunBase {
      */
     public static String[] split(final CharSequence str) {
         if (str == null) {
-            return new String[]{};
+            return ArrayUtils.EMPTY_STRING;
         }
 
         return StringUtils.split(str.toString(), 0, false, false);
@@ -1060,7 +1060,7 @@ public class Fun extends FunBase {
      */
     public static String[] split(final CharSequence str, final char seperator) {
         if (str == null) {
-            return new String[]{};
+            return ArrayUtils.EMPTY_STRING;
         }
 
         return StringUtils.split(str.toString(), seperator, 0, false, false, false);
@@ -1075,7 +1075,7 @@ public class Fun extends FunBase {
      */
     public static String[] split(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return new String[]{};
+            return ArrayUtils.EMPTY_STRING;
         }
 
         if (seperator == null) {
@@ -1147,10 +1147,27 @@ public class Fun extends FunBase {
      */
     public static String[] splitTrim(final CharSequence str) {
         if (str == null) {
-            return new String[]{};
+            return ArrayUtils.EMPTY_STRING;
         }
 
         return StringUtils.split(str.toString(), 0, true, true);
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return int[]
+     */
+    public static int[] splitTrimToInt(final CharSequence str) {
+        if (str == null) {
+            return ArrayUtils.EMPTY_INT;
+        }
+
+        String[] strings = StringUtils.split(str.toString(), 0, true, true);
+        return Arrays.stream(strings).mapToInt(Integer::parseInt).toArray();
     }
 
     /**
@@ -1164,7 +1181,7 @@ public class Fun extends FunBase {
      */
     public static String[] splitTrim(final CharSequence str, final char seperator) {
         if (str == null) {
-            return new String[]{};
+            return ArrayUtils.EMPTY_STRING;
         }
 
         return StringUtils.split(str.toString(), seperator, 0, true, true, false);
@@ -1179,7 +1196,7 @@ public class Fun extends FunBase {
      */
     public static String[] splitTrim(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return new String[]{};
+            return ArrayUtils.EMPTY_STRING;
         }
 
         if (seperator == null) {
@@ -1187,6 +1204,75 @@ public class Fun extends FunBase {
         } else {
             return StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return int[]
+     */
+    public static int[] splitTrimToInt(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return ArrayUtils.EMPTY_INT;
+        }
+
+        String[] strings;
+        if (seperator == null) {
+            strings = StringUtils.split(str.toString(), 0, true, true);
+        } else {
+            strings = StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+        }
+        return ArrayUtils.stringToIntArray(strings);
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return long[]
+     */
+    public static long[] splitTrimToLong(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return ArrayUtils.EMPTY_LONG;
+        }
+
+        String[] strings;
+        if (seperator == null) {
+            strings = StringUtils.split(str.toString(), 0, true, true);
+        } else {
+            strings = StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+        }
+        return ArrayUtils.stringToLongArray(strings);
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param seperator 分隔符
+     * @return short[]
+     */
+    public static short[] splitTrimToShort(final CharSequence str, final CharSequence seperator) {
+        if (str == null) {
+            return ArrayUtils.EMPTY_SHORT;
+        }
+
+        String[] strings;
+        if (seperator == null) {
+            strings = StringUtils.split(str.toString(), 0, true, true);
+        } else {
+            strings = StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+        }
+        return ArrayUtils.stringToShortArray(strings);
     }
 
     /**
