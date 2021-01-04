@@ -397,6 +397,7 @@ public class FunTest {
         list.add("a");
         list.add("b");
         list.add("c");
+
         Assert.assertEquals(list, splitTrimToList("a b c"));
         Assert.assertEquals(list, splitTrimToList("a#b#c", '#'));
         Assert.assertEquals(list, splitTrimToList("a#b#c", "#"));
@@ -587,11 +588,11 @@ public class FunTest {
         Assert.assertEquals("MTIzNDU2YWJj", base64Encode("123456abc"));
         Assert.assertEquals("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo=", base64Encode("abcdefghijklmnopqrstuvwxyz"));
         Assert.assertEquals("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M/aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1", base64Encode("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu"));
-        Assert.assertEquals("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1", base64URLEncode("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu"));
+        Assert.assertEquals("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1", base64UrlEncode("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu"));
 
         Assert.assertEquals("123456abc", base64Decode("MTIzNDU2YWJj"));
         Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", base64Decode("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo="));
         Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64Decode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M/aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
-        Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64URLDecode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
+        Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64UrlDecode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
     }
 }

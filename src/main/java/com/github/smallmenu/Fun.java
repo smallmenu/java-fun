@@ -1851,7 +1851,7 @@ public class Fun extends FunBase {
      * @param data byte数组
      * @return String
      */
-    public static String base64URLEncode(final byte[] data) {
+    public static String base64UrlEncode(final byte[] data) {
         return Base64.getUrlEncoder().encodeToString(data);
     }
 
@@ -1863,8 +1863,8 @@ public class Fun extends FunBase {
      * @param str 字符串
      * @return String
      */
-    public static String base64URLEncode(final String str) {
-        return base64URLEncode(bytes(str));
+    public static String base64UrlEncode(final String str) {
+        return base64UrlEncode(bytes(str));
     }
 
     /**
@@ -1873,7 +1873,7 @@ public class Fun extends FunBase {
      * @param str Base64字符串
      * @return String
      */
-    public static String base64URLDecode(final String str) {
+    public static String base64UrlDecode(final String str) {
         return new String(Base64.getUrlDecoder().decode(str));
     }
 

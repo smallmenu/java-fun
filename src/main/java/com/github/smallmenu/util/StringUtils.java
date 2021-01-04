@@ -124,7 +124,7 @@ public class StringUtils {
      * @return
      */
     public static String trim(final CharSequence str) {
-        return trim(str, "", 0);
+        return trim(str, null, 0);
     }
 
     /**
