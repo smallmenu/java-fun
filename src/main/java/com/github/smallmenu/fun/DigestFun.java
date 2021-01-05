@@ -1,4 +1,4 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 import com.github.smallmenu.digest.DigestAlgorithm;
 import com.github.smallmenu.digest.Hex;
@@ -13,12 +13,12 @@ import static com.github.smallmenu.Fun.bytes;
  *
  * @author smallmenu
  */
-public class DigestUtils {
+public class DigestFun {
 
     /**
      * 禁止实例化
      */
-    private DigestUtils() {
+    private DigestFun() {
         throw new AssertionError();
     }
 

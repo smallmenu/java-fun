@@ -6,22 +6,22 @@ package com.github.smallmenu.expection;
  *
  * @author smallmenu
  */
-public class UtilsException extends RuntimeException {
+public class FunException extends RuntimeException {
     private static final long serialVersionUID = 2253489756088246525L;
 
-    public UtilsException() {
+    public FunException() {
         super();
     }
 
-    public UtilsException(final Throwable e) {
+    public FunException(final Throwable e) {
         super(e);
     }
 
-    public UtilsException(final String message) {
+    public FunException(final String message) {
         super(message);
     }
 
-    public UtilsException(final String message, final Throwable e) {
+    public FunException(final String message, final Throwable e) {
         super(message, e);
     }
 }

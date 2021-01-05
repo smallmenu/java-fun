@@ -1,4 +1,4 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 import java.util.Objects;
 
@@ -7,8 +7,8 @@ import java.util.Objects;
  *
  * @author smallmenu
  */
-public class ObjectUtils {
-    private ObjectUtils() {
+public class ObjectFun {
+    private ObjectFun() {
         throw new AssertionError();
     }
 

@@ -1,8 +1,8 @@
 package com.github.smallmenu;
 
 import com.github.smallmenu.constant.DatePattern;
-import com.github.smallmenu.util.SizeUtils;
-import com.github.smallmenu.util.StringUtils;
+import com.github.smallmenu.fun.SizeFun;
+import com.github.smallmenu.fun.StringFun;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,10 +52,10 @@ public class FunTest {
         System.out.println(totalMemory());
         System.out.println(freeMemory());
         System.out.println(usedMemory());
-        System.out.println(maxMemory(SizeUtils.MB) + "MB");
-        System.out.println(totalMemory(SizeUtils.MB) + "MB");
-        System.out.println(freeMemory(SizeUtils.MB) + "MB");
-        System.out.println(usedMemory(SizeUtils.MB) + "MB");
+        System.out.println(maxMemory(SizeFun.MB) + "MB");
+        System.out.println(totalMemory(SizeFun.MB) + "MB");
+        System.out.println(freeMemory(SizeFun.MB) + "MB");
+        System.out.println(usedMemory(SizeFun.MB) + "MB");
     }
 
     @Test
@@ -563,14 +563,14 @@ public class FunTest {
 
     @Test
     public void testMd5() {
-        Assert.assertEquals("d41d8cd98f00b204e9800998ecf8427e", md5(StringUtils.EMPTY));
+        Assert.assertEquals("d41d8cd98f00b204e9800998ecf8427e", md5(StringFun.EMPTY));
         Assert.assertEquals("df10ef8509dc176d733d59549e7dbfaf", md5("123456abc"));
         Assert.assertEquals("c3fcd3d76192e4007dfb496cca67e13b", md5("abcdefghijklmnopqrstuvwxyz"));
     }
 
     @Test
     public void testSha() {
-        Assert.assertEquals("da39a3ee5e6b4b0d3255bfef95601890afd80709", sha1(StringUtils.EMPTY));
+        Assert.assertEquals("da39a3ee5e6b4b0d3255bfef95601890afd80709", sha1(StringFun.EMPTY));
         Assert.assertEquals("a172ffc990129fe6f68b50f6037c54a1894ee3fd", sha1("123456abc"));
         Assert.assertEquals("32d10c7b8cf96570ca04ce37f2a19d84240d3a89", sha1("abcdefghijklmnopqrstuvwxyz"));
         Assert.assertEquals("931145d4ddd1811be545e4ac88a81f1fdbfaf0779c437efba16b884595274d11", sha256("123456abc"));
@@ -583,7 +583,7 @@ public class FunTest {
 
     @Test
     public void testBase64() {
-        Assert.assertEquals("", base64Encode(StringUtils.EMPTY));
+        Assert.assertEquals("", base64Encode(StringFun.EMPTY));
         Assert.assertEquals("MTIzNDU2YWJj", base64Encode(bytes("123456abc")));
         Assert.assertEquals("MTIzNDU2YWJj", base64Encode("123456abc"));
         Assert.assertEquals("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo=", base64Encode("abcdefghijklmnopqrstuvwxyz"));

@@ -1,4 +1,4 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -8,8 +8,8 @@ import java.util.Arrays;
  *
  * @author smallmenu
  */
-public class ArrayUtils extends ArrayBaseUtils {
-    private ArrayUtils() {
+public class ArrayFun extends ArrayBaseFun {
+    private ArrayFun() {
         throw new AssertionError();
     }
 
@@ -67,7 +67,7 @@ public class ArrayUtils extends ArrayBaseUtils {
     public static <T> int indexOf(T[] array, Object value) {
         if (null != array) {
             for (int i = 0; i < array.length; i++) {
-                if (ObjectUtils.equal(value, array[i])) {
+                if (ObjectFun.equal(value, array[i])) {
                     return i;
                 }
             }

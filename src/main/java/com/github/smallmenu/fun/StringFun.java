@@ -1,4 +1,4 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 import com.github.smallmenu.Fun;
 
@@ -13,7 +13,7 @@ import static com.github.smallmenu.Fun.*;
  *
  * @author smallmenu
  */
-public class StringUtils {
+public class StringFun {
     public static final int INDEX_NOT_FOUND = -1;
 
     public static final String EMPTY = "";
@@ -44,7 +44,7 @@ public class StringUtils {
     /**
      * 禁止实例化
      */
-    private StringUtils() {
+    private StringFun() {
         throw new AssertionError();
     }
 
@@ -146,7 +146,7 @@ public class StringUtils {
         // 扫描字符串头部
         if (mode <= 0) {
             if (trimStr == null) {
-                while ((start < end) && (CharUtils.isBlankChar(str.charAt(start)))) {
+                while ((start < end) && (CharFun.isBlankChar(str.charAt(start)))) {
                     start++;
                 }
             } else {
@@ -159,7 +159,7 @@ public class StringUtils {
         // 扫描字符串尾部
         if (mode >= 0) {
             if (trimStr == null) {
-                while ((start < end) && (CharUtils.isBlankChar(str.charAt(end - 1)))) {
+                while ((start < end) && (CharFun.isBlankChar(str.charAt(end - 1)))) {
                     end--;
                 }
             } else {
@@ -313,7 +313,7 @@ public class StringUtils {
         int len = str.length();
         int start = 0;
         for (int i = 0; i < len; i++) {
-            if (CharUtils.isBlankChar(str.charAt(i))) {
+            if (CharFun.isBlankChar(str.charAt(i))) {
                 splitAddList(list, str.substring(start, i), isTrim, ignoreEmpty);
                 start = i + 1;
 
@@ -348,7 +348,7 @@ public class StringUtils {
         int len = str.length();
         int start = 0;
         for (int i = 0; i < len; i++) {
-            if (CharUtils.equals(separator, str.charAt(i), ignoreCase)) {
+            if (CharFun.equals(separator, str.charAt(i), ignoreCase)) {
                 splitAddList(list, str.substring(start, i), isTrim, ignoreEmpty);
                 start = i + 1;
 
@@ -418,7 +418,7 @@ public class StringUtils {
      */
     public static String[] split(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
         List<String> list = splitToList(str, limit, isTrim, ignoreEmpty);
-        return list.toArray(ArrayUtils.EMPTY_STRING);
+        return list.toArray(ArrayFun.EMPTY_STRING);
     }
 
     /**
@@ -434,7 +434,7 @@ public class StringUtils {
      */
     public static String[] split(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         List<String> list = splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase);
-        return list.toArray(ArrayUtils.EMPTY_STRING);
+        return list.toArray(ArrayFun.EMPTY_STRING);
     }
 
     /**
@@ -450,7 +450,7 @@ public class StringUtils {
      */
     public static String[] split(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         List<String> list = splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase);
-        return list.toArray(ArrayUtils.EMPTY_STRING);
+        return list.toArray(ArrayFun.EMPTY_STRING);
     }
 
     /**

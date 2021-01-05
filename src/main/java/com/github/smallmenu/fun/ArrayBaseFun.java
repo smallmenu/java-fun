@@ -1,11 +1,11 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 /**
  * ArrayBaseUtils
  *
  * @author smallmenu
  */
-public class ArrayBaseUtils {
+public class ArrayBaseFun {
     public static final boolean[] EMPTY_BOOLEAN = new boolean[0];
 
     public static final Boolean[] EMPTY_BOOLEAN_OBJECT = new Boolean[0];
@@ -46,7 +46,7 @@ public class ArrayBaseUtils {
 
     public static final int INDEX_NOT_FOUND = -1;
 
-    protected ArrayBaseUtils() {
+    protected ArrayBaseFun() {
         throw new AssertionError();
     }
 

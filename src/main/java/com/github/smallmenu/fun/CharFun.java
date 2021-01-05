@@ -1,11 +1,11 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 /**
  * CharUtils
  *
  * @author smallmenu
  */
-public class CharUtils {
+public class CharFun {
     public static final char SPACE = ' ';
     public static final char TAB = '	';
     public static final char DOT = '.';
@@ -22,7 +22,7 @@ public class CharUtils {
     /**
      * 禁止实例化
      */
-    private CharUtils() {
+    private CharFun() {
         throw new AssertionError();
     }
 

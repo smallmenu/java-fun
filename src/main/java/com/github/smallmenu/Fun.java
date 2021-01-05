@@ -2,7 +2,7 @@ package com.github.smallmenu;
 
 import com.github.smallmenu.constant.DatePattern;
 import com.github.smallmenu.date.Strtotime;
-import com.github.smallmenu.util.*;
+import com.github.smallmenu.fun.*;
 
 import java.lang.reflect.Array;
 import java.nio.charset.Charset;
@@ -49,7 +49,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long freeMemory() {
-        return freeMemory(SizeUtils.MB);
+        return freeMemory(SizeFun.MB);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long maxMemory() {
-        return maxMemory(SizeUtils.MB);
+        return maxMemory(SizeFun.MB);
     }
 
     /**
@@ -67,7 +67,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long usedMemory() {
-        return usedMemory(SizeUtils.MB);
+        return usedMemory(SizeFun.MB);
     }
 
     /**
@@ -76,7 +76,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long totalMemory() {
-        return totalMemory(SizeUtils.MB);
+        return totalMemory(SizeFun.MB);
     }
 
     /**
@@ -134,10 +134,10 @@ public class Fun extends FunBase {
      */
     public static boolean empty(Object object) {
         if (object != null) {
-            if (ArrayUtils.isArray(object)) {
+            if (ArrayFun.isArray(object)) {
                 return 0 == Array.getLength(object);
             }
-            if (StringUtils.isString(object)) {
+            if (StringFun.isString(object)) {
                 return object.toString().length() == 0;
             }
             if (object instanceof Integer) {
@@ -256,7 +256,7 @@ public class Fun extends FunBase {
         }
 
         for (int i = 0; i < length; i++) {
-            if (!CharUtils.isBlankChar(str.charAt(i))) {
+            if (!CharFun.isBlankChar(str.charAt(i))) {
                 return false;
             }
         }
@@ -315,7 +315,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String trim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str);
+        return (null == str) ? null : StringFun.trim(str);
     }
 
     /**
@@ -325,7 +325,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String ltrim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, null, -1);
+        return (null == str) ? null : StringFun.trim(str, null, -1);
     }
 
     /**
@@ -335,7 +335,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String rtrim(final CharSequence str) {
-        return (null == str) ? null : StringUtils.trim(str, null, 1);
+        return (null == str) ? null : StringFun.trim(str, null, 1);
     }
 
     /**
@@ -348,7 +348,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String trim(final CharSequence str, final CharSequence trimStr) {
-        return (null == str) ? null : StringUtils.trim(str, trimStr, 0);
+        return (null == str) ? null : StringFun.trim(str, trimStr, 0);
     }
 
 
@@ -361,7 +361,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String trimToEmpty(final CharSequence str) {
-        return str == null ? StringUtils.EMPTY : trim(str);
+        return str == null ? StringFun.EMPTY : trim(str);
     }
 
     /**
@@ -374,7 +374,7 @@ public class Fun extends FunBase {
      */
     public static String trimToNull(final CharSequence str) {
         final String trimStr = trim(str);
-        return StringUtils.EMPTY.equals(trimStr) ? null : trimStr;
+        return StringFun.EMPTY.equals(trimStr) ? null : trimStr;
     }
 
     /**
@@ -562,7 +562,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean equals(final CharSequence str1, final CharSequence str2) {
-        return StringUtils.equals(str1, str2, false);
+        return StringFun.equals(str1, str2, false);
     }
 
     /**
@@ -573,7 +573,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean equalsIgnoreCase(final CharSequence str1, final CharSequence str2) {
-        return StringUtils.equals(str1, str2, true);
+        return StringFun.equals(str1, str2, true);
     }
 
     /**
@@ -587,7 +587,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean startsWith(final CharSequence str, final CharSequence prefix) {
-        return StringUtils.startsWith(str, prefix, false);
+        return StringFun.startsWith(str, prefix, false);
     }
 
     /**
@@ -598,7 +598,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean startsWithIgnoreCase(final CharSequence str, final CharSequence prefix) {
-        return StringUtils.startsWith(str, prefix, true);
+        return StringFun.startsWith(str, prefix, true);
     }
 
     /**
@@ -612,7 +612,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean endsWith(final CharSequence str, final CharSequence suffix) {
-        return StringUtils.endsWith(str, suffix, false);
+        return StringFun.endsWith(str, suffix, false);
     }
 
     /**
@@ -623,7 +623,7 @@ public class Fun extends FunBase {
      * @return boolean
      */
     public static boolean endsWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
-        return StringUtils.endsWith(str, suffix, true);
+        return StringFun.endsWith(str, suffix, true);
     }
 
     /**
@@ -670,7 +670,7 @@ public class Fun extends FunBase {
             return null;
         }
         if (length < 0) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
         if (str.length() <= length) {
             return str;
@@ -690,7 +690,7 @@ public class Fun extends FunBase {
             return null;
         }
         if (length < 0) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
         if (str.length() <= length) {
             return str;
@@ -707,9 +707,9 @@ public class Fun extends FunBase {
      */
     public static int indexOf(final CharSequence str, final CharSequence searchStr) {
         if (str == null || searchStr == null) {
-            return StringUtils.INDEX_NOT_FOUND;
+            return StringFun.INDEX_NOT_FOUND;
         }
-        return StringUtils.indexOf(str, searchStr, 0, false);
+        return StringFun.indexOf(str, searchStr, 0, false);
     }
 
     /**
@@ -722,9 +722,9 @@ public class Fun extends FunBase {
      */
     public static int indexOf(final CharSequence str, final CharSequence searchStr, int start) {
         if (str == null || searchStr == null) {
-            return StringUtils.INDEX_NOT_FOUND;
+            return StringFun.INDEX_NOT_FOUND;
         }
-        return StringUtils.indexOf(str, searchStr, start, false);
+        return StringFun.indexOf(str, searchStr, start, false);
     }
 
     /**
@@ -736,9 +736,9 @@ public class Fun extends FunBase {
      */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
         if (str == null || searchStr == null) {
-            return StringUtils.INDEX_NOT_FOUND;
+            return StringFun.INDEX_NOT_FOUND;
         }
-        return StringUtils.indexOf(str, searchStr, 0, true);
+        return StringFun.indexOf(str, searchStr, 0, true);
     }
 
     /**
@@ -751,9 +751,9 @@ public class Fun extends FunBase {
      */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr, int start) {
         if (str == null || searchStr == null) {
-            return StringUtils.INDEX_NOT_FOUND;
+            return StringFun.INDEX_NOT_FOUND;
         }
-        return StringUtils.indexOf(str, searchStr, start, true);
+        return StringFun.indexOf(str, searchStr, start, true);
     }
 
     /**
@@ -807,7 +807,7 @@ public class Fun extends FunBase {
             return Arrays.toString((float[]) obj);
         } else if (obj instanceof double[]) {
             return Arrays.toString((double[]) obj);
-        } else if (ArrayUtils.isArray(obj)) {
+        } else if (ArrayFun.isArray(obj)) {
             try {
                 return Arrays.deepToString((Object[]) obj);
             } catch (Exception ignore) {
@@ -826,7 +826,7 @@ public class Fun extends FunBase {
      */
     public static String repeat(final char ch, final int repeat) {
         if (repeat <= 0) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
         final char[] buf = new char[repeat];
         for (int i = repeat - 1; i >= 0; i--) {
@@ -848,7 +848,7 @@ public class Fun extends FunBase {
         }
 
         if (repeat <= 0) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
 
         final int inputLength = str.length();
@@ -856,7 +856,7 @@ public class Fun extends FunBase {
             return str(str);
         }
 
-        if (inputLength == 1 && repeat <= StringUtils.PAD_LIMIT) {
+        if (inputLength == 1 && repeat <= StringFun.PAD_LIMIT) {
             return repeat(str.charAt(0), repeat);
         }
 
@@ -900,7 +900,7 @@ public class Fun extends FunBase {
             return str.toString();
         }
 
-        if (pads > StringUtils.PAD_LIMIT) {
+        if (pads > StringFun.PAD_LIMIT) {
             return padLeft(str, length, String.valueOf(padChar));
         }
 
@@ -933,7 +933,7 @@ public class Fun extends FunBase {
         }
 
         if (empty(padStr)) {
-            padStr = StringUtils.SPACE;
+            padStr = StringFun.SPACE;
         }
 
         final int padLen = padStr.length();
@@ -943,7 +943,7 @@ public class Fun extends FunBase {
             return str(str);
         }
 
-        if (padLen == 1 && pads <= StringUtils.PAD_LIMIT) {
+        if (padLen == 1 && pads <= StringFun.PAD_LIMIT) {
             return padLeft(str, length, padStr.charAt(0));
         }
 
@@ -978,7 +978,7 @@ public class Fun extends FunBase {
             return str(str);
         }
 
-        if (pads > StringUtils.PAD_LIMIT) {
+        if (pads > StringFun.PAD_LIMIT) {
             return padRight(str, length, String.valueOf(padChar));
         }
 
@@ -1010,7 +1010,7 @@ public class Fun extends FunBase {
         }
 
         if (empty(padStr)) {
-            padStr = StringUtils.SPACE;
+            padStr = StringFun.SPACE;
         }
 
         final int padLen = padStr.length();
@@ -1019,7 +1019,7 @@ public class Fun extends FunBase {
         if (pads <= 0) {
             return str(str);
         }
-        if (padLen == 1 && pads <= StringUtils.PAD_LIMIT) {
+        if (padLen == 1 && pads <= StringFun.PAD_LIMIT) {
             return padRight(str, length, padStr.charAt(0));
         }
 
@@ -1045,10 +1045,10 @@ public class Fun extends FunBase {
      */
     public static String[] split(final CharSequence str) {
         if (str == null) {
-            return ArrayUtils.EMPTY_STRING;
+            return ArrayFun.EMPTY_STRING;
         }
 
-        return StringUtils.split(str.toString(), 0, false, false);
+        return StringFun.split(str.toString(), 0, false, false);
     }
 
     /**
@@ -1060,10 +1060,10 @@ public class Fun extends FunBase {
      */
     public static String[] split(final CharSequence str, final char seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_STRING;
+            return ArrayFun.EMPTY_STRING;
         }
 
-        return StringUtils.split(str.toString(), seperator, 0, false, false, false);
+        return StringFun.split(str.toString(), seperator, 0, false, false, false);
     }
 
     /**
@@ -1075,13 +1075,13 @@ public class Fun extends FunBase {
      */
     public static String[] split(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_STRING;
+            return ArrayFun.EMPTY_STRING;
         }
 
         if (seperator == null) {
-            return StringUtils.split(str.toString(), 0, false, false);
+            return StringFun.split(str.toString(), 0, false, false);
         } else {
-            return StringUtils.split(str.toString(), seperator.toString(), 0, false, false, false);
+            return StringFun.split(str.toString(), seperator.toString(), 0, false, false, false);
         }
     }
 
@@ -1098,7 +1098,7 @@ public class Fun extends FunBase {
             return Collections.emptyList();
         }
 
-        return StringUtils.splitToList(str.toString(), 0, false, false);
+        return StringFun.splitToList(str.toString(), 0, false, false);
     }
 
     /**
@@ -1115,7 +1115,7 @@ public class Fun extends FunBase {
             return Collections.emptyList();
         }
 
-        return StringUtils.splitToList(str.toString(), seperator, 0, false, false, false);
+        return StringFun.splitToList(str.toString(), seperator, 0, false, false, false);
     }
 
     /**
@@ -1131,9 +1131,9 @@ public class Fun extends FunBase {
         }
 
         if (seperator == null) {
-            return StringUtils.splitToList(str.toString(), 0, false, false);
+            return StringFun.splitToList(str.toString(), 0, false, false);
         } else {
-            return StringUtils.splitToList(str.toString(), seperator.toString(), 0, false, false, false);
+            return StringFun.splitToList(str.toString(), seperator.toString(), 0, false, false, false);
         }
     }
 
@@ -1147,10 +1147,10 @@ public class Fun extends FunBase {
      */
     public static String[] splitTrim(final CharSequence str) {
         if (str == null) {
-            return ArrayUtils.EMPTY_STRING;
+            return ArrayFun.EMPTY_STRING;
         }
 
-        return StringUtils.split(str.toString(), 0, true, true);
+        return StringFun.split(str.toString(), 0, true, true);
     }
 
     /**
@@ -1163,10 +1163,10 @@ public class Fun extends FunBase {
      */
     public static int[] splitTrimToInt(final CharSequence str) {
         if (str == null) {
-            return ArrayUtils.EMPTY_INT;
+            return ArrayFun.EMPTY_INT;
         }
 
-        String[] strings = StringUtils.split(str.toString(), 0, true, true);
+        String[] strings = StringFun.split(str.toString(), 0, true, true);
         return Arrays.stream(strings).mapToInt(Integer::parseInt).toArray();
     }
 
@@ -1181,10 +1181,10 @@ public class Fun extends FunBase {
      */
     public static String[] splitTrim(final CharSequence str, final char seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_STRING;
+            return ArrayFun.EMPTY_STRING;
         }
 
-        return StringUtils.split(str.toString(), seperator, 0, true, true, false);
+        return StringFun.split(str.toString(), seperator, 0, true, true, false);
     }
 
     /**
@@ -1196,13 +1196,13 @@ public class Fun extends FunBase {
      */
     public static String[] splitTrim(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_STRING;
+            return ArrayFun.EMPTY_STRING;
         }
 
         if (seperator == null) {
-            return StringUtils.split(str.toString(), 0, true, true);
+            return StringFun.split(str.toString(), 0, true, true);
         } else {
-            return StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+            return StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
     }
 
@@ -1217,16 +1217,16 @@ public class Fun extends FunBase {
      */
     public static int[] splitTrimToInt(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_INT;
+            return ArrayFun.EMPTY_INT;
         }
 
         String[] strings;
         if (seperator == null) {
-            strings = StringUtils.split(str.toString(), 0, true, true);
+            strings = StringFun.split(str.toString(), 0, true, true);
         } else {
-            strings = StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+            strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
-        return ArrayUtils.stringToIntArray(strings);
+        return ArrayFun.stringToIntArray(strings);
     }
 
     /**
@@ -1240,16 +1240,16 @@ public class Fun extends FunBase {
      */
     public static long[] splitTrimToLong(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_LONG;
+            return ArrayFun.EMPTY_LONG;
         }
 
         String[] strings;
         if (seperator == null) {
-            strings = StringUtils.split(str.toString(), 0, true, true);
+            strings = StringFun.split(str.toString(), 0, true, true);
         } else {
-            strings = StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+            strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
-        return ArrayUtils.stringToLongArray(strings);
+        return ArrayFun.stringToLongArray(strings);
     }
 
     /**
@@ -1263,16 +1263,16 @@ public class Fun extends FunBase {
      */
     public static short[] splitTrimToShort(final CharSequence str, final CharSequence seperator) {
         if (str == null) {
-            return ArrayUtils.EMPTY_SHORT;
+            return ArrayFun.EMPTY_SHORT;
         }
 
         String[] strings;
         if (seperator == null) {
-            strings = StringUtils.split(str.toString(), 0, true, true);
+            strings = StringFun.split(str.toString(), 0, true, true);
         } else {
-            strings = StringUtils.split(str.toString(), seperator.toString(), 0, true, true, false);
+            strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
-        return ArrayUtils.stringToShortArray(strings);
+        return ArrayFun.stringToShortArray(strings);
     }
 
     /**
@@ -1288,7 +1288,7 @@ public class Fun extends FunBase {
             return Collections.emptyList();
         }
 
-        return StringUtils.splitToList(str.toString(), 0, true, true);
+        return StringFun.splitToList(str.toString(), 0, true, true);
     }
 
     /**
@@ -1305,7 +1305,7 @@ public class Fun extends FunBase {
             return Collections.emptyList();
         }
 
-        return StringUtils.splitToList(str.toString(), seperator, 0, true, true, false);
+        return StringFun.splitToList(str.toString(), seperator, 0, true, true, false);
     }
 
     /**
@@ -1321,9 +1321,9 @@ public class Fun extends FunBase {
         }
 
         if (seperator == null) {
-            return StringUtils.splitToList(str.toString(), 0, true, true);
+            return StringFun.splitToList(str.toString(), 0, true, true);
         } else {
-            return StringUtils.splitToList(str.toString(), seperator.toString(), 0, true, true, false);
+            return StringFun.splitToList(str.toString(), seperator.toString(), 0, true, true, false);
         }
     }
 
@@ -1347,7 +1347,7 @@ public class Fun extends FunBase {
             start = 0;
         }
         if (start > str.length()) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
 
         return str.toString().substring(start);
@@ -1378,7 +1378,7 @@ public class Fun extends FunBase {
         }
 
         if (start > end) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
 
         if (start < 0) {
@@ -1433,7 +1433,7 @@ public class Fun extends FunBase {
         }
 
         if (start > end) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
 
         if (start < 0) {
@@ -1459,7 +1459,7 @@ public class Fun extends FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -1509,11 +1509,11 @@ public class Fun extends FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         if (!iterator.hasNext()) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
 
         final Object first = iterator.next();
@@ -1551,7 +1551,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String replace(final CharSequence str, final CharSequence searchStr, final CharSequence replaceStr) {
-        return StringUtils.replace(str, searchStr, replaceStr, -1, false);
+        return StringFun.replace(str, searchStr, replaceStr, -1, false);
     }
 
     /**
@@ -1563,7 +1563,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String replaceIgnoreCase(final CharSequence str, final CharSequence searchStr, final CharSequence replaceStr) {
-        return StringUtils.replace(str, searchStr, replaceStr, -1, true);
+        return StringFun.replace(str, searchStr, replaceStr, -1, true);
     }
 
     /**
@@ -1577,7 +1577,7 @@ public class Fun extends FunBase {
         if (empty(str) || empty(remove)) {
             return str(str);
         }
-        return str.toString().replace(remove, StringUtils.EMPTY);
+        return str.toString().replace(remove, StringFun.EMPTY);
     }
 
     /**
@@ -1650,7 +1650,7 @@ public class Fun extends FunBase {
         char c;
         for (int i = 0; i < len; i++) {
             c = str.charAt(i);
-            if (!ArrayUtils.contains(chars, c)) {
+            if (!ArrayFun.contains(chars, c)) {
                 builder.append(c);
             }
         }
@@ -1664,7 +1664,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String removeLines(final CharSequence str) {
-        return removeAny(str, CharUtils.CR, CharUtils.LF);
+        return removeAny(str, CharFun.CR, CharFun.LF);
     }
 
     /**
@@ -1750,7 +1750,7 @@ public class Fun extends FunBase {
      * @return int
      */
     public static int random() {
-        return RandomUtils.randomInt(Integer.MAX_VALUE);
+        return RandomFun.randomInt(Integer.MAX_VALUE);
     }
 
     /**
@@ -1760,7 +1760,7 @@ public class Fun extends FunBase {
      * @return int
      */
     public static int randomInt(int max) {
-        return RandomUtils.randomInt(max);
+        return RandomFun.randomInt(max);
     }
 
     /**
@@ -1770,7 +1770,7 @@ public class Fun extends FunBase {
      * @return 随机数
      */
     public static long randomLong(long max) {
-        return RandomUtils.randomLong(max);
+        return RandomFun.randomLong(max);
     }
 
     /**
@@ -1780,7 +1780,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String randomString(int length) {
-        return RandomUtils.randomString(length);
+        return RandomFun.randomString(length);
     }
 
     /**
@@ -1790,7 +1790,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String randomStringExcepts(int length, String... excepts) {
-        return RandomUtils.randomStringExcept(length, excepts);
+        return RandomFun.randomStringExcept(length, excepts);
     }
 
     /**
@@ -1800,7 +1800,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String randomStringNumber(int length) {
-        return RandomUtils.randomStringNumber(length);
+        return RandomFun.randomStringNumber(length);
     }
 
     /**
@@ -1810,7 +1810,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String randomStringChar(int length) {
-        return RandomUtils.randomStringChar(length);
+        return RandomFun.randomStringChar(length);
     }
 
     /**
@@ -1884,7 +1884,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String md5(final byte[] data) {
-        return DigestUtils.md5Hex(data);
+        return DigestFun.md5Hex(data);
     }
 
     /**
@@ -1894,7 +1894,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String md5(final String str) {
-        return DigestUtils.md5Hex(str);
+        return DigestFun.md5Hex(str);
     }
 
     /**
@@ -1904,7 +1904,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha1(final byte[] data) {
-        return DigestUtils.sha1Hex(data);
+        return DigestFun.sha1Hex(data);
     }
 
     /**
@@ -1914,7 +1914,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha1(final String str) {
-        return DigestUtils.sha1Hex(str);
+        return DigestFun.sha1Hex(str);
     }
 
     /**
@@ -1924,7 +1924,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha256(final byte[] data) {
-        return DigestUtils.sha256Hex(data);
+        return DigestFun.sha256Hex(data);
     }
 
     /**
@@ -1934,7 +1934,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha256(final String str) {
-        return DigestUtils.sha256Hex(str);
+        return DigestFun.sha256Hex(str);
     }
 
     /**
@@ -1944,7 +1944,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha384(final byte[] data) {
-        return DigestUtils.sha384Hex(data);
+        return DigestFun.sha384Hex(data);
     }
 
     /**
@@ -1954,7 +1954,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha384(final String str) {
-        return DigestUtils.sha384Hex(str);
+        return DigestFun.sha384Hex(str);
     }
 
     /**
@@ -1964,7 +1964,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha512(final byte[] data) {
-        return DigestUtils.sha512Hex(data);
+        return DigestFun.sha512Hex(data);
     }
 
     /**
@@ -1974,6 +1974,6 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String sha512(final String str) {
-        return DigestUtils.sha512Hex(str);
+        return DigestFun.sha512Hex(str);
     }
 }

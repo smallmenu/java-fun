@@ -1,11 +1,11 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 /**
  * SizeUtils
  *
  * @author smallmenu
  */
-final public class SizeUtils {
+final public class SizeFun {
     public static final String KB = "KB";
     public static final String MB = "MB";
     public static final String GB = "GB";
@@ -15,7 +15,7 @@ final public class SizeUtils {
     /**
      * 禁止实例化
      */
-    private SizeUtils() {
+    private SizeFun() {
         throw new AssertionError();
     }
 

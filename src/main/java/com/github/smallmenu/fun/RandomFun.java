@@ -1,4 +1,4 @@
-package com.github.smallmenu.util;
+package com.github.smallmenu.fun;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,7 +10,7 @@ import static com.github.smallmenu.Fun.removeAny;
  *
  * @author smallmenu
  */
-public class RandomUtils {
+public class RandomFun {
 
     /**
      * 随机字符池
@@ -30,7 +30,7 @@ public class RandomUtils {
     /**
      * 禁止实例化
      */
-    private RandomUtils() {
+    private RandomFun() {
         throw new AssertionError();
     }
 
@@ -155,7 +155,7 @@ public class RandomUtils {
      */
     public static String randomString(String baseString, int length) {
         if (empty(baseString)) {
-            return StringUtils.EMPTY;
+            return StringFun.EMPTY;
         }
         final StringBuilder sb = new StringBuilder(length);
 

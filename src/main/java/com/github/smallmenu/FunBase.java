@@ -1,8 +1,8 @@
 package com.github.smallmenu;
 
-import com.github.smallmenu.util.RandomUtils;
-import com.github.smallmenu.util.SizeUtils;
-import com.github.smallmenu.util.StringUtils;
+import com.github.smallmenu.fun.RandomFun;
+import com.github.smallmenu.fun.SizeFun;
+import com.github.smallmenu.fun.StringFun;
 
 /**
  * Java With Fun(ctions)
@@ -61,7 +61,7 @@ public class FunBase {
      */
     public static long freeMemory(final String format) {
         long memory = freeMemoryByte();
-        return format != null ? SizeUtils.format(memory, format) : memory;
+        return format != null ? SizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -72,7 +72,7 @@ public class FunBase {
      */
     public static long usedMemory(final String format) {
         long memory = totalMemoryByte() - freeMemoryByte();
-        return format != null ? SizeUtils.format(memory, format) : memory;
+        return format != null ? SizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -83,7 +83,7 @@ public class FunBase {
      */
     public static long maxMemory(final String format) {
         long memory = maxMemoryByte();
-        return format != null ? SizeUtils.format(memory, format) : memory;
+        return format != null ? SizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -94,7 +94,7 @@ public class FunBase {
      */
     public static long totalMemory(final String format) {
         long memory = totalMemoryByte();
-        return format != null ? SizeUtils.format(memory, format) : memory;
+        return format != null ? SizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -223,7 +223,7 @@ public class FunBase {
      * @return int
      */
     public static int randomInt() {
-        return RandomUtils.randomInt();
+        return RandomFun.randomInt();
     }
 
     /**
@@ -234,7 +234,7 @@ public class FunBase {
      * @return int
      */
     public static int randomInt(int min, int max) {
-        return RandomUtils.randomInt(min, max);
+        return RandomFun.randomInt(min, max);
     }
 
     /**
@@ -243,7 +243,7 @@ public class FunBase {
      * @return int
      */
     public static long randomLong() {
-        return RandomUtils.randomLong();
+        return RandomFun.randomLong();
     }
 
     /**
@@ -254,7 +254,7 @@ public class FunBase {
      * @return int
      */
     public static long randomLong(long min, long max) {
-        return RandomUtils.randomLong(min, max);
+        return RandomFun.randomLong(min, max);
     }
 
     /**
@@ -270,7 +270,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -299,7 +299,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -328,7 +328,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -357,7 +357,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -386,7 +386,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -415,7 +415,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -444,7 +444,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -473,7 +473,7 @@ public class FunBase {
         }
 
         if (separator == null) {
-            separator = StringUtils.EMPTY;
+            separator = StringFun.EMPTY;
         }
 
         final StringBuilder sb = new StringBuilder();
