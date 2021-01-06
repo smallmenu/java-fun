@@ -1,3 +1,3 @@
-# Java-Fun
+# Java with Fun (Functions)
 
-Java with Fun (Functions)
+

@@ -260,7 +260,7 @@ public class StringFun {
      */
     public static String replace(final CharSequence str, CharSequence searchStr, final CharSequence replaceStr, int max, final boolean ignoreCase) {
         if (empty(str) || empty(searchStr) || replaceStr == null || max == 0) {
-            return str(str);
+            return toStr(str);
         }
 
         if (ignoreCase) {

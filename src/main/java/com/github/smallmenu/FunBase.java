@@ -1,8 +1,11 @@
 package com.github.smallmenu;
 
+import com.github.smallmenu.fun.DigestFun;
 import com.github.smallmenu.fun.RandomFun;
 import com.github.smallmenu.fun.SizeFun;
 import com.github.smallmenu.fun.StringFun;
+
+import java.util.Base64;
 
 /**
  * Java With Fun(ctions)
@@ -487,5 +490,77 @@ public class FunBase {
             sb.append(item);
         }
         return sb.toString();
+    }
+
+    /**
+     * MD5
+     *
+     * @param data 字节数组
+     * @return String
+     */
+    public static String md5(final byte[] data) {
+        return DigestFun.md5Hex(data);
+    }
+
+    /**
+     * SHA1
+     *
+     * @param data 字节数组
+     * @return String
+     */
+    public static String sha1(final byte[] data) {
+        return DigestFun.sha1Hex(data);
+    }
+
+    /**
+     * SHA256
+     *
+     * @param data 字节数组
+     * @return String
+     */
+    public static String sha256(final byte[] data) {
+        return DigestFun.sha256Hex(data);
+    }
+
+    /**
+     * SHA384
+     *
+     * @param data 字节数组
+     * @return String
+     */
+    public static String sha384(final byte[] data) {
+        return DigestFun.sha384Hex(data);
+    }
+
+    /**
+     * SHA512
+     *
+     * @param data 字节数组
+     * @return String
+     */
+    public static String sha512(final byte[] data) {
+        return DigestFun.sha512Hex(data);
+    }
+
+    /**
+     * base64Encode
+     *
+     * @param data byte数组
+     * @return String
+     */
+    public static String base64Encode(final byte[] data) {
+        return Base64.getEncoder().encodeToString(data);
+    }
+
+    /**
+     * base64URLEncode
+     * <p>
+     * 会将 +、/ 替换为 -、_
+     *
+     * @param data byte数组
+     * @return String
+     */
+    public static String base64UrlEncode(final byte[] data) {
+        return Base64.getUrlEncoder().encodeToString(data);
     }
 }

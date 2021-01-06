@@ -424,7 +424,7 @@ public class Fun extends FunBase {
      * @return int
      */
     public static int toInt(final String str) {
-        return toInt(str(str), 0);
+        return toInt(toStr(str), 0);
     }
 
     /**
@@ -794,16 +794,6 @@ public class Fun extends FunBase {
     }
 
     /**
-     * CharSequence 转 String
-     *
-     * @param cs 字符串
-     * @return String
-     */
-    public static String str(final CharSequence cs) {
-        return null == cs ? null : cs.toString();
-    }
-
-    /**
      * 反转字符串
      *
      * @param str 字符串
@@ -818,12 +808,22 @@ public class Fun extends FunBase {
     }
 
     /**
+     * CharSequence 转 String
+     *
+     * @param cs 字符串
+     * @return String
+     */
+    public static String toStr(final CharSequence cs) {
+        return null == cs ? null : cs.toString();
+    }
+
+    /**
      * 数组或对象转 String
      *
      * @param obj 数组或对象
      * @return String
      */
-    public static String string(Object obj) {
+    public static String toStr(Object obj) {
         if (null == obj) {
             return null;
         }
@@ -890,7 +890,7 @@ public class Fun extends FunBase {
 
         final int inputLength = str.length();
         if (repeat == 1 || inputLength == 0) {
-            return str(str);
+            return toStr(str);
         }
 
         if (inputLength == 1 && repeat <= StringFun.PAD_LIMIT) {
@@ -977,7 +977,7 @@ public class Fun extends FunBase {
         final int strLen = str.length();
         final int pads = length - strLen;
         if (pads <= 0) {
-            return str(str);
+            return toStr(str);
         }
 
         if (padLen == 1 && pads <= StringFun.PAD_LIMIT) {
@@ -1012,7 +1012,7 @@ public class Fun extends FunBase {
 
         final int pads = length - str.length();
         if (pads <= 0) {
-            return str(str);
+            return toStr(str);
         }
 
         if (pads > StringFun.PAD_LIMIT) {
@@ -1054,7 +1054,7 @@ public class Fun extends FunBase {
         final int strLen = str.length();
         final int pads = length - strLen;
         if (pads <= 0) {
-            return str(str);
+            return toStr(str);
         }
         if (padLen == 1 && pads <= StringFun.PAD_LIMIT) {
             return padRight(str, length, padStr.charAt(0));
@@ -1693,7 +1693,7 @@ public class Fun extends FunBase {
      */
     public static String remove(final CharSequence str, final CharSequence remove) {
         if (empty(str) || empty(remove)) {
-            return str(str);
+            return toStr(str);
         }
         return str.toString().replace(remove, StringFun.EMPTY);
     }
@@ -1707,7 +1707,7 @@ public class Fun extends FunBase {
      */
     public static String removePrefix(final CharSequence str, final CharSequence remove) {
         if (empty(str) || empty(remove)) {
-            return str(str);
+            return toStr(str);
         }
         if (str.toString().startsWith(remove.toString())) {
             return str.toString().substring(remove.length());
@@ -1724,7 +1724,7 @@ public class Fun extends FunBase {
      */
     public static String removeSuffix(final CharSequence str, final CharSequence remove) {
         if (empty(str) || empty(remove)) {
-            return str(str);
+            return toStr(str);
         }
         if (str.toString().endsWith(remove.toString())) {
             return str.toString().substring(0, str.length() - remove.length());
@@ -1740,7 +1740,7 @@ public class Fun extends FunBase {
      * @return String
      */
     public static String removeAny(final CharSequence str, final CharSequence... removes) {
-        String result = str(str);
+        String result = toStr(str);
         if (!empty(str)) {
             for (CharSequence remove : removes) {
                 result = remove(result, remove);
@@ -1758,11 +1758,11 @@ public class Fun extends FunBase {
      */
     public static String removeAny(final CharSequence str, char... chars) {
         if (null == str || empty(chars)) {
-            return str(str);
+            return toStr(str);
         }
         final int len = str.length();
         if (0 == len) {
-            return str(str);
+            return toStr(str);
         }
         final StringBuilder builder = new StringBuilder(len);
         char c;
@@ -1931,15 +1931,6 @@ public class Fun extends FunBase {
         return RandomFun.randomStringChar(length);
     }
 
-    /**
-     * base64Encode
-     *
-     * @param data byte数组
-     * @return String
-     */
-    public static String base64Encode(final byte[] data) {
-        return Base64.getEncoder().encodeToString(data);
-    }
 
     /**
      * base64Encode
@@ -1961,17 +1952,6 @@ public class Fun extends FunBase {
         return new String(Base64.getDecoder().decode(str));
     }
 
-    /**
-     * base64URLEncode
-     * <p>
-     * 会将 +、/ 替换为 -、_
-     *
-     * @param data byte数组
-     * @return String
-     */
-    public static String base64UrlEncode(final byte[] data) {
-        return Base64.getUrlEncoder().encodeToString(data);
-    }
 
     /**
      * base64URLEncode
@@ -1995,15 +1975,6 @@ public class Fun extends FunBase {
         return new String(Base64.getUrlDecoder().decode(str));
     }
 
-    /**
-     * MD5
-     *
-     * @param data 字节数组
-     * @return String
-     */
-    public static String md5(final byte[] data) {
-        return DigestFun.md5Hex(data);
-    }
 
     /**
      * MD5
@@ -2013,16 +1984,6 @@ public class Fun extends FunBase {
      */
     public static String md5(final String str) {
         return DigestFun.md5Hex(str);
-    }
-
-    /**
-     * SHA1
-     *
-     * @param data 字节数组
-     * @return String
-     */
-    public static String sha1(final byte[] data) {
-        return DigestFun.sha1Hex(data);
     }
 
     /**
@@ -2038,16 +1999,6 @@ public class Fun extends FunBase {
     /**
      * SHA256
      *
-     * @param data 字节数组
-     * @return String
-     */
-    public static String sha256(final byte[] data) {
-        return DigestFun.sha256Hex(data);
-    }
-
-    /**
-     * SHA256
-     *
      * @param str 字符串
      * @return String
      */
@@ -2058,31 +2009,11 @@ public class Fun extends FunBase {
     /**
      * SHA384
      *
-     * @param data 字节数组
-     * @return String
-     */
-    public static String sha384(final byte[] data) {
-        return DigestFun.sha384Hex(data);
-    }
-
-    /**
-     * SHA384
-     *
      * @param str 字符串
      * @return String
      */
     public static String sha384(final String str) {
         return DigestFun.sha384Hex(str);
-    }
-
-    /**
-     * SHA512
-     *
-     * @param data 字节数组
-     * @return String
-     */
-    public static String sha512(final byte[] data) {
-        return DigestFun.sha512Hex(data);
     }
 
     /**
