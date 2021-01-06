@@ -233,6 +233,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -251,6 +252,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -269,6 +271,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -287,6 +290,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -305,6 +309,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -323,6 +328,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -341,6 +347,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -359,6 +366,7 @@ public class ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 }

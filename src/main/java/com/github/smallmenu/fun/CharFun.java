@@ -39,10 +39,10 @@ public class CharFun {
     /**
      * 比较两个字符是否相等
      *
-     * @param c1
-     * @param c2
-     * @param ignoreCase
-     * @return
+     * @param c1         字符串
+     * @param c2         字符串
+     * @param ignoreCase 忽略大小写
+     * @return boolean
      */
     public static boolean equals(char c1, char c2, boolean ignoreCase) {
         if (ignoreCase) {

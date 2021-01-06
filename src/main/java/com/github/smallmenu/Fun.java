@@ -139,23 +139,30 @@ public class Fun extends FunBase {
             if (ArrayFun.isArray(object)) {
                 return 0 == Array.getLength(object);
             }
+
             if (StringFun.isString(object)) {
                 return object.toString().length() == 0;
             }
+
             if (object instanceof Integer) {
                 return 0 == (int) object;
             }
+
             if (object instanceof Long) {
                 return 0 == (long) object;
             }
+
             if (object instanceof Short) {
                 return 0 == (short) object;
             }
+
             if (object instanceof Boolean) {
                 return !((boolean) object);
             }
+
             return false;
         }
+
         return true;
     }
 
@@ -440,6 +447,7 @@ public class Fun extends FunBase {
         if (str == null) {
             return defalutValue;
         }
+
         try {
             return Integer.parseInt(str);
         } catch (final NumberFormatException nfe) {
@@ -536,6 +544,7 @@ public class Fun extends FunBase {
         if (str == null) {
             return defalutValue;
         }
+
         try {
             return Long.parseLong(str);
         } catch (final NumberFormatException nfe) {
@@ -554,6 +563,7 @@ public class Fun extends FunBase {
         if (null == str || null == searchStr) {
             return false;
         }
+
         return str.toString().contains(searchStr);
     }
 
@@ -568,6 +578,7 @@ public class Fun extends FunBase {
         if (null == str || null == searchStr) {
             return false;
         }
+
         return str.toString().toLowerCase().contains(searchStr.toString().toLowerCase());
     }
 
@@ -582,6 +593,7 @@ public class Fun extends FunBase {
         if (empty(str) || empty(searchStrs)) {
             return false;
         }
+
         for (CharSequence checkStr : searchStrs) {
             if (str.toString().contains(checkStr)) {
                 return true;
@@ -706,12 +718,15 @@ public class Fun extends FunBase {
         if (str == null) {
             return null;
         }
+
         if (length < 0) {
             return StringFun.EMPTY;
         }
+
         if (str.length() <= length) {
             return str;
         }
+
         return str.substring(0, length);
     }
 
@@ -726,12 +741,15 @@ public class Fun extends FunBase {
         if (str == null) {
             return null;
         }
+
         if (length < 0) {
             return StringFun.EMPTY;
         }
+
         if (str.length() <= length) {
             return str;
         }
+
         return str.substring(str.length() - length);
     }
 
@@ -746,6 +764,7 @@ public class Fun extends FunBase {
         if (str == null || searchStr == null) {
             return StringFun.INDEX_NOT_FOUND;
         }
+
         return StringFun.indexOf(str, searchStr, 0, false);
     }
 
@@ -761,6 +780,7 @@ public class Fun extends FunBase {
         if (str == null || searchStr == null) {
             return StringFun.INDEX_NOT_FOUND;
         }
+
         return StringFun.indexOf(str, searchStr, start, false);
     }
 
@@ -775,6 +795,7 @@ public class Fun extends FunBase {
         if (str == null || searchStr == null) {
             return StringFun.INDEX_NOT_FOUND;
         }
+
         return StringFun.indexOf(str, searchStr, 0, true);
     }
 
@@ -790,6 +811,7 @@ public class Fun extends FunBase {
         if (str == null || searchStr == null) {
             return StringFun.INDEX_NOT_FOUND;
         }
+
         return StringFun.indexOf(str, searchStr, start, true);
     }
 
@@ -865,10 +887,12 @@ public class Fun extends FunBase {
         if (repeat <= 0) {
             return StringFun.EMPTY;
         }
+
         final char[] buf = new char[repeat];
         for (int i = repeat - 1; i >= 0; i--) {
             buf[i] = ch;
         }
+
         return new String(buf);
     }
 
@@ -1056,6 +1080,7 @@ public class Fun extends FunBase {
         if (pads <= 0) {
             return toStr(str);
         }
+
         if (padLen == 1 && pads <= StringFun.PAD_LIMIT) {
             return padRight(str, length, padStr.charAt(0));
         }
@@ -1263,6 +1288,7 @@ public class Fun extends FunBase {
         } else {
             strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
+
         return ArrayFun.stringToIntArray(strings);
     }
 
@@ -1286,6 +1312,7 @@ public class Fun extends FunBase {
         } else {
             strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
+
         return ArrayFun.stringToLongArray(strings);
     }
 
@@ -1309,6 +1336,7 @@ public class Fun extends FunBase {
         } else {
             strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
         }
+
         return ArrayFun.stringToShortArray(strings);
     }
 
@@ -1462,11 +1490,7 @@ public class Fun extends FunBase {
         if (length < 0) {
             end = len + length;
         } else {
-            if (start + length >= len) {
-                end = len;
-            } else {
-                end = start + length;
-            }
+            end = Math.min(start + length, len);
         }
 
         if (start > end) {
@@ -1511,6 +1535,7 @@ public class Fun extends FunBase {
                 sb.append(item);
             }
         }
+
         return sb.toString();
     }
 
@@ -1609,7 +1634,6 @@ public class Fun extends FunBase {
             return null;
         }
 
-        ArrayList<String> result = new ArrayList<>();
         Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
         return regexMatch(pattern, content);
     }
@@ -1657,6 +1681,7 @@ public class Fun extends FunBase {
                 sb.append(obj);
             }
         }
+
         return sb.toString();
     }
 
@@ -1695,6 +1720,7 @@ public class Fun extends FunBase {
         if (empty(str) || empty(remove)) {
             return toStr(str);
         }
+
         return str.toString().replace(remove, StringFun.EMPTY);
     }
 
@@ -1709,9 +1735,11 @@ public class Fun extends FunBase {
         if (empty(str) || empty(remove)) {
             return toStr(str);
         }
+
         if (str.toString().startsWith(remove.toString())) {
             return str.toString().substring(remove.length());
         }
+
         return str.toString();
     }
 
@@ -1726,9 +1754,11 @@ public class Fun extends FunBase {
         if (empty(str) || empty(remove)) {
             return toStr(str);
         }
+
         if (str.toString().endsWith(remove.toString())) {
             return str.toString().substring(0, str.length() - remove.length());
         }
+
         return str.toString();
     }
 
@@ -1741,11 +1771,13 @@ public class Fun extends FunBase {
      */
     public static String removeAny(final CharSequence str, final CharSequence... removes) {
         String result = toStr(str);
+
         if (!empty(str)) {
             for (CharSequence remove : removes) {
                 result = remove(result, remove);
             }
         }
+
         return result;
     }
 
@@ -1760,10 +1792,12 @@ public class Fun extends FunBase {
         if (null == str || empty(chars)) {
             return toStr(str);
         }
+
         final int len = str.length();
         if (0 == len) {
             return toStr(str);
         }
+
         final StringBuilder builder = new StringBuilder(len);
         char c;
         for (int i = 0; i < len; i++) {
@@ -1772,6 +1806,7 @@ public class Fun extends FunBase {
                 builder.append(c);
             }
         }
+
         return builder.toString();
     }
 

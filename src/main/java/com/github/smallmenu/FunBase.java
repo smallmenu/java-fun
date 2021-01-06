@@ -8,7 +8,7 @@ import com.github.smallmenu.fun.StringFun;
 import java.util.Base64;
 
 /**
- * Java With Fun(ctions)
+ * FunBase
  *
  * @author smallmenu
  */
@@ -64,6 +64,7 @@ public class FunBase {
      */
     public static long freeMemory(final String format) {
         long memory = freeMemoryByte();
+
         return format != null ? SizeFun.format(memory, format) : memory;
     }
 
@@ -75,6 +76,7 @@ public class FunBase {
      */
     public static long usedMemory(final String format) {
         long memory = totalMemoryByte() - freeMemoryByte();
+
         return format != null ? SizeFun.format(memory, format) : memory;
     }
 
@@ -86,6 +88,7 @@ public class FunBase {
      */
     public static long maxMemory(final String format) {
         long memory = maxMemoryByte();
+
         return format != null ? SizeFun.format(memory, format) : memory;
     }
 
@@ -97,13 +100,14 @@ public class FunBase {
      */
     public static long totalMemory(final String format) {
         long memory = totalMemoryByte();
+
         return format != null ? SizeFun.format(memory, format) : memory;
     }
 
     /**
      * 检测是否为空
      *
-     * @param value
+     * @param value 值
      * @return boolean
      */
     public static boolean empty(int value) {
@@ -113,7 +117,7 @@ public class FunBase {
     /**
      * 检测是否为空
      *
-     * @param value
+     * @param value 值
      * @return boolean
      */
     public static boolean empty(long value) {
@@ -123,7 +127,7 @@ public class FunBase {
     /**
      * 检测是否为空
      *
-     * @param value
+     * @param value 值
      * @return boolean
      */
     public static boolean empty(short value) {
@@ -133,11 +137,11 @@ public class FunBase {
     /**
      * 检测是否为空
      *
-     * @param value
-     * @return
+     * @param value 值
+     * @return boolean
      */
     public static boolean empty(boolean value) {
-        return value == false;
+        return !value;
     }
 
     /**
@@ -286,6 +290,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -315,6 +320,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -344,6 +350,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -373,6 +380,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -402,6 +410,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -431,6 +440,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -460,6 +470,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 
@@ -489,6 +500,7 @@ public class FunBase {
             }
             sb.append(item);
         }
+
         return sb.toString();
     }
 

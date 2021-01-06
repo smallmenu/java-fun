@@ -25,7 +25,7 @@ public class DigestFun {
     /**
      * 摘要算法工厂
      *
-     * @param algorithm
+     * @param algorithm 摘要算法字符串表示
      * @return MessageDigest
      */
     public static MessageDigest getDigest(final String algorithm) {

@@ -23,6 +23,7 @@ public class ArrayFun extends ArrayBaseFun {
         if (null == obj) {
             return false;
         }
+
         return obj.getClass().isArray();
     }
 
@@ -37,6 +38,7 @@ public class ArrayFun extends ArrayBaseFun {
         if (null == array) {
             return 0;
         }
+
         return Array.getLength(array);
     }
 
@@ -72,6 +74,7 @@ public class ArrayFun extends ArrayBaseFun {
                 }
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 

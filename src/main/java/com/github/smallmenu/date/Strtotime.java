@@ -24,7 +24,7 @@ public final class Strtotime {
         LocalDateTime tryConvert(String input, Long time);
     }
 
-    static  {
+    static {
         D_MATCHERS = new LinkedList<>();
         D_MATCHERS.add(new DateFormatMatcher(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         D_MATCHERS.add(new DateFormatMatcher(DateTimeFormatter.ofPattern("yyyy-M-d")));
@@ -93,6 +93,7 @@ public final class Strtotime {
 
         DT_MATCHERS.add(new DMatcher() {
             private final Pattern regex = Pattern.compile("[\\-\\+]?\\d+ (year|month|day|hour|minute|second|week)[s]?");
+
             @Override
             public LocalDateTime tryConvert(String input, Long time) {
                 String exp = trim(input);
@@ -107,25 +108,25 @@ public final class Strtotime {
                     if (t != 0) {
                         String type = matcher.group(1);
                         switch (type) {
-                            case "year" :
+                            case "year":
                                 ldt = ldt.plusYears(t);
                                 break;
-                            case "month" :
+                            case "month":
                                 ldt = ldt.plusMonths(t);
                                 break;
-                            case "day" :
+                            case "day":
                                 ldt = ldt.plusDays(t);
                                 break;
-                            case "hour" :
+                            case "hour":
                                 ldt = ldt.plusHours(t);
                                 break;
-                            case "minute" :
+                            case "minute":
                                 ldt = ldt.plusMinutes(t);
                                 break;
-                            case "second" :
+                            case "second":
                                 ldt = ldt.plusSeconds(t);
                                 break;
-                            case "week" :
+                            case "week":
                                 ldt = ldt.plusWeeks(t);
                                 break;
                             default:

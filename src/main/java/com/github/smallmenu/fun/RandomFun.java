@@ -123,6 +123,7 @@ public class RandomFun {
     public static String randomStringExcept(int length, String... excepts) {
         String pool = RANDOM_CHAR_NUM_POOL;
         pool = removeAny(pool, excepts);
+
         return randomString(pool, length);
     }
 
@@ -157,6 +158,7 @@ public class RandomFun {
         if (empty(baseString)) {
             return StringFun.EMPTY;
         }
+
         final StringBuilder sb = new StringBuilder(length);
 
         if (length < 1) {
@@ -167,6 +169,7 @@ public class RandomFun {
             int number = randomInt(baseLength);
             sb.append(baseString.charAt(number));
         }
+
         return sb.toString();
     }
 

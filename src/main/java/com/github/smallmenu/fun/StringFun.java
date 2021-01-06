@@ -14,31 +14,104 @@ import static com.github.smallmenu.Fun.*;
  * @author smallmenu
  */
 public class StringFun {
+    /**
+     *
+     */
     public static final int INDEX_NOT_FOUND = -1;
 
+    /**
+     *
+     */
     public static final String EMPTY = "";
+
+    /**
+     *
+     */
     public static final String EMPTY_JSON = "{}";
 
+    /**
+     *
+     */
     public static final String SPACE = " ";
+
+    /**
+     *
+     */
     public static final String TAB = "	";
 
+    /**
+     *
+     */
     public static final String DOT = ".";
+
+    /**
+     *
+     */
     public static final String DOUBLE_DOT = "..";
+
+    /**
+     *
+     */
     public static final String SLASH = "/";
+
+    /**
+     *
+     */
     public static final String BACKSLASH = "\\";
+
+    /**
+     *
+     */
     public static final String UNDERLINE = "_";
+
+    /**
+     *
+     */
     public static final String DASHED = "-";
+
+    /**
+     *
+     */
     public static final String COMMA = ",";
 
+    /**
+     *
+     */
     public static final String CR = "\r";
+
+    /**
+     *
+     */
     public static final String LF = "\n";
+
+    /**
+     *
+     */
     public static final String CRLF = "\r\n";
 
+    /**
+     *
+     */
     public static final String HTML_NBSP = "&nbsp;";
+
+    /**
+     *
+     */
     public static final String HTML_AMP = "&amp;";
+
+    /**
+     *
+     */
     public static final String HTML_LT = "&lt;";
+
+    /**
+     *
+     */
     public static final String HTML_GT = "&gt;";
 
+    /**
+     *
+     */
     public static final int PAD_LIMIT = 8192;
 
     /**
@@ -93,6 +166,7 @@ public class StringFun {
                 return i;
             }
         }
+
         return INDEX_NOT_FOUND;
     }
 
@@ -121,7 +195,7 @@ public class StringFun {
      * 除去两侧字符串空白，如果字符串是 null，依然返回 null
      *
      * @param str 待处理字符串
-     * @return
+     * @return String
      */
     public static String trim(final CharSequence str) {
         return trim(str, null, 0);
@@ -295,11 +369,11 @@ public class StringFun {
     /**
      * 分割字符串为列表
      *
-     * @param str
-     * @param limit
-     * @param isTrim
-     * @param ignoreEmpty
-     * @return
+     * @param str    字符串
+     * @param limit   次数
+     * @param isTrim   是否trim
+     * @param ignoreEmpty  是否忽略空值
+     * @return List
      */
     public static List<String> splitToList(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
         if (empty(str)) {
@@ -328,13 +402,13 @@ public class StringFun {
     /**
      * 分割字符串为列表
      *
-     * @param str
-     * @param separator
-     * @param limit
-     * @param isTrim
-     * @param ignoreEmpty
-     * @param ignoreCase
-     * @return
+     * @param str   字符串
+     * @param separator    分隔符
+     * @param limit     次数
+     * @param isTrim    是否trim
+     * @param ignoreEmpty  是否忽略空值
+     * @param ignoreCase   是否忽略大小写
+     * @return List
      */
     public static List<String> splitToList(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         if (empty(str)) {
@@ -363,13 +437,13 @@ public class StringFun {
     /**
      * 分割字符串为列表
      *
-     * @param str
-     * @param separator
-     * @param limit
-     * @param isTrim
-     * @param ignoreEmpty
-     * @param ignoreCase
-     * @return
+     * @param str   字符串
+     * @param separator    分隔字符串
+     * @param limit     次数
+     * @param isTrim    是否trim
+     * @param ignoreEmpty  是否忽略空值
+     * @param ignoreCase   是否忽略大小写
+     * @return List
      */
     public static List<String> splitToList(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         if (empty(str)) {
@@ -410,11 +484,11 @@ public class StringFun {
     /**
      * 分割字符串为数组
      *
-     * @param str
-     * @param limit
-     * @param isTrim
-     * @param ignoreEmpty
-     * @return
+     * @param str   字符串
+     * @param limit   次数
+     * @param isTrim    是否trim
+     * @param ignoreEmpty  是否忽略空值
+     * @return String[]
      */
     public static String[] split(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
         List<String> list = splitToList(str, limit, isTrim, ignoreEmpty);
@@ -424,13 +498,13 @@ public class StringFun {
     /**
      * 分割字符串为数组
      *
-     * @param str
-     * @param separator
-     * @param limit
-     * @param isTrim
-     * @param ignoreEmpty
-     * @param ignoreCase
-     * @return
+     * @param str   字符串
+     * @param separator    分隔字符串
+     * @param limit     次数
+     * @param isTrim    是否trim
+     * @param ignoreEmpty  是否忽略空值
+     * @param ignoreCase   是否忽略大小写
+     * @return String[]
      */
     public static String[] split(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         List<String> list = splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase);
@@ -440,12 +514,12 @@ public class StringFun {
     /**
      * 分割字符串为数组
      *
-     * @param str
-     * @param separator
-     * @param limit
-     * @param isTrim
-     * @param ignoreEmpty
-     * @param ignoreCase
+     * @param str   字符串
+     * @param separator    分隔字符
+     * @param limit     次数
+     * @param isTrim    是否trim
+     * @param ignoreEmpty  是否忽略空值
+     * @param ignoreCase   是否忽略大小写
      * @return
      */
     public static String[] split(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {

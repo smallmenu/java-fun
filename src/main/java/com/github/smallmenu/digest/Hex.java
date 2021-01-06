@@ -87,6 +87,7 @@ public class Hex {
         if (digit == -1) {
             throw new Exception("Illegal hexadecimal character " + ch + " at index " + index);
         }
+
         return digit;
     }
 
@@ -100,6 +101,7 @@ public class Hex {
     public static byte[] decodeHex(final char[] data) throws Exception {
         final byte[] out = new byte[data.length >> 1];
         decodeHex(data, out, 0);
+
         return out;
     }
 
@@ -200,6 +202,7 @@ public class Hex {
         final int l = data.length;
         final char[] out = new char[l << 1];
         encodeHex(data, 0, data.length, toDigits, out, 0);
+
         return out;
     }
 
@@ -215,6 +218,7 @@ public class Hex {
     public static char[] encodeHex(final byte[] data, final int dataOffset, final int dataLen, final boolean toLowerCase) {
         final char[] out = new char[dataLen << 1];
         encodeHex(data, dataOffset, dataLen, toLowerCase ? DIGITS_LOWER : DIGITS_UPPER, out, 0);
+
         return out;
     }
 
