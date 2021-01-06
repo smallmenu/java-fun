@@ -369,10 +369,10 @@ public class StringFun {
     /**
      * 分割字符串为列表
      *
-     * @param str    字符串
-     * @param limit   次数
-     * @param isTrim   是否trim
-     * @param ignoreEmpty  是否忽略空值
+     * @param str         字符串
+     * @param limit       次数
+     * @param isTrim      是否trim
+     * @param ignoreEmpty 是否忽略空值
      * @return List
      */
     public static List<String> splitToList(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
@@ -402,12 +402,12 @@ public class StringFun {
     /**
      * 分割字符串为列表
      *
-     * @param str   字符串
-     * @param separator    分隔符
-     * @param limit     次数
-     * @param isTrim    是否trim
-     * @param ignoreEmpty  是否忽略空值
-     * @param ignoreCase   是否忽略大小写
+     * @param str         字符串
+     * @param separator   分隔符
+     * @param limit       次数
+     * @param isTrim      是否trim
+     * @param ignoreEmpty 是否忽略空值
+     * @param ignoreCase  是否忽略大小写
      * @return List
      */
     public static List<String> splitToList(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
@@ -437,12 +437,12 @@ public class StringFun {
     /**
      * 分割字符串为列表
      *
-     * @param str   字符串
-     * @param separator    分隔字符串
-     * @param limit     次数
-     * @param isTrim    是否trim
-     * @param ignoreEmpty  是否忽略空值
-     * @param ignoreCase   是否忽略大小写
+     * @param str         字符串
+     * @param separator   分隔字符串
+     * @param limit       次数
+     * @param isTrim      是否trim
+     * @param ignoreEmpty 是否忽略空值
+     * @param ignoreCase  是否忽略大小写
      * @return List
      */
     public static List<String> splitToList(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
@@ -484,10 +484,10 @@ public class StringFun {
     /**
      * 分割字符串为数组
      *
-     * @param str   字符串
-     * @param limit   次数
-     * @param isTrim    是否trim
-     * @param ignoreEmpty  是否忽略空值
+     * @param str         字符串
+     * @param limit       次数
+     * @param isTrim      是否trim
+     * @param ignoreEmpty 是否忽略空值
      * @return String[]
      */
     public static String[] split(String str, int limit, boolean isTrim, boolean ignoreEmpty) {
@@ -498,12 +498,12 @@ public class StringFun {
     /**
      * 分割字符串为数组
      *
-     * @param str   字符串
-     * @param separator    分隔字符串
-     * @param limit     次数
-     * @param isTrim    是否trim
-     * @param ignoreEmpty  是否忽略空值
-     * @param ignoreCase   是否忽略大小写
+     * @param str         字符串
+     * @param separator   分隔字符串
+     * @param limit       次数
+     * @param isTrim      是否trim
+     * @param ignoreEmpty 是否忽略空值
+     * @param ignoreCase  是否忽略大小写
      * @return String[]
      */
     public static String[] split(String str, String separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
@@ -514,12 +514,12 @@ public class StringFun {
     /**
      * 分割字符串为数组
      *
-     * @param str   字符串
-     * @param separator    分隔字符
-     * @param limit     次数
-     * @param isTrim    是否trim
-     * @param ignoreEmpty  是否忽略空值
-     * @param ignoreCase   是否忽略大小写
+     * @param str         字符串
+     * @param separator   分隔字符
+     * @param limit       次数
+     * @param isTrim      是否trim
+     * @param ignoreEmpty 是否忽略空值
+     * @param ignoreCase  是否忽略大小写
      * @return
      */
     public static String[] split(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {

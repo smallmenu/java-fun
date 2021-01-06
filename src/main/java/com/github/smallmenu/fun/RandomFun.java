@@ -116,7 +116,7 @@ public class RandomFun {
     /**
      * 获得一个随机的字符串，排除指定的字符串集
      *
-     * @param length 字符串的长度
+     * @param length  字符串的长度
      * @param excepts 排除的字符串列表
      * @return String
      */
