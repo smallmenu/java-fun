@@ -36,7 +36,7 @@ public enum DigestAlgorithm {
     /**
      * Construct
      *
-     * @param value
+     * @param value 值
      */
     DigestAlgorithm(String value) {
         this.value = value;

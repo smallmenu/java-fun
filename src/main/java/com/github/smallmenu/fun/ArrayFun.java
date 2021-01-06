@@ -30,7 +30,7 @@ public class ArrayFun extends ArrayBaseFun {
     /**
      * 获取数组长度，null 检查
      *
-     * @param array
+     * @param array 对象
      * @return int
      * @throws IllegalArgumentException 如果参数不为数组，抛出异常
      */

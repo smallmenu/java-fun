@@ -21,6 +21,11 @@ public final class Strtotime {
     private static final List<DMatcher> D_MATCHERS;
 
     public interface DMatcher {
+        /**
+         * @param input 时间转换表达式
+         * @param time  时间戳
+         * @return LocalDateTime
+         */
         LocalDateTime tryConvert(String input, Long time);
     }
 

@@ -210,7 +210,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测字符串列表，是否包含有空值
+     * 检测字符串列表，是否包含有空值，包含任意一个返回 true
      *
      * @param strs 字符串列表
      * @return boolean
@@ -274,7 +274,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 检测字符串列表，是否包含空白
+     * 检测字符串列表，是否包含空白，包含任意一个空白返回 true
      * <p>
      * 空白包含：null、""、" "、以及不可见字符如缩紧
      *
@@ -409,6 +409,38 @@ public class Fun extends FunBase {
     }
 
     /**
+     * 除去字符串头尾部的空白，并处理 null 值。如果结果为empty，则返回默认值
+     *
+     * @param str        待处理字符串
+     * @param defaultStr 默认值
+     * @return String
+     */
+    public static String trimToEmptyDefault(final CharSequence str, String defaultStr) {
+        if (str == null) {
+            return defaultStr;
+        }
+
+        String s = trim(str);
+        return empty(s) ? defaultStr : s;
+    }
+
+    /**
+     * 除去字符串头尾部的空白，并处理 null 值。如果结果为blank，则返回默认值
+     *
+     * @param str        待处理字符串
+     * @param defaultStr 默认值
+     * @return String
+     */
+    public static String trimToBlankDefault(final CharSequence str, String defaultStr) {
+        if (str == null) {
+            return defaultStr;
+        }
+
+        String s = trim(str);
+        return blank(s) ? defaultStr : s;
+    }
+
+    /**
      * 除去字符串头尾部的空白，并处理 null 和空字符串 ""
      * <p>
      * 如果字符串是 null 或者 "" ，返回  null
@@ -440,18 +472,18 @@ public class Fun extends FunBase {
      * 如果是 null 或者 "" 或者异常，返回默认值
      *
      * @param str          字符串
-     * @param defalutValue 默认值
+     * @param defaultValue 默认值
      * @return int
      */
-    public static int toInt(final String str, final int defalutValue) {
+    public static int toInt(final String str, final int defaultValue) {
         if (str == null) {
-            return defalutValue;
+            return defaultValue;
         }
 
         try {
             return Integer.parseInt(str);
         } catch (final NumberFormatException nfe) {
-            return defalutValue;
+            return defaultValue;
         }
     }
 
@@ -537,18 +569,18 @@ public class Fun extends FunBase {
      * 如果是  null 或者 "" 或者异常，返回默认值
      *
      * @param str          字符串
-     * @param defalutValue 默认值
+     * @param defaultValue 默认值
      * @return long
      */
-    public static long toLong(final String str, final long defalutValue) {
+    public static long toLong(final String str, final long defaultValue) {
         if (str == null) {
-            return defalutValue;
+            return defaultValue;
         }
 
         try {
             return Long.parseLong(str);
         } catch (final NumberFormatException nfe) {
-            return defalutValue;
+            return defaultValue;
         }
     }
 
@@ -678,7 +710,7 @@ public class Fun extends FunBase {
     /**
      * 获取字符串的字符长度，如果为 null 返回 0
      * <p>
-     * 使用 String.lenght 方法， 中英文数字均是 1
+     * 使用 String.length 方法， 中英文数字均是 1
      *
      * @param str 字符串
      * @return int
@@ -1117,33 +1149,33 @@ public class Fun extends FunBase {
      * 分割字符串为数组
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return String[]
      */
-    public static String[] split(final CharSequence str, final char seperator) {
+    public static String[] split(final CharSequence str, final char separator) {
         if (str == null) {
             return ArrayFun.EMPTY_STRING;
         }
 
-        return StringFun.split(str.toString(), seperator, 0, false, false, false);
+        return StringFun.split(str.toString(), separator, 0, false, false, false);
     }
 
     /**
      * 分割字符串为数组
      *
      * @param str       字符串
-     * @param seperator 分割字符串
+     * @param separator 分割字符串
      * @return String[]
      */
-    public static String[] split(final CharSequence str, final CharSequence seperator) {
+    public static String[] split(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return ArrayFun.EMPTY_STRING;
         }
 
-        if (seperator == null) {
+        if (separator == null) {
             return StringFun.split(str.toString(), 0, false, false);
         } else {
-            return StringFun.split(str.toString(), seperator.toString(), 0, false, false, false);
+            return StringFun.split(str.toString(), separator.toString(), 0, false, false, false);
         }
     }
 
@@ -1169,33 +1201,33 @@ public class Fun extends FunBase {
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return String[]
      */
-    public static List<String> splitToList(final CharSequence str, final char seperator) {
+    public static List<String> splitToList(final CharSequence str, final char separator) {
         if (str == null) {
             return Collections.emptyList();
         }
 
-        return StringFun.splitToList(str.toString(), seperator, 0, false, false, false);
+        return StringFun.splitToList(str.toString(), separator, 0, false, false, false);
     }
 
     /**
      * 分割字符串为列表
      *
      * @param str       字符串
-     * @param seperator 分割字符串
+     * @param separator 分割字符串
      * @return String[]
      */
-    public static List<String> splitToList(final CharSequence str, final CharSequence seperator) {
+    public static List<String> splitToList(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return Collections.emptyList();
         }
 
-        if (seperator == null) {
+        if (separator == null) {
             return StringFun.splitToList(str.toString(), 0, false, false);
         } else {
-            return StringFun.splitToList(str.toString(), seperator.toString(), 0, false, false, false);
+            return StringFun.splitToList(str.toString(), separator.toString(), 0, false, false, false);
         }
     }
 
@@ -1238,33 +1270,33 @@ public class Fun extends FunBase {
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return String[]
      */
-    public static String[] splitTrim(final CharSequence str, final char seperator) {
+    public static String[] splitTrim(final CharSequence str, final char separator) {
         if (str == null) {
             return ArrayFun.EMPTY_STRING;
         }
 
-        return StringFun.split(str.toString(), seperator, 0, true, true, false);
+        return StringFun.split(str.toString(), separator, 0, true, true, false);
     }
 
     /**
      * 分割字符串为数组
      *
      * @param str       字符串
-     * @param seperator 分割字符串
+     * @param separator 分割字符串
      * @return String[]
      */
-    public static String[] splitTrim(final CharSequence str, final CharSequence seperator) {
+    public static String[] splitTrim(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return ArrayFun.EMPTY_STRING;
         }
 
-        if (seperator == null) {
+        if (separator == null) {
             return StringFun.split(str.toString(), 0, true, true);
         } else {
-            return StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
+            return StringFun.split(str.toString(), separator.toString(), 0, true, true, false);
         }
     }
 
@@ -1274,19 +1306,19 @@ public class Fun extends FunBase {
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return int[]
      */
-    public static int[] splitTrimToInt(final CharSequence str, final CharSequence seperator) {
+    public static int[] splitTrimToInt(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return ArrayFun.EMPTY_INT;
         }
 
         String[] strings;
-        if (seperator == null) {
+        if (separator == null) {
             strings = StringFun.split(str.toString(), 0, true, true);
         } else {
-            strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
+            strings = StringFun.split(str.toString(), separator.toString(), 0, true, true, false);
         }
 
         return ArrayFun.stringToIntArray(strings);
@@ -1298,19 +1330,19 @@ public class Fun extends FunBase {
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return long[]
      */
-    public static long[] splitTrimToLong(final CharSequence str, final CharSequence seperator) {
+    public static long[] splitTrimToLong(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return ArrayFun.EMPTY_LONG;
         }
 
         String[] strings;
-        if (seperator == null) {
+        if (separator == null) {
             strings = StringFun.split(str.toString(), 0, true, true);
         } else {
-            strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
+            strings = StringFun.split(str.toString(), separator.toString(), 0, true, true, false);
         }
 
         return ArrayFun.stringToLongArray(strings);
@@ -1322,19 +1354,19 @@ public class Fun extends FunBase {
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return short[]
      */
-    public static short[] splitTrimToShort(final CharSequence str, final CharSequence seperator) {
+    public static short[] splitTrimToShort(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return ArrayFun.EMPTY_SHORT;
         }
 
         String[] strings;
-        if (seperator == null) {
+        if (separator == null) {
             strings = StringFun.split(str.toString(), 0, true, true);
         } else {
-            strings = StringFun.split(str.toString(), seperator.toString(), 0, true, true, false);
+            strings = StringFun.split(str.toString(), separator.toString(), 0, true, true, false);
         }
 
         return ArrayFun.stringToShortArray(strings);
@@ -1362,33 +1394,33 @@ public class Fun extends FunBase {
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
-     * @param seperator 分隔符
+     * @param separator 分隔符
      * @return String[]
      */
-    public static List<String> splitTrimToList(final CharSequence str, final char seperator) {
+    public static List<String> splitTrimToList(final CharSequence str, final char separator) {
         if (str == null) {
             return Collections.emptyList();
         }
 
-        return StringFun.splitToList(str.toString(), seperator, 0, true, true, false);
+        return StringFun.splitToList(str.toString(), separator, 0, true, true, false);
     }
 
     /**
      * 分割字符串为列表
      *
      * @param str       字符串
-     * @param seperator 分割字符串
+     * @param separator 分割字符串
      * @return String[]
      */
-    public static List<String> splitTrimToList(final CharSequence str, final CharSequence seperator) {
+    public static List<String> splitTrimToList(final CharSequence str, final CharSequence separator) {
         if (str == null) {
             return Collections.emptyList();
         }
 
-        if (seperator == null) {
+        if (separator == null) {
             return StringFun.splitToList(str.toString(), 0, true, true);
         } else {
-            return StringFun.splitToList(str.toString(), seperator.toString(), 0, true, true, false);
+            return StringFun.splitToList(str.toString(), separator.toString(), 0, true, true, false);
         }
     }
 

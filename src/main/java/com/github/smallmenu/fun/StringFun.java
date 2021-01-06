@@ -520,7 +520,7 @@ public class StringFun {
      * @param isTrim      是否trim
      * @param ignoreEmpty 是否忽略空值
      * @param ignoreCase  是否忽略大小写
-     * @return
+     * @return String[]
      */
     public static String[] split(String str, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
         List<String> list = splitToList(str, separator, limit, isTrim, ignoreEmpty, ignoreCase);

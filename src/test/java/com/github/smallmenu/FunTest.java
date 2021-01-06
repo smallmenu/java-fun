@@ -576,6 +576,7 @@ public class FunTest {
 
     @Test
     public void testRandom() {
+        System.out.println(random());
         System.out.println(randomInt());
         System.out.println(randomInt(100));
         System.out.println(randomInt(100, 10000));

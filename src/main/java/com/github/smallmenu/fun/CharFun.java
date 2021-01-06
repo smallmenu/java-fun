@@ -33,7 +33,7 @@ public class CharFun {
      * @return boolean
      */
     public static boolean isChar(Object value) {
-        return value instanceof Character || value.getClass() == char.class;
+        return value instanceof Character;
     }
 
     /**
