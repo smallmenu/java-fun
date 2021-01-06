@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Java With Fun(ctions)
@@ -304,6 +306,41 @@ public class Fun extends FunBase {
         }
 
         return true;
+    }
+
+    /**
+     * 字符串是否匹配正则
+     *
+     * @param regex   正则表达式字符串
+     * @param content 字符串
+     * @return boolean
+     */
+    public static boolean match(String regex, CharSequence content) {
+        if (content == null) {
+            return false;
+        }
+
+        if (empty(regex)) {
+            return true;
+        }
+
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+        return match(pattern, content);
+    }
+
+    /**
+     * 字符串是否匹配正则
+     *
+     * @param pattern 正则表达式模式
+     * @param content 字符串
+     * @return boolean
+     */
+    public static boolean match(Pattern pattern, CharSequence content) {
+        if (content == null || pattern == null) {
+            return false;
+        }
+
+        return pattern.matcher(content).matches();
     }
 
     /**
@@ -1492,8 +1529,89 @@ public class Fun extends FunBase {
         return join(iterable.iterator(), separator);
     }
 
-    public static String regexMatch() {
+    /**
+     * 获得匹配字符串的指定分组
+     * <p>
+     * 分组 0，表示全匹配的信息
+     *
+     * @param pattern    正则表达式模式
+     * @param content    字符串
+     * @param groupIndex 分组
+     * @return String
+     */
+    public static String regexMatch(Pattern pattern, CharSequence content, int groupIndex) {
+        if (pattern == null || content == null) {
+            return null;
+        }
+
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            return matcher.group(groupIndex);
+        }
+
         return null;
+    }
+
+    /**
+     * 获得匹配字符串的所有分组
+     * <p>
+     * 分组 0，表示全匹配的信息
+     *
+     * @param pattern 正则表达式模式
+     * @param content 字符串
+     * @return List
+     */
+    public static List<String> regexMatch(Pattern pattern, CharSequence content) {
+        if (pattern == null || content == null) {
+            return null;
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            final int groupCount = matcher.groupCount();
+            for (int i = 0; i <= groupCount; i++) {
+                result.add(matcher.group(i));
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 获得匹配字符串的指定分组
+     * <p>
+     * 分组 0，表示全匹配的信息
+     *
+     * @param regex      正则表达式字符串
+     * @param content    字符串
+     * @param groupIndex 分组
+     * @return String
+     */
+    public static String regexMatch(String regex, CharSequence content, int groupIndex) {
+        if (regex == null || content == null) {
+            return null;
+        }
+
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+        return regexMatch(pattern, content, groupIndex);
+    }
+
+    /**
+     * 获得匹配字符串的所有分组
+     *
+     * @param regex   正则表达式字符串
+     * @param content 字符串
+     * @return List
+     */
+    public static List<String> regexMatch(String regex, CharSequence content) {
+        if (regex == null || content == null) {
+            return null;
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+        return regexMatch(pattern, content);
     }
 
     /**

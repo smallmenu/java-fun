@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static com.github.smallmenu.Fun.*;
 
@@ -521,6 +522,32 @@ public class FunTest {
     @Test
     public void testReverse() {
         Assert.assertEquals("dlroWolleH", reverse("HelloWorld"));
+    }
+
+    @Test
+    public void testMatch() {
+        Pattern pattern = Pattern.compile("(foo)(bar)(baz)");
+        Assert.assertTrue(match("(foo)(bar)(baz)", "foobarbaz"));
+        Assert.assertTrue(match(pattern, "foobarbaz"));
+
+        Assert.assertFalse(match("(foo)(bar)(baa)", "foobarbaz"));
+    }
+
+    @Test
+    public void testRegexMatch() {
+        Pattern pattern = Pattern.compile("(foo)(bar)(baz)");
+        List<String> results = new ArrayList<>();
+        results.add("foobarbaz");
+        results.add("foo");
+        results.add("bar");
+        results.add("baz");
+
+        Assert.assertEquals("foobarbaz", regexMatch("(foo)(bar)(baz)", "foobarbaz", 0));
+        Assert.assertEquals("bar", regexMatch("(foo)(bar)(baz)", "foobarbaz", 2));
+        Assert.assertEquals("bar", regexMatch(pattern, "foobarbaz", 2));
+
+        Assert.assertEquals(results, regexMatch("(foo)(bar)(baz)", "foobarbaz"));
+        Assert.assertEquals(results, regexMatch(pattern, "foobarbaz"));
     }
 
     @Test

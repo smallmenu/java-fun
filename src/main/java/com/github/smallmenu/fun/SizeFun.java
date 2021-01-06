@@ -6,10 +6,29 @@ package com.github.smallmenu.fun;
  * @author smallmenu
  */
 final public class SizeFun {
+    /**
+     * KB
+     */
     public static final String KB = "KB";
+
+    /**
+     * MB
+     */
     public static final String MB = "MB";
+
+    /**
+     * GB
+     */
     public static final String GB = "GB";
+
+    /**
+     * TB
+     */
     public static final String TB = "TB";
+
+    /**
+     * PB
+     */
     public static final String PB = "PB";
 
     /**
