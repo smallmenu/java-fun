@@ -2003,7 +2003,6 @@ public class Fun extends FunBase {
         return new String(Base64.getDecoder().decode(str));
     }
 
-
     /**
      * base64URLEncode
      * <p>

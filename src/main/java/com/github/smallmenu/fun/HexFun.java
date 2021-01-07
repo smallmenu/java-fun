@@ -1,4 +1,4 @@
-package com.github.smallmenu.digest;
+package com.github.smallmenu.fun;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
  *
  * @author smallmenu
  */
-public class Hex {
+public class HexFun {
 
     /**
      * DEFAULT_CHARSET
@@ -34,7 +34,7 @@ public class Hex {
     /**
      * Construct
      */
-    public Hex() {
+    public HexFun() {
         charset = DEFAULT_CHARSET;
     }
 
@@ -43,7 +43,7 @@ public class Hex {
      *
      * @param charset Charset
      */
-    public Hex(final Charset charset) {
+    public HexFun(final Charset charset) {
         this.charset = charset;
     }
 
@@ -70,7 +70,7 @@ public class Hex {
      *
      * @param charsetName 字符集
      */
-    public Hex(final String charsetName) {
+    public HexFun(final String charsetName) {
         this(Charset.forName(charsetName));
     }
 

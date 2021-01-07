@@ -1,7 +1,6 @@
 package com.github.smallmenu.fun;
 
 import com.github.smallmenu.digest.DigestAlgorithm;
-import com.github.smallmenu.digest.Hex;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -105,7 +104,7 @@ public class DigestFun {
      * @return String
      */
     public static String md5Hex(final byte[] data) {
-        return Hex.encodeHexString(md5(data));
+        return HexFun.encodeHexString(md5(data));
     }
 
     /**
@@ -114,7 +113,7 @@ public class DigestFun {
      * @return String
      */
     public static String md5Hex(final String str) {
-        return Hex.encodeHexString(md5(str));
+        return HexFun.encodeHexString(md5(str));
     }
 
     /**
@@ -141,7 +140,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha1Hex(final byte[] data) {
-        return Hex.encodeHexString(sha1(data));
+        return HexFun.encodeHexString(sha1(data));
     }
 
     /**
@@ -150,7 +149,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha1Hex(final String str) {
-        return Hex.encodeHexString(sha1(str));
+        return HexFun.encodeHexString(sha1(str));
     }
 
     /**
@@ -177,7 +176,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha256Hex(final byte[] data) {
-        return Hex.encodeHexString(sha256(data));
+        return HexFun.encodeHexString(sha256(data));
     }
 
     /**
@@ -186,7 +185,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha256Hex(final String str) {
-        return Hex.encodeHexString(sha256(str));
+        return HexFun.encodeHexString(sha256(str));
     }
 
     /**
@@ -213,7 +212,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha384Hex(final byte[] data) {
-        return Hex.encodeHexString(sha384(data));
+        return HexFun.encodeHexString(sha384(data));
     }
 
     /**
@@ -222,7 +221,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha384Hex(final String str) {
-        return Hex.encodeHexString(sha384(str));
+        return HexFun.encodeHexString(sha384(str));
     }
 
     /**
@@ -249,7 +248,7 @@ public class DigestFun {
      * @return String
      */
     public static String sha512Hex(final byte[] data) {
-        return Hex.encodeHexString(sha512(data));
+        return HexFun.encodeHexString(sha512(data));
     }
 
     /**
@@ -258,6 +257,6 @@ public class DigestFun {
      * @return String
      */
     public static String sha512Hex(final String str) {
-        return Hex.encodeHexString(sha512(str));
+        return HexFun.encodeHexString(sha512(str));
     }
 }
