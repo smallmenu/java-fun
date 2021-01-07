@@ -1,7 +1,7 @@
 package com.github.smallmenu;
 
 import com.github.smallmenu.constant.DatePattern;
-import com.github.smallmenu.fun.SizeFun;
+import com.github.smallmenu.fun.DataSizeFun;
 import com.github.smallmenu.fun.StringFun;
 import org.junit.Assert;
 import org.junit.Test;
@@ -53,10 +53,10 @@ public class FunTest {
         System.out.println(totalMemory());
         System.out.println(freeMemory());
         System.out.println(usedMemory());
-        System.out.println(maxMemory(SizeFun.MB) + "MB");
-        System.out.println(totalMemory(SizeFun.MB) + "MB");
-        System.out.println(freeMemory(SizeFun.MB) + "MB");
-        System.out.println(usedMemory(SizeFun.MB) + "MB");
+        System.out.println(maxMemory(DataSizeFun.MB) + "MB");
+        System.out.println(totalMemory(DataSizeFun.MB) + "MB");
+        System.out.println(freeMemory(DataSizeFun.MB) + "MB");
+        System.out.println(usedMemory(DataSizeFun.MB) + "MB");
     }
 
     @Test

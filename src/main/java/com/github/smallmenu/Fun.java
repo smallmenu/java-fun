@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
  * @author smallmenu
  */
 public class Fun extends FunBase {
+    public static long FUN_TIMEMILLIS = System.currentTimeMillis();
+
     /**
      * 禁止实例化
      */
@@ -51,7 +53,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long freeMemory() {
-        return freeMemory(SizeFun.MB);
+        return freeMemory(DataSizeFun.MB);
     }
 
     /**
@@ -60,7 +62,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long maxMemory() {
-        return maxMemory(SizeFun.MB);
+        return maxMemory(DataSizeFun.MB);
     }
 
     /**
@@ -69,7 +71,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long usedMemory() {
-        return usedMemory(SizeFun.MB);
+        return usedMemory(DataSizeFun.MB);
     }
 
     /**
@@ -78,7 +80,7 @@ public class Fun extends FunBase {
      * @return long
      */
     public static long totalMemory() {
-        return totalMemory(SizeFun.MB);
+        return totalMemory(DataSizeFun.MB);
     }
 
     /**

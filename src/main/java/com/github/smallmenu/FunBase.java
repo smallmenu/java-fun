@@ -2,7 +2,7 @@ package com.github.smallmenu;
 
 import com.github.smallmenu.fun.DigestFun;
 import com.github.smallmenu.fun.RandomFun;
-import com.github.smallmenu.fun.SizeFun;
+import com.github.smallmenu.fun.DataSizeFun;
 import com.github.smallmenu.fun.StringFun;
 
 import java.util.Base64;
@@ -65,7 +65,7 @@ public class FunBase {
     public static long freeMemory(final String format) {
         long memory = freeMemoryByte();
 
-        return format != null ? SizeFun.format(memory, format) : memory;
+        return format != null ? DataSizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -77,7 +77,7 @@ public class FunBase {
     public static long usedMemory(final String format) {
         long memory = totalMemoryByte() - freeMemoryByte();
 
-        return format != null ? SizeFun.format(memory, format) : memory;
+        return format != null ? DataSizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -89,7 +89,7 @@ public class FunBase {
     public static long maxMemory(final String format) {
         long memory = maxMemoryByte();
 
-        return format != null ? SizeFun.format(memory, format) : memory;
+        return format != null ? DataSizeFun.format(memory, format) : memory;
     }
 
     /**
@@ -101,7 +101,7 @@ public class FunBase {
     public static long totalMemory(final String format) {
         long memory = totalMemoryByte();
 
-        return format != null ? SizeFun.format(memory, format) : memory;
+        return format != null ? DataSizeFun.format(memory, format) : memory;
     }
 
     /**
