@@ -572,7 +572,7 @@ public class FunBase {
      * @param data byte数组
      * @return String
      */
-    public static String base64UrlEncode(final byte[] data) {
+    public static String base64UrlSafeEncode(final byte[] data) {
         return Base64.getUrlEncoder().encodeToString(data);
     }
 }

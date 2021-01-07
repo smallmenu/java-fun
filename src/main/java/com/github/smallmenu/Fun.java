@@ -322,7 +322,7 @@ public class Fun extends FunBase {
      * @param content 字符串
      * @return boolean
      */
-    public static boolean match(String regex, CharSequence content) {
+    public static boolean matches(String regex, CharSequence content) {
         if (content == null) {
             return false;
         }
@@ -331,23 +331,7 @@ public class Fun extends FunBase {
             return true;
         }
 
-        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-        return match(pattern, content);
-    }
-
-    /**
-     * 字符串是否匹配正则
-     *
-     * @param pattern 正则表达式模式
-     * @param content 字符串
-     * @return boolean
-     */
-    public static boolean match(Pattern pattern, CharSequence content) {
-        if (content == null || pattern == null) {
-            return false;
-        }
-
-        return pattern.matcher(content).matches();
+        return content.toString().matches(regex);
     }
 
     /**
@@ -2028,8 +2012,8 @@ public class Fun extends FunBase {
      * @param str 字符串
      * @return String
      */
-    public static String base64UrlEncode(final String str) {
-        return base64UrlEncode(bytes(str));
+    public static String base64UrlSafeEncode(final String str) {
+        return base64UrlSafeEncode(bytes(str));
     }
 
     /**
@@ -2038,7 +2022,7 @@ public class Fun extends FunBase {
      * @param str Base64字符串
      * @return String
      */
-    public static String base64UrlDecode(final String str) {
+    public static String base64UrlSafeDecode(final String str) {
         return new String(Base64.getUrlDecoder().decode(str));
     }
 
