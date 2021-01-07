@@ -52,7 +52,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long freeMemory() {
+    public static long freeMemoryMB() {
         return freeMemory(DataSizeFun.MB);
     }
 
@@ -61,7 +61,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long maxMemory() {
+    public static long maxMemoryMB() {
         return maxMemory(DataSizeFun.MB);
     }
 
@@ -70,7 +70,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long usedMemory() {
+    public static long usedMemoryMB() {
         return usedMemory(DataSizeFun.MB);
     }
 
@@ -79,7 +79,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long totalMemory() {
+    public static long totalMemoryMB() {
         return totalMemory(DataSizeFun.MB);
     }
 

@@ -49,10 +49,10 @@ public class FunTest {
         System.out.println(totalMemoryByte());
         System.out.println(freeMemoryByte());
         System.out.println(usedMemoryByte());
-        System.out.println(maxMemory());
-        System.out.println(totalMemory());
-        System.out.println(freeMemory());
-        System.out.println(usedMemory());
+        System.out.println(maxMemoryMB());
+        System.out.println(totalMemoryMB());
+        System.out.println(freeMemoryMB());
+        System.out.println(usedMemoryMB());
         System.out.println(maxMemory(DataSizeFun.MB) + "MB");
         System.out.println(totalMemory(DataSizeFun.MB) + "MB");
         System.out.println(freeMemory(DataSizeFun.MB) + "MB");
