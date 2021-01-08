@@ -49,10 +49,10 @@ public class FunTest {
         System.out.println(totalMemoryByte());
         System.out.println(freeMemoryByte());
         System.out.println(usedMemoryByte());
-        System.out.println(maxMemoryMB());
-        System.out.println(totalMemoryMB());
-        System.out.println(freeMemoryMB());
-        System.out.println(usedMemoryMB());
+        System.out.println(maxMemoryMb());
+        System.out.println(totalMemoryMb());
+        System.out.println(freeMemoryMb());
+        System.out.println(usedMemoryMb());
         System.out.println(maxMemory(DataSizeFun.MB) + "MB");
         System.out.println(totalMemory(DataSizeFun.MB) + "MB");
         System.out.println(freeMemory(DataSizeFun.MB) + "MB");
@@ -166,6 +166,24 @@ public class FunTest {
         String str2 = null;
         Assert.assertEquals("HelloWorld", trimToEmpty(str1));
         Assert.assertEquals("", trimToEmpty(str2));
+
+        Assert.assertEquals("abc", trimToDefault("\n", "abc"));
+        Assert.assertEquals("abc", trimToDefault("      ", "abc"));
+        Assert.assertEquals("abc", trimToDefault(null, "abc"));
+        Assert.assertEquals("abc", trimToDefault(str2, "abc"));
+        Assert.assertEquals("HelloWorld", trimToDefault(str1, "abc"));
+    }
+
+    @Test
+    public void testTrimToDefault() {
+        String str1 = " HelloWorld ";
+        String str2 = null;
+
+        Assert.assertEquals("abc", trimToDefault("\n", "abc"));
+        Assert.assertEquals("abc", trimToDefault("      ", "abc"));
+        Assert.assertEquals("abc", trimToDefault(null, "abc"));
+        Assert.assertEquals("abc", trimToDefault(str2, "abc"));
+        Assert.assertEquals("HelloWorld", trimToDefault(str1, "abc"));
     }
 
     @Test
@@ -620,5 +638,16 @@ public class FunTest {
         Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", base64Decode("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo="));
         Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64Decode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M/aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
         Assert.assertEquals("https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu", base64UrlSafeDecode("aHR0cHM6Ly93d3cuYmFpZHUuY29tL3M_aWU9dXRmLTgmZj04JnJzdl9icD0xJnRuPWJhaWR1"));
+    }
+
+    @Test
+    public void testIdEncodeDecode() {
+        Assert.assertEquals("j0gW", idEncode(12345L));
+        Assert.assertEquals("NkK9", idEncode(12345L, "this is my salt"));
+        Assert.assertEquals("EDngB0NkK9A5ev1W", idEncode(12345L, 16, "this is my salt"));
+
+        Assert.assertEquals(12345L, idDecode("j0gW"));
+        Assert.assertEquals(12345L, idDecode("NkK9", "this is my salt"));
+        Assert.assertEquals(12345L, idDecode("EDngB0NkK9A5ev1W", 16, "this is my salt"));
     }
 }

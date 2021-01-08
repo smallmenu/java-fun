@@ -1,6 +1,7 @@
 package com.github.smallmenu;
 
 import com.github.smallmenu.constant.DatePattern;
+import com.github.smallmenu.crypto.Hashids;
 import com.github.smallmenu.date.Strtotime;
 import com.github.smallmenu.fun.*;
 
@@ -20,8 +21,6 @@ import java.util.regex.Pattern;
  * @author smallmenu
  */
 public class Fun extends FunBase {
-    public static long FUN_TIMEMILLIS = System.currentTimeMillis();
-
     /**
      * 禁止实例化
      */
@@ -52,7 +51,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long freeMemoryMB() {
+    public static long freeMemoryMb() {
         return freeMemory(DataSizeFun.MB);
     }
 
@@ -61,7 +60,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long maxMemoryMB() {
+    public static long maxMemoryMb() {
         return maxMemory(DataSizeFun.MB);
     }
 
@@ -70,7 +69,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long usedMemoryMB() {
+    public static long usedMemoryMb() {
         return usedMemory(DataSizeFun.MB);
     }
 
@@ -79,7 +78,7 @@ public class Fun extends FunBase {
      *
      * @return long
      */
-    public static long totalMemoryMB() {
+    public static long totalMemoryMb() {
         return totalMemory(DataSizeFun.MB);
     }
 
@@ -401,29 +400,13 @@ public class Fun extends FunBase {
      * @param defaultStr 默认值
      * @return String
      */
-    public static String trimToEmptyDefault(final CharSequence str, String defaultStr) {
+    public static String trimToDefault(final CharSequence str, String defaultStr) {
         if (str == null) {
             return defaultStr;
         }
 
         String s = trim(str);
         return empty(s) ? defaultStr : s;
-    }
-
-    /**
-     * 除去字符串头尾部的空白，并处理 null 值。如果结果为blank，则返回默认值
-     *
-     * @param str        待处理字符串
-     * @param defaultStr 默认值
-     * @return String
-     */
-    public static String trimToBlankDefault(final CharSequence str, String defaultStr) {
-        if (str == null) {
-            return defaultStr;
-        }
-
-        String s = trim(str);
-        return blank(s) ? defaultStr : s;
     }
 
     /**
@@ -2076,5 +2059,93 @@ public class Fun extends FunBase {
      */
     public static String sha512(final String str) {
         return DigestFun.sha512Hex(str);
+    }
+
+    /**
+     * Hashid 加密
+     *
+     * @param id ID
+     * @return String
+     */
+    public static String idEncode(long id) {
+        Hashids hashids = new Hashids();
+        return hashids.encode(id);
+    }
+
+    /**
+     * Hashid 解密
+     *
+     * @param hash Hash字符串
+     * @return long
+     */
+    public static long idDecode(String hash) {
+        Hashids hashids = new Hashids();
+        long[] ids = hashids.decode(hash);
+        if (!empty(ids)) {
+            return ids[0];
+        }
+
+        return 0L;
+    }
+
+    /**
+     * Hashid 加密
+     *
+     * @param id   ID
+     * @param salt 盐
+     * @return String
+     */
+    public static String idEncode(long id, String salt) {
+        Hashids hashids = new Hashids(salt);
+        return hashids.encode(id);
+    }
+
+    /**
+     * Hashid 加密
+     *
+     * @param id        ID
+     * @param minLength 最小长度
+     * @param salt      盐
+     * @return String
+     */
+    public static String idEncode(long id, int minLength, String salt) {
+        Hashids hashids = new Hashids(salt, minLength);
+        return hashids.encode(id);
+
+    }
+
+    /**
+     * Hashid 解密
+     *
+     * @param hash Hash 字符串
+     * @param salt 盐
+     * @return long
+     */
+    public static long idDecode(String hash, String salt) {
+        Hashids hashids = new Hashids(salt);
+        long[] ids = hashids.decode(hash);
+        if (!empty(ids)) {
+            return ids[0];
+        }
+
+        return 0L;
+    }
+
+    /**
+     * Hashid 解密
+     *
+     * @param hash      Hash 字符串
+     * @param minLength 最小长度
+     * @param salt      盐
+     * @return long
+     */
+    public static long idDecode(String hash, int minLength, String salt) {
+        Hashids hashids = new Hashids(salt, minLength);
+        long[] ids = hashids.decode(hash);
+        if (!empty(ids)) {
+            return ids[0];
+        }
+
+        return 0L;
     }
 }
