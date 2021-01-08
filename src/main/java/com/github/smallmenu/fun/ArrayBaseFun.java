@@ -1,7 +1,7 @@
 package com.github.smallmenu.fun;
 
 /**
- * ArrayBaseUtils
+ * ArrayBaseFun
  *
  * @author smallmenu
  */

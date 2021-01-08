@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * ArrayUtils
+ * ArrayFun
  *
  * @author smallmenu
  */

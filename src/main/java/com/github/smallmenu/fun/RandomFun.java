@@ -6,7 +6,7 @@ import static com.github.smallmenu.Fun.empty;
 import static com.github.smallmenu.Fun.removeAny;
 
 /**
- * RandomUtils
+ * RandomFun
  *
  * @author smallmenu
  */

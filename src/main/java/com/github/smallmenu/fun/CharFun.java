@@ -1,7 +1,7 @@
 package com.github.smallmenu.fun;
 
 /**
- * CharUtils
+ * CharFun
  *
  * @author smallmenu
  */

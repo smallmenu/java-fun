@@ -9,108 +9,123 @@ import java.util.List;
 import static com.github.smallmenu.Fun.*;
 
 /**
- * StringUtils
+ * StringFun
  *
  * @author smallmenu
  */
 public class StringFun {
     /**
-     *
+     * INDEX_NOT_FOUND
      */
     public static final int INDEX_NOT_FOUND = -1;
 
     /**
-     *
+     * 空字符串
      */
     public static final String EMPTY = "";
 
     /**
-     *
+     * 空 JSON
      */
     public static final String EMPTY_JSON = "{}";
 
     /**
-     *
+     * 英文空格
      */
     public static final String SPACE = " ";
 
     /**
-     *
+     * 缩进
      */
     public static final String TAB = "	";
 
     /**
-     *
+     * 点
      */
     public static final String DOT = ".";
 
     /**
-     *
+     * 双点
      */
     public static final String DOUBLE_DOT = "..";
 
     /**
-     *
+     * 斜杠
      */
     public static final String SLASH = "/";
 
     /**
-     *
+     * 反斜杠
      */
     public static final String BACKSLASH = "\\";
 
     /**
-     *
+     * 下划线
      */
     public static final String UNDERLINE = "_";
 
     /**
-     *
+     * 横杠
      */
     public static final String DASHED = "-";
 
     /**
-     *
+     * 英文逗号
      */
     public static final String COMMA = ",";
 
     /**
-     *
+     * 换行符
      */
     public static final String CR = "\r";
 
     /**
-     *
+     * 换行符
      */
     public static final String LF = "\n";
 
     /**
-     *
+     * 换行符
      */
     public static final String CRLF = "\r\n";
 
     /**
-     *
+     * 冒号
+     */
+    public static final String COLON = ":";
+
+    /**
+     * 井号
+     */
+    public static final String SHARP = "#";
+
+    /**
+     * 艾特
+     */
+    public static final String AT = "@";
+
+    /**
+     * HTML 空格转义
      */
     public static final String HTML_NBSP = "&nbsp;";
 
     /**
-     *
+     * HTML & 转义
      */
     public static final String HTML_AMP = "&amp;";
 
     /**
-     *
+     * HTML < 转义
      */
     public static final String HTML_LT = "&lt;";
 
     /**
-     *
+     * HTML > 转义
      */
     public static final String HTML_GT = "&gt;";
 
     /**
-     *
+     * 填充限制
      */
     public static final int PAD_LIMIT = 8192;
 

@@ -1,7 +1,7 @@
 package com.github.smallmenu.digest;
 
 /**
- * DigestAlgorithm
+ * DigestAlgorithm 摘要算法
  *
  * @author smallmenu
  */
@@ -36,14 +36,14 @@ public enum DigestAlgorithm {
     /**
      * Construct
      *
-     * @param value 值
+     * @param value 字符串表示
      */
     DigestAlgorithm(String value) {
         this.value = value;
     }
 
     /**
-     * value()
+     * 字符串表示
      *
      * @return String
      */

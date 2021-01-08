@@ -3,7 +3,7 @@ package com.github.smallmenu.fun;
 import java.util.Objects;
 
 /**
- * ObjectUtils
+ * ObjectFun
  *
  * @author smallmenu
  */

@@ -4,7 +4,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Hex
+ * HexFun Hex 库
  *
  * @author smallmenu
  */

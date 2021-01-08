@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import static com.github.smallmenu.Fun.bytes;
 
 /**
- * DigestUtils
+ * DigestFun 摘要算法库
  *
  * @author smallmenu
  */
@@ -78,6 +78,17 @@ public class DigestFun {
      */
     public static MessageDigest getSha512Digest() {
         return getDigest(DigestAlgorithm.SHA512.value());
+    }
+
+    /**
+     * 生成摘要
+     *
+     * @param messageDigest MessageDigest
+     * @param data          字节数组
+     * @return byte[]
+     */
+    public static byte[] digest(final MessageDigest messageDigest, final byte[] data) {
+        return messageDigest.digest(data);
     }
 
     /**
