@@ -6,6 +6,7 @@ import com.github.smallmenu.fun.StringFun;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -234,6 +235,12 @@ public class FunTest {
     }
 
     @Test
+    public void testToFloatDouble() {
+        Assert.assertEquals(3.1415926F, toFloat("3.14159265"), 0.0001);
+        Assert.assertEquals(3.14159265D, toDouble("3.14159265"), 0);
+    }
+
+    @Test
     public void testEquals() {
         String str1 = "HelloWorld";
         String str2 = null;
@@ -328,6 +335,15 @@ public class FunTest {
     }
 
     @Test
+    public void testRemoveLines() {
+        String str = "<html>\n" +
+                "<head>\n" +
+                "<meta charset=\"utf-8\">\n";
+
+        Assert.assertEquals("<html><head><meta charset=\"utf-8\">", removeLines(str));
+    }
+
+    @Test
     public void testRepeat() {
         Assert.assertEquals("", repeat('a', 0));
         Assert.assertEquals("", repeat('a', -2));
@@ -398,6 +414,7 @@ public class FunTest {
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, split("a b c"));
         Assert.assertArrayEquals(new String[]{"a", "", "b", "", "c"}, split("a  b  c"));
         Assert.assertArrayEquals(new String[]{"a#b#c"}, split("a#b#c", null));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, split("a#b#c", '#'));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, split("a#b#c", "#"));
         Assert.assertArrayEquals(new String[]{"", "a", "b", "c", ""}, split("#a#b#c#", "#"));
         Assert.assertArrayEquals(new String[]{"", "a", "", "b", "", "c", ""}, split("#a##b##c#", "#"));
@@ -407,6 +424,7 @@ public class FunTest {
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a  b  c"));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a  b  c"));
         Assert.assertArrayEquals(new String[]{"a#b#c"}, splitTrim("a#b#c", null));
+        Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a#b#c", '#'));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("a#b#c", "#"));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("#a#b#c#", "#"));
         Assert.assertArrayEquals(new String[]{"a", "b", "c"}, splitTrim("#a##b##c#", "#"));
@@ -417,12 +435,17 @@ public class FunTest {
         list.add("b");
         list.add("c");
 
+        Assert.assertEquals(list, splitToList("a b c"));
+        Assert.assertEquals(list, splitToList("a#b#c", '#'));
+        Assert.assertEquals(list, splitToList("a#b#c", "#"));
+
         Assert.assertEquals(list, splitTrimToList("a b c"));
         Assert.assertEquals(list, splitTrimToList("a#b#c", '#'));
         Assert.assertEquals(list, splitTrimToList("a#b#c", "#"));
         Assert.assertEquals(list, splitTrimToList("#a#b#c#", "#"));
         Assert.assertEquals(list, splitTrimToList("#a##b##c#", "#"));
 
+        Assert.assertArrayEquals(new int[]{3, 2, 0, 5}, splitTrimToInt("3 2 0 5"));
         Assert.assertArrayEquals(new int[]{3, 2, 0, 5}, splitTrimToInt("#3##2#0##5#", "#"));
         Assert.assertArrayEquals(new int[]{3, 1, 0, 5}, splitTrimToInt("#3##1#0#a#5#", "#"));
         Assert.assertArrayEquals(new long[]{3, 1, 0, 5}, splitTrimToLong("#3##1#0#a#5#", "#"));
