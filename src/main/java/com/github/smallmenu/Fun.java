@@ -2073,19 +2073,15 @@ public class Fun extends FunBase {
     }
 
     /**
-     * Hashid 解密
+     * Hashid 加密
      *
-     * @param hash Hash字符串
-     * @return long
+     * @param id        ID
+     * @param minLength 最小长度
+     * @return String
      */
-    public static long idDecode(String hash) {
-        Hashids hashids = new Hashids();
-        long[] ids = hashids.decode(hash);
-        if (!empty(ids)) {
-            return ids[0];
-        }
-
-        return 0L;
+    public static String idEncode(long id, int minLength) {
+        Hashids hashids = new Hashids(minLength);
+        return hashids.encode(id);
     }
 
     /**
@@ -2108,10 +2104,43 @@ public class Fun extends FunBase {
      * @param salt      盐
      * @return String
      */
-    public static String idEncode(long id, int minLength, String salt) {
+    public static String idEncode(long id, String salt, int minLength) {
         Hashids hashids = new Hashids(salt, minLength);
         return hashids.encode(id);
 
+    }
+
+    /**
+     * Hashid 解密
+     *
+     * @param hash Hash字符串
+     * @return long
+     */
+    public static long idDecode(String hash) {
+        Hashids hashids = new Hashids();
+        long[] ids = hashids.decode(hash);
+        if (!empty(ids)) {
+            return ids[0];
+        }
+
+        return 0L;
+    }
+
+    /**
+     * Hashid 解密
+     *
+     * @param hash      Hash 字符串
+     * @param minLength 最小长度
+     * @return long
+     */
+    public static long idDecode(String hash, int minLength) {
+        Hashids hashids = new Hashids(minLength);
+        long[] ids = hashids.decode(hash);
+        if (!empty(ids)) {
+            return ids[0];
+        }
+
+        return 0L;
     }
 
     /**
@@ -2135,11 +2164,11 @@ public class Fun extends FunBase {
      * Hashid 解密
      *
      * @param hash      Hash 字符串
-     * @param minLength 最小长度
      * @param salt      盐
+     * @param minLength 最小长度
      * @return long
      */
-    public static long idDecode(String hash, int minLength, String salt) {
+    public static long idDecode(String hash, String salt, int minLength) {
         Hashids hashids = new Hashids(salt, minLength);
         long[] ids = hashids.decode(hash);
         if (!empty(ids)) {

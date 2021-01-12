@@ -667,10 +667,12 @@ public class FunTest {
     public void testIdEncodeDecode() {
         Assert.assertEquals("j0gW", idEncode(12345L));
         Assert.assertEquals("NkK9", idEncode(12345L, "this is my salt"));
-        Assert.assertEquals("EDngB0NkK9A5ev1W", idEncode(12345L, 16, "this is my salt"));
+        Assert.assertEquals("lej0gWbj", idEncode(12345L, 8));
+        Assert.assertEquals("EDngB0NkK9A5ev1W", idEncode(12345L, "this is my salt", 16));
 
         Assert.assertEquals(12345L, idDecode("j0gW"));
         Assert.assertEquals(12345L, idDecode("NkK9", "this is my salt"));
-        Assert.assertEquals(12345L, idDecode("EDngB0NkK9A5ev1W", 16, "this is my salt"));
+        Assert.assertEquals(12345L, idDecode("lej0gWbj", 8));
+        Assert.assertEquals(12345L, idDecode("EDngB0NkK9A5ev1W", "this is my salt", 16));
     }
 }
