@@ -6,7 +6,7 @@ import com.github.smallmenu.fun.StringFun;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -566,10 +566,12 @@ public class FunTest {
     }
 
     @Test
-    public void testMatch() {
-        Pattern pattern = Pattern.compile("(foo)(bar)(baz)");
+    public void testMatches() {
+        Pattern pattern = Pattern.compile("(foo)(bar).*");
         Assert.assertTrue(matches("(foo)(bar)(baz)", "foobarbaz"));
         Assert.assertFalse(matches("(foo)(bar)(baa)", "foobarbaz"));
+
+        Assert.assertTrue(matches(pattern, "foobarbaz"));
     }
 
     @Test
@@ -675,4 +677,48 @@ public class FunTest {
         Assert.assertEquals(12345L, idDecode("lej0gWbj", 8));
         Assert.assertEquals(12345L, idDecode("EDngB0NkK9A5ev1W", "this is my salt", 16));
     }
+
+    @Test
+    public void testUrlVerify() {
+        Assert.assertFalse(urlVerify("http://www"));
+        Assert.assertTrue(urlVerify("http://www.ss"));
+
+        Assert.assertTrue(urlVerify("https://www.baidu.com/s?wd=%E9%A9%AC%E4%BA%91"));
+        Assert.assertTrue(urlVerify("//www.zhihu.com/collection/150270125?page=3"));
+        Assert.assertTrue(urlVerify("//static.ws.126.net/www/logo/logo-ipad-icon.png"));
+        Assert.assertTrue(urlVerify("http://www.siyst.org.cn/portal/article/index/id/12/cid/1.html"));
+        Assert.assertTrue(urlVerify("http://www.jptour.cn/../../../../s_毛里求斯.html"));
+        Assert.assertTrue(urlVerify("https://www.cnblogs.com/hubingxu/archive/2012/02/17/2355516.html"));
+    }
+
+    @Test
+    public void testUrlParse() {
+        Assert.assertNull(urlParse(""));
+        Assert.assertNull(urlParse(" "));
+        Assert.assertNull(urlParse("http://www"));
+
+        URL url1 = urlParse("https://www.baidu.com/s?wd=%E9%A9%AC%E4%BA%91");
+        Assert.assertEquals("https", url1.getProtocol());
+        Assert.assertEquals("www.baidu.com", url1.getHost());
+        Assert.assertEquals("/s", url1.getPath());
+        Assert.assertEquals("/s?wd=%E9%A9%AC%E4%BA%91", url1.getFile());
+        Assert.assertEquals("wd=%E9%A9%AC%E4%BA%91", url1.getQuery());
+
+        URL url2 = urlParse("http://username:password@www.abc.com:8080/path?arg=value&parameters=passed#with-anchor");
+        Assert.assertEquals(8080, url2.getPort());
+        Assert.assertEquals("http", url2.getProtocol());
+        Assert.assertEquals("username:password", url2.getUserInfo());
+        Assert.assertEquals("arg=value&parameters=passed", url2.getQuery());
+        Assert.assertEquals("with-anchor", url2.getRef());
+
+        URL url3 = urlParse("//www.example.com/path?googleguy=googley");
+        Assert.assertEquals("http", url3.getProtocol());
+        Assert.assertEquals("www.example.com", url3.getHost());
+    }
+
+    @Test
+    public void testUrlComplete() {
+        System.out.println(urlComplete("http://www.jptour.cn/a", "../../../../s_毛里求斯.html"));
+    }
+
 }

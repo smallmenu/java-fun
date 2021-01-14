@@ -1,11 +1,15 @@
 package com.github.smallmenu;
 
 import com.github.smallmenu.constant.DatePattern;
+import com.github.smallmenu.constant.RegexPattern;
 import com.github.smallmenu.crypto.Hashids;
 import com.github.smallmenu.date.Strtotime;
+import com.github.smallmenu.expection.FunException;
 import com.github.smallmenu.fun.*;
 
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -333,6 +337,21 @@ public class Fun extends FunBase {
         }
 
         return content.toString().matches(regex);
+    }
+
+    /**
+     * 字符串是否匹配正则
+     *
+     * @param pattern 正则表达式
+     * @param content 字符串
+     * @return boolean
+     */
+    public static boolean matches(Pattern pattern, CharSequence content) {
+        if (content == null || pattern == null) {
+            return false;
+        }
+
+        return pattern.matcher(content).matches();
     }
 
     /**
@@ -1745,6 +1764,32 @@ public class Fun extends FunBase {
     }
 
     /**
+     * 完整的移除字符串左侧中所有给定字符串
+     *
+     * @param str    字符串
+     * @param remove 被移除的字符串
+     * @return String
+     */
+    public static String removePrefixComplete(final CharSequence str, final CharSequence remove) {
+        if (empty(str) || empty(remove)) {
+            return toStr(str);
+        }
+
+        String removeStr = str.toString();
+
+        do {
+            if (removeStr.startsWith(remove.toString())) {
+                removeStr = removePrefix(removeStr, remove);
+            } else {
+                break;
+            }
+
+        } while (true);
+
+        return removeStr;
+    }
+
+    /**
      * 移除字符串右侧中所有给定字符串
      *
      * @param str    字符串
@@ -2176,5 +2221,91 @@ public class Fun extends FunBase {
         }
 
         return 0L;
+    }
+
+    /**
+     * 安全的解析 URL，返回 URL 实例
+     *
+     * @param url 字符串
+     * @return URL
+     */
+    public static URL urlParse(final String url) {
+        String formatUrl = urlNormalize(url);
+
+        if (!empty(formatUrl)) {
+
+            try {
+                return new URL(formatUrl);
+            } catch (MalformedURLException e) {
+                throw new FunException(e);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * 验证 URL 格式
+     *
+     * @param url URL 字符串
+     * @return boolean
+     */
+    public static boolean urlVerify(final String url) {
+        if (!blank(url)) {
+            return matches(RegexPattern.URL_HTTP, url);
+        }
+
+        return false;
+    }
+
+    /**
+     * 自动格式化补齐 URL，如缺少协议头
+     *
+     * @param url URL字符串
+     * @return String
+     */
+    public static String urlNormalize(final String url) {
+        if (urlVerify(url)) {
+            if (startsWith(url, URLFun.NO_PROTOCOL)) {
+                String formatUrl = removePrefix(url, URLFun.NO_PROTOCOL);
+                return URLFun.HTTP_PROTOCOL + URLFun.PROTOCOL_BREAK + formatUrl;
+            }
+
+            if (!contains(url, URLFun.PROTOCOL_BREAK)) {
+                return URLFun.HTTP_PROTOCOL + URLFun.PROTOCOL_BREAK + url;
+            }
+
+            return url;
+        }
+
+        return StringFun.EMPTY;
+    }
+
+    /**
+     * 补全相对路径
+     *
+     * @param baseUrl      基准URL
+     * @param relativePath 相对路径
+     * @return String
+     */
+    public static String urlComplete(String baseUrl, String relativePath) {
+        baseUrl = urlNormalize(baseUrl);
+        if (!empty(baseUrl)) {
+            try {
+                final URL absoluteUrl = new URL(baseUrl);
+
+                if (blank(absoluteUrl.getPath())) {
+
+                }
+
+
+                final URL parseUrl = new URL(absoluteUrl, relativePath);
+                return parseUrl.toString();
+            } catch (MalformedURLException e) {
+                throw new FunException(e);
+            }
+        }
+
+        return null;
     }
 }

@@ -31,10 +31,30 @@ public class RegexPattern {
     /**
      * Http URL
      */
-    public static final Pattern URL_HTTP = Pattern.compile("(https://|http://)?([\\w-]+\\.)+[\\w-]+(:\\d+)*(/[\\w- ./?%&=]*)?");
+    public static final Pattern URL_HTTP = Pattern.compile("(https://|http://|//)?(([^:\\n\\r]+):([^@\\n\\r]+)@)?([\\w-]+\\.)+[\\w-]+(:\\d+)*(/[\\w- ./:?%&=#]*)?");
 
     /**
      * 中文汉字
      */
-    public static final Pattern CHINESES = Pattern.compile("^[\u4E00-\u9FFF]+$");
+    public static final Pattern CHINESE = Pattern.compile("^[\u4E00-\u9FFF]+$");
+
+    /**
+     * 身份证号码
+     */
+    public final static Pattern CITIZEN_ID = Pattern.compile("[1-9]\\d{5}[1-2]\\d{3}((0\\d)|(1[0-2]))(([012]\\d)|3[0-1])\\d{3}(\\d|X|x)");
+
+    /**
+     * 手机号码
+     */
+    public final static Pattern MOBILE = Pattern.compile("(?:0|86|\\+86)?1[3-9]\\d{9}");
+
+    /**
+     * 邮编（兼容港澳台）
+     */
+    public final static Pattern ZIP_CODE = Pattern.compile("^(0[1-7]|1[0-356]|2[0-7]|3[0-6]|4[0-7]|5[0-7]|6[0-7]|7[0-5]|8[0-9]|9[0-8])\\d{4}|99907[78]$");
+
+    /**
+     * MAC地址
+     */
+    public static final Pattern MAC_ADDRESS = Pattern.compile("((?:[A-F0-9]{1,2}[:-]){5}[A-F0-9]{1,2})|(?:0x)(\\d{12})(?:.+ETHER)", Pattern.CASE_INSENSITIVE);
 }
