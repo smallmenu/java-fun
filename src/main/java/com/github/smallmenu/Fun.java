@@ -1775,18 +1775,18 @@ public class Fun extends FunBase {
             return toStr(str);
         }
 
-        String removeStr = str.toString();
+        String removedStr = str.toString();
 
         do {
-            if (removeStr.startsWith(remove.toString())) {
-                removeStr = removePrefix(removeStr, remove);
+            if (removedStr.startsWith(remove.toString())) {
+                removedStr = removePrefix(removedStr, remove);
             } else {
                 break;
             }
 
         } while (true);
 
-        return removeStr;
+        return removedStr;
     }
 
     /**
@@ -1806,6 +1806,32 @@ public class Fun extends FunBase {
         }
 
         return str.toString();
+    }
+
+    /**
+     * 完整的移除字符串右侧中所有给定字符串
+     *
+     * @param str    字符串
+     * @param remove 被移除的字符串
+     * @return String
+     */
+    public static String removeSuffixComplete(final CharSequence str, final CharSequence remove) {
+        if (empty(str) || empty(remove)) {
+            return toStr(str);
+        }
+
+        String removedStr = str.toString();
+
+        do {
+            if (removedStr.endsWith(remove.toString())) {
+                removedStr = removeSuffix(removedStr, remove);
+            } else {
+                break;
+            }
+
+        } while (true);
+
+        return removedStr;
     }
 
     /**
@@ -2295,9 +2321,9 @@ public class Fun extends FunBase {
                 final URL absoluteUrl = new URL(baseUrl);
 
                 if (blank(absoluteUrl.getPath())) {
-
+                    relativePath = removePrefixComplete(relativePath, "./");
+                    relativePath = removePrefixComplete(relativePath, "../");
                 }
-
 
                 final URL parseUrl = new URL(absoluteUrl, relativePath);
                 return parseUrl.toString();

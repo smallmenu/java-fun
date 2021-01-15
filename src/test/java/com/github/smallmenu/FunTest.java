@@ -332,6 +332,11 @@ public class FunTest {
         Assert.assertEquals(".abc.com", removePrefix("com.abc.com", "com"));
         Assert.assertEquals("com.abc.", removeSuffix("com.abc.com", "com"));
 
+        Assert.assertEquals("//abc", removePrefix("////abc", "//"));
+        Assert.assertEquals("abc", removePrefixComplete("////abc", "//"));
+
+        Assert.assertEquals("abc##", removeSuffix("abc####", "##"));
+        Assert.assertEquals("abc", removeSuffixComplete("abc####", "##"));
     }
 
     @Test
@@ -718,7 +723,9 @@ public class FunTest {
 
     @Test
     public void testUrlComplete() {
-        System.out.println(urlComplete("http://www.jptour.cn/a", "../../../../s_毛里求斯.html"));
+        System.out.println(urlComplete("http://www.jptour.cn/a/", "../s_毛里求斯.html"));
+        System.out.println(urlComplete("http://www.jptour.cn/a/", "/s_毛里求斯.html"));
+        System.out.println(urlComplete("http://www.jptour.cn/a/b/c/", "../../s_毛里求斯.html"));
     }
 
 }
