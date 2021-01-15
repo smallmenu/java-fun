@@ -94,6 +94,7 @@ public class DigestFun {
     /**
      * md5
      *
+     * @param data 数据
      * @return byte[]
      */
     public static byte[] md5(final byte[] data) {
@@ -103,6 +104,7 @@ public class DigestFun {
     /**
      * MD5
      *
+     * @param str 数据
      * @return byte[]
      */
     public static byte[] md5(final String str) {
@@ -112,6 +114,7 @@ public class DigestFun {
     /**
      * MD5
      *
+     * @param data 数据
      * @return String
      */
     public static String md5Hex(final byte[] data) {
@@ -121,6 +124,7 @@ public class DigestFun {
     /**
      * MD5
      *
+     * @param str 数据
      * @return String
      */
     public static String md5Hex(final String str) {
@@ -130,6 +134,7 @@ public class DigestFun {
     /**
      * SHA1
      *
+     * @param data 数据
      * @return byte[]
      */
     public static byte[] sha1(final byte[] data) {
@@ -139,6 +144,7 @@ public class DigestFun {
     /**
      * SHA1
      *
+     * @param str 数据
      * @return byte[]
      */
     public static byte[] sha1(final String str) {
@@ -148,6 +154,7 @@ public class DigestFun {
     /**
      * SHA1
      *
+     * @param data 数据
      * @return String
      */
     public static String sha1Hex(final byte[] data) {
@@ -157,6 +164,7 @@ public class DigestFun {
     /**
      * SHA1
      *
+     * @param str 数据
      * @return String
      */
     public static String sha1Hex(final String str) {
@@ -166,6 +174,7 @@ public class DigestFun {
     /**
      * SHA256
      *
+     * @param data 数据
      * @return byte[]
      */
     public static byte[] sha256(final byte[] data) {
@@ -175,6 +184,7 @@ public class DigestFun {
     /**
      * SHA256
      *
+     * @param str 数据
      * @return byte[]
      */
     public static byte[] sha256(final String str) {
@@ -184,6 +194,7 @@ public class DigestFun {
     /**
      * SHA256
      *
+     * @param data 数据
      * @return String
      */
     public static String sha256Hex(final byte[] data) {
@@ -193,6 +204,7 @@ public class DigestFun {
     /**
      * SHA256
      *
+     * @param str 数据
      * @return String
      */
     public static String sha256Hex(final String str) {
@@ -202,6 +214,7 @@ public class DigestFun {
     /**
      * SHA384
      *
+     * @param data 数据
      * @return byte[]
      */
     public static byte[] sha384(final byte[] data) {
@@ -211,6 +224,7 @@ public class DigestFun {
     /**
      * SHA384
      *
+     * @param str 数据
      * @return byte[]
      */
     public static byte[] sha384(final String str) {
@@ -220,6 +234,7 @@ public class DigestFun {
     /**
      * SHA384
      *
+     * @param data 数据
      * @return String
      */
     public static String sha384Hex(final byte[] data) {
@@ -229,6 +244,7 @@ public class DigestFun {
     /**
      * SHA384
      *
+     * @param str 数据
      * @return String
      */
     public static String sha384Hex(final String str) {
@@ -238,6 +254,7 @@ public class DigestFun {
     /**
      * SHA512
      *
+     * @param data 数据
      * @return byte[]
      */
     public static byte[] sha512(final byte[] data) {
@@ -247,6 +264,7 @@ public class DigestFun {
     /**
      * SHA512
      *
+     * @param str 数据
      * @return byte[]
      */
     public static byte[] sha512(final String str) {
@@ -256,6 +274,7 @@ public class DigestFun {
     /**
      * SHA512
      *
+     * @param data 数据
      * @return String
      */
     public static String sha512Hex(final byte[] data) {
@@ -265,6 +284,7 @@ public class DigestFun {
     /**
      * SHA512
      *
+     * @param str 数据
      * @return String
      */
     public static String sha512Hex(final String str) {

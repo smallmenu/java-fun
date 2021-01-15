@@ -6,7 +6,7 @@
 
     <groupId>com.github.smallmenu</groupId>
     <artifactId>java-fun</artifactId>
-    <version>0.4</version>
+    <version>0.5.1</version>
 
     <name>java-fun</name>
     <description>Java With Fun(ctions)</description>
@@ -150,7 +150,7 @@
                                 <format>html</format>
                                 <format>xml</format>
                             </formats>
-                            <check />
+                            <check/>
                         </configuration>
                     </plugin>
                     <!-- Gpg Signature -->

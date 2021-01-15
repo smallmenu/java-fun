@@ -492,7 +492,8 @@ public class Fun extends FunBase {
      * <p>
      * 如果是 null 或者 "" 或者异常，返回默认值
      *
-     * @param str 字符串
+     * @param str          字符串
+     * @param defaultValue 默认值
      * @return float
      */
     public static float toFloat(final String str, float defaultValue) {
@@ -525,6 +526,7 @@ public class Fun extends FunBase {
      * 如果是 null 或者 "" 或者异常，返回默认值
      *
      * @param str 字符串
+     * @param defaultValue 默认值
      * @return double
      */
     public static double toDouble(String str, double defaultValue) {
@@ -1047,6 +1049,7 @@ public class Fun extends FunBase {
      *
      * @param str    待填充字符
      * @param length 长度
+     * @param padChar 填充字符
      * @return String
      */
     public static String padRight(final CharSequence str, final int length, final char padChar) {
@@ -1532,6 +1535,7 @@ public class Fun extends FunBase {
      *
      * @param array     数组
      * @param separator 分隔符
+     * @param <T> 范型
      * @return String
      */
     public static <T> String join(T[] array, CharSequence separator) {
@@ -1564,6 +1568,7 @@ public class Fun extends FunBase {
      *
      * @param iterable  字符串容器
      * @param separator 分隔符
+     * @param <T> 范型
      * @return String
      */
     public static <T> String join(final Iterable<?> iterable, String separator) {
@@ -2012,6 +2017,7 @@ public class Fun extends FunBase {
      * 获得一个指定长度随机的字符串，排除指定的字符串列表集
      *
      * @param length 字符串的长度
+     * @param excepts 待排除列表
      * @return String
      */
     public static String randomStringExcepts(int length, String... excepts) {
@@ -2250,7 +2256,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 安全的解析 URL，返回 URL 实例
+     * 安全的解析 HTTP(s) URL，会对 URL 进行验证与格式化，返回 URL 实例
      *
      * @param url 字符串
      * @return URL
@@ -2259,7 +2265,6 @@ public class Fun extends FunBase {
         String formatUrl = urlNormalize(url);
 
         if (!empty(formatUrl)) {
-
             try {
                 return new URL(formatUrl);
             } catch (MalformedURLException e) {
@@ -2271,7 +2276,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 验证 URL 格式
+     * 验证 HTTP(s) 格式
      *
      * @param url URL 字符串
      * @return boolean
@@ -2285,7 +2290,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 自动格式化补齐 URL，如缺少协议头
+     * 自动格式化补齐 HTTP(s) URL，如缺少协议头
      *
      * @param url URL字符串
      * @return String
@@ -2305,33 +2310,5 @@ public class Fun extends FunBase {
         }
 
         return StringFun.EMPTY;
-    }
-
-    /**
-     * 补全相对路径
-     *
-     * @param baseUrl      基准URL
-     * @param relativePath 相对路径
-     * @return String
-     */
-    public static String urlComplete(String baseUrl, String relativePath) {
-        baseUrl = urlNormalize(baseUrl);
-        if (!empty(baseUrl)) {
-            try {
-                final URL absoluteUrl = new URL(baseUrl);
-
-                if (blank(absoluteUrl.getPath())) {
-                    relativePath = removePrefixComplete(relativePath, "./");
-                    relativePath = removePrefixComplete(relativePath, "../");
-                }
-
-                final URL parseUrl = new URL(absoluteUrl, relativePath);
-                return parseUrl.toString();
-            } catch (MalformedURLException e) {
-                throw new FunException(e);
-            }
-        }
-
-        return null;
     }
 }

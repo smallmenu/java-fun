@@ -110,17 +110,17 @@ public class StringFun {
     public static final String HTML_NBSP = "&nbsp;";
 
     /**
-     * HTML & 转义
+     * HTML &amp; 转义
      */
     public static final String HTML_AMP = "&amp;";
 
     /**
-     * HTML < 转义
+     * HTML &lt; 转义
      */
     public static final String HTML_LT = "&lt;";
 
     /**
-     * HTML > 转义
+     * HTML &gt; 转义
      */
     public static final String HTML_GT = "&gt;";
 
@@ -219,8 +219,9 @@ public class StringFun {
     /**
      * 除去字符串空白，如果字符串是null，依然返回null
      *
-     * @param str  待处理字符串
-     * @param mode 模式（左侧-1、全部0、右侧1）
+     * @param str     待处理字符串
+     * @param trimStr 需要trim的字符串
+     * @param mode    模式（左侧-1、全部0、右侧1）
      * @return String
      */
     public static String trim(final CharSequence str, final CharSequence trimStr, int mode) {

@@ -720,12 +720,4 @@ public class FunTest {
         Assert.assertEquals("http", url3.getProtocol());
         Assert.assertEquals("www.example.com", url3.getHost());
     }
-
-    @Test
-    public void testUrlComplete() {
-        System.out.println(urlComplete("http://www.jptour.cn/a/", "../s_毛里求斯.html"));
-        System.out.println(urlComplete("http://www.jptour.cn/a/", "/s_毛里求斯.html"));
-        System.out.println(urlComplete("http://www.jptour.cn/a/b/c/", "../../s_毛里求斯.html"));
-    }
-
 }
