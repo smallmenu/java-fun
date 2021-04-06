@@ -27,7 +27,7 @@ public class CharFun {
     }
 
     /**
-     * 检测对象是否为字符类
+     * 检测对象是否为 Character 字符类
      *
      * @param value 被检查的对象
      * @return boolean

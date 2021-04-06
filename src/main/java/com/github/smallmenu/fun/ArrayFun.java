@@ -14,7 +14,7 @@ public class ArrayFun extends ArrayBaseFun {
     }
 
     /**
-     * 对象是否为数组对象
+     * 检测对象是否为数组对象
      *
      * @param obj 对象
      * @return boolean
@@ -28,7 +28,7 @@ public class ArrayFun extends ArrayBaseFun {
     }
 
     /**
-     * 获取数组长度，null 检查
+     * 获取数组长度，null 返回 0
      *
      * @param array 对象
      * @return int
@@ -118,30 +118,6 @@ public class ArrayFun extends ArrayBaseFun {
         for (String string : strings) {
             try {
                 numbers[index] = Long.parseLong(string);
-                index++;
-            } catch (NumberFormatException ignored) {
-            }
-        }
-
-        return Arrays.copyOf(numbers, index);
-    }
-
-    /**
-     * 字符串数组转整型数组，忽略错误的值
-     *
-     * @param strings 字符串数组
-     * @return short []
-     */
-    public static short[] stringToShortArray(String[] strings) {
-        if (strings == null) {
-            return EMPTY_SHORT;
-        }
-
-        short[] numbers = new short[strings.length];
-        int index = 0;
-        for (String string : strings) {
-            try {
-                numbers[index] = Short.parseShort(string);
                 index++;
             } catch (NumberFormatException ignored) {
             }
