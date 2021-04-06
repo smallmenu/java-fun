@@ -21,7 +21,7 @@ public class FunBase {
     }
 
     /**
-     * 返回系统空闲堆内存，单位Byte
+     * 返回系统空闲堆内存，单位 Byte
      *
      * @return long
      */
@@ -30,7 +30,7 @@ public class FunBase {
     }
 
     /**
-     * 返回系统最大堆内存（-Xmx），单位Byte
+     * 返回系统最大堆内存（-Xmx），单位 Byte
      *
      * @return long
      */
@@ -39,7 +39,7 @@ public class FunBase {
     }
 
     /**
-     * 返回系统当前已使用堆内存，单位Byte
+     * 返回系统当前已使用堆内存，单位 Byte
      *
      * @return long
      */
@@ -48,7 +48,7 @@ public class FunBase {
     }
 
     /**
-     * 返回系统当前已申请堆内存，单位Byte
+     * 返回系统当前已申请堆内存，单位 Byte
      *
      * @return long
      */

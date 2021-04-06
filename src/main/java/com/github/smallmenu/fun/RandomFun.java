@@ -66,7 +66,7 @@ public class RandomFun {
     /**
      * 获得指定范围内的随机数 [0,max)
      *
-     * @param max 限制随机数的范围，不包括这个数
+     * @param max 限制随机数的范围，不包含这个数
      * @return int
      */
     public static int randomInt(int max) {
@@ -94,7 +94,7 @@ public class RandomFun {
     }
 
     /**
-     * 获得指定范围内的随机数 [0,limit)
+     * 获得指定范围内的随机数 [0, max)
      *
      * @param max 限制随机数的范围，不包括这个数
      * @return long
@@ -150,7 +150,7 @@ public class RandomFun {
     /**
      * 获得一个随机的字符串
      *
-     * @param baseString 随机字符选取的样本
+     * @param baseString 随机字符选取的样本集
      * @param length     字符串的长度
      * @return String
      */
@@ -172,5 +172,4 @@ public class RandomFun {
 
         return sb.toString();
     }
-
 }

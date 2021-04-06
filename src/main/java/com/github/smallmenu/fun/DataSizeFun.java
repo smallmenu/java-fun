@@ -62,7 +62,7 @@ final public class DataSizeFun {
     public static final long BYTES_PER_TB = BYTES_PER_GB * 1024;
 
     /**
-     * Bytes per Terabyte(TB).
+     * Bytes per Terabyte(PB).
      */
     public static final long BYTES_PER_PB = BYTES_PER_TB * 1024;
 
@@ -74,7 +74,7 @@ final public class DataSizeFun {
     }
 
     /**
-     * 字节数格式化转换大小
+     * 字节数格式化转换大小（自动）
      *
      * @param bytes 字节大小
      * @return String
@@ -94,7 +94,7 @@ final public class DataSizeFun {
     }
 
     /**
-     * 字节数格式化转换大小
+     * 字节数格式化转换大小（指定单位）
      *
      * @param bytes  字节大小
      * @param suffix 后缀标识
@@ -111,7 +111,7 @@ final public class DataSizeFun {
     }
 
     /**
-     * 字节数格式化转换大小
+     * 字节数格式化转换大小（指定单位）
      *
      * @param bytes  字节大小
      * @param suffix 后缀标识

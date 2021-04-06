@@ -6,6 +6,7 @@ import com.github.smallmenu.fun.StringFun;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -266,6 +267,15 @@ public class FunTest {
         Assert.assertTrue(endsWith("Hello", "o"));
 
         Assert.assertTrue(endsWithIgnoreCase("Hello", "O"));
+
+
+        Assert.assertFalse(startsWithAny(null, null));
+        Assert.assertTrue(startsWithAny("a.zip", "b.", "a.", "c."));
+
+        Assert.assertFalse(endWithAny(null, null));
+        Assert.assertTrue(endWithAny("a.zip", ".doc", ".zip", ".xls"));
+        Assert.assertFalse(endWithAny("a.png", ".doc", ".zip", ".xls"));
+        Assert.assertTrue(endWithAny("a.png", new String[]{""}));
     }
 
     @Test
@@ -451,10 +461,10 @@ public class FunTest {
         Assert.assertEquals(list, splitTrimToList("#a##b##c#", "#"));
 
         Assert.assertArrayEquals(new int[]{3, 2, 0, 5}, splitTrimToInt("3 2 0 5"));
+        Assert.assertArrayEquals(new long[]{3, 2, 0, 5}, splitTrimToLong("3 2 0 5"));
         Assert.assertArrayEquals(new int[]{3, 2, 0, 5}, splitTrimToInt("#3##2#0##5#", "#"));
         Assert.assertArrayEquals(new int[]{3, 1, 0, 5}, splitTrimToInt("#3##1#0#a#5#", "#"));
         Assert.assertArrayEquals(new long[]{3, 1, 0, 5}, splitTrimToLong("#3##1#0#a#5#", "#"));
-        Assert.assertArrayEquals(new short[]{3, 1, 0, 5}, splitTrimToShort("#3##1#0#a#5#", "#"));
     }
 
     @Test

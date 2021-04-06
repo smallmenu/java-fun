@@ -51,7 +51,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回系统空闲堆内存，单位MB
+     * 返回系统空闲堆内存，单位 MB
      *
      * @return long
      */
@@ -60,7 +60,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回系统最大堆内存（-Xmx），单位MB
+     * 返回系统最大堆内存（-Xmx），单位 MB
      *
      * @return long
      */
@@ -69,7 +69,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回系统当前已使用堆内存，单位MB
+     * 返回系统当前已使用堆内存，单位 MB
      *
      * @return long
      */
@@ -78,7 +78,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回系统当前已申请堆内存，单位MB
+     * 返回系统当前已申请堆内存，单位 MB
      *
      * @return long
      */
@@ -87,7 +87,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 字符串获取 Bytes
+     * 字符串转换为字节数组 Bytes
      *
      * @param str 字符串
      * @return byte[]
@@ -97,10 +97,10 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 字符串获取 Bytes
+     * 字符串转换为字节数组 Bytes
      *
      * @param str     字符串
-     * @param charset 字符集
+     * @param charset Charset 字符集
      * @return byte[]
      */
     public static byte[] bytes(CharSequence str, Charset charset) {
@@ -119,7 +119,7 @@ public class Fun extends FunBase {
      * 字符串获取 Bytes
      *
      * @param str     字符串
-     * @param charset 字符集
+     * @param charset 字符串字符集
      * @return byte[]
      */
     public static byte[] bytes(CharSequence str, String charset) {
@@ -257,7 +257,7 @@ public class Fun extends FunBase {
     /**
      * 检测字符串是否为空白
      * <p>
-     * 空白包含：null、""、" "、以及不可见字符如缩紧
+     * 空白包含：null、""、" "、以及不可见字符如：缩进符
      *
      * @param str 待检测字符串
      * @return boolean
@@ -281,7 +281,7 @@ public class Fun extends FunBase {
     /**
      * 检测字符串列表，是否包含空白，包含任意一个空白返回 true
      * <p>
-     * 空白包含：null、""、" "、以及不可见字符如缩紧
+     * 空白包含：null、""、" "、以及不可见字符如：缩进符
      *
      * @param strs 字符串列表
      * @return boolean
@@ -321,7 +321,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 字符串是否匹配正则
+     * 字符串是否匹配正则表达式
      *
      * @param regex   正则表达式字符串
      * @param content 字符串
@@ -340,7 +340,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 字符串是否匹配正则
+     * 字符串是否匹配正则表达式
      *
      * @param pattern 正则表达式
      * @param content 字符串
@@ -357,7 +357,7 @@ public class Fun extends FunBase {
     /**
      * 除去字符串头尾部的空白，如果字符串是 null，依然返回 null
      * <p>
-     * 和 String.trim 不同，此方法使用 CharUtils.isBlankChar()  来判定空白
+     * 和原生的 String.trim 不同，此方法使用 CharUtils.isBlankChar() 来判定空白
      *
      * @param str 待处理字符串
      * @return String
@@ -413,10 +413,10 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 除去字符串头尾部的空白，并处理 null 值。如果结果为empty，则返回默认值
+     * 除去字符串头尾部的空白，并处理 null 值。如果结果为 empty，则返回指定的默认值
      *
      * @param str        待处理字符串
-     * @param defaultStr 默认值
+     * @param defaultStr 指定默认值
      * @return String
      */
     public static String trimToDefault(final CharSequence str, String defaultStr) {
@@ -457,10 +457,10 @@ public class Fun extends FunBase {
     /**
      * 字符串转整型
      * <p>
-     * 如果是 null 或者 "" 或者异常，返回默认值
+     * 如果是 null 或者 "" 或者异常，返回指定的默认值
      *
      * @param str          字符串
-     * @param defaultValue 默认值
+     * @param defaultValue 指定默认值
      * @return int
      */
     public static int toInt(final String str, final int defaultValue) {
@@ -478,7 +478,7 @@ public class Fun extends FunBase {
     /**
      * 字符串转浮点型
      * <p>
-     * 如果是 null 或者 "" 或者异常，返回 0.0
+     * 如果是 null 或者 "" 或者异常，返回 0.0F
      *
      * @param str 字符串
      * @return float
@@ -490,10 +490,10 @@ public class Fun extends FunBase {
     /**
      * 字符串转浮点型
      * <p>
-     * 如果是 null 或者 "" 或者异常，返回默认值
+     * 如果是 null 或者 "" 或者异常，返回指定默认值
      *
      * @param str          字符串
-     * @param defaultValue 默认值
+     * @param defaultValue 指定默认值
      * @return float
      */
     public static float toFloat(final String str, float defaultValue) {
@@ -511,7 +511,7 @@ public class Fun extends FunBase {
     /**
      * 字符串转浮点型
      * <p>
-     * 如果是 null 或者 "" 或者异常，返回 0.0
+     * 如果是 null 或者 "" 或者异常，返回 0.0D
      *
      * @param str 字符串
      * @return double
@@ -523,10 +523,10 @@ public class Fun extends FunBase {
     /**
      * 字符串转浮点型
      * <p>
-     * 如果是 null 或者 "" 或者异常，返回默认值
+     * 如果是 null 或者 "" 或者异常，返回指定默认值
      *
-     * @param str 字符串
-     * @param defaultValue 默认值
+     * @param str          字符串
+     * @param defaultValue 指定默认值
      * @return double
      */
     public static double toDouble(String str, double defaultValue) {
@@ -544,22 +544,22 @@ public class Fun extends FunBase {
     /**
      * 字符串转整型
      * <p>
-     * 如果是  null 或者 "" 或异常，返回 0
+     * 如果是  null 或者 "" 或异常，返回 0L
      *
      * @param str 字符串
      * @return int
      */
     public static long toLong(final String str) {
-        return toLong(str, 0);
+        return toLong(str, 0L);
     }
 
     /**
      * 字符串转整型
      * <p>
-     * 如果是  null 或者 "" 或者异常，返回默认值
+     * 如果是  null 或者 "" 或者异常，返回指定默认值
      *
      * @param str          字符串
-     * @param defaultValue 默认值
+     * @param defaultValue 指定默认值
      * @return long
      */
     public static long toLong(final String str, final long defaultValue) {
@@ -578,7 +578,7 @@ public class Fun extends FunBase {
      * 查找字符串是否包含指定字符串
      *
      * @param str       字符串
-     * @param searchStr 被查找的字符串
+     * @param searchStr 查找字符串
      * @return boolean
      */
     public static boolean contains(final CharSequence str, final CharSequence searchStr) {
@@ -593,7 +593,7 @@ public class Fun extends FunBase {
      * 查找字符串是否包含指定字符串，忽略大小写
      *
      * @param str       字符串
-     * @param searchStr 被查找的字符串
+     * @param searchStr 查找字符串
      * @return boolean
      */
     public static boolean containsIgnoreCase(final CharSequence str, final CharSequence searchStr) {
@@ -608,8 +608,8 @@ public class Fun extends FunBase {
      * 查找指定字符串，是否包含指定字符列表中的任意一个字符串
      *
      * @param str        指定字符串
-     * @param searchStrs 被查找的字符串数组
-     * @return 是否包含任意一个字符
+     * @param searchStrs 查找字符串列表
+     * @return boolean
      */
     public static boolean containsAny(final CharSequence str, final CharSequence... searchStrs) {
         if (empty(str) || empty(searchStrs)) {
@@ -651,9 +651,9 @@ public class Fun extends FunBase {
      * 检测字符串是否以指定字符串开头
      * <p>
      * 如果给定的字符串和开头字符串都为 null 则返回 true ，否则任意一个值为 null 返回 false
-     * 如果给定的字符串不为 null，prefix 字符串为 "" 空字符串，返回true
+     * 如果给定的字符串不为 null，prefix 字符串为 "" 空字符串，返回 true
      *
-     * @param str    被监测字符串
+     * @param str    待检测字符串
      * @param prefix 开头字符串
      * @return boolean
      */
@@ -662,9 +662,9 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 是否以指定字符串开头，忽略大小写
+     * 检测字符串是否以指定字符串开头，忽略大小写
      *
-     * @param str    被监测字符串
+     * @param str    待检测字符串
      * @param prefix 开头字符串
      * @return boolean
      */
@@ -673,12 +673,33 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 是否以指定字符串结尾
+     * 检测字符串是否以任意指定字符串开头
+     *
+     * @param str           待检测字符串
+     * @param searchStrings 开头字符串数组
+     * @return boolean
+     */
+    public static boolean startsWithAny(final CharSequence str, final CharSequence... searchStrings) {
+        if (empty(str) || empty(searchStrings)) {
+            return false;
+        }
+
+        for (CharSequence searchString : searchStrings) {
+            if (startsWith(str, searchString)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 检测字符串是否以指定字符串结尾
      * <p>
      * 如果给定的字符串和开头字符串都为 null 则返回 true ，否则任意一个值为 null 返回 false
-     * 如果给定的字符串不为 null，suffix 字符串为 "" 空字符串，返回true
+     * 如果给定的字符串不为 null，suffix 字符串为 "" 空字符串，返回 true
      *
-     * @param str    被监测字符串
+     * @param str    待检测字符串
      * @param suffix 结尾字符串
      * @return boolean
      */
@@ -687,14 +708,35 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 是否以指定字符串结尾，忽略大小写
+     * 检测字符串是否以指定字符串结尾，忽略大小写
      *
-     * @param str    被监测字符串
+     * @param str    待检测字符串
      * @param suffix 结尾字符串
      * @return boolean
      */
     public static boolean endsWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
         return StringFun.endsWith(str, suffix, true);
+    }
+
+    /**
+     * 检测字符串是否以任意指定字符串结尾
+     *
+     * @param str           待检测字符串
+     * @param searchStrings 查找字符串
+     * @return boolean
+     */
+    public static boolean endWithAny(final CharSequence str, final CharSequence... searchStrings) {
+        if (empty(str) || empty(searchStrings)) {
+            return false;
+        }
+
+        for (CharSequence searchString : searchStrings) {
+            if (endsWith(str, searchString)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -776,7 +818,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回索引位置
+     * 查找字符串，并返回索引位置
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -791,7 +833,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回索引位置
+     * 查找字符串，并返回索引位置
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -807,7 +849,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回索引位置，忽略大小写
+     * 查找字符串，并返回索引位置，忽略大小写
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -822,7 +864,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 查找字符串，返回索引位置，忽略大小写
+     * 查找字符串，并返回索引位置，忽略大小写
      *
      * @param str       字符串
      * @param searchStr 查找字符串
@@ -854,7 +896,7 @@ public class Fun extends FunBase {
     /**
      * CharSequence 转 String
      *
-     * @param cs 字符串
+     * @param cs CharSequence 类型字符串
      * @return String
      */
     public static String toStr(final CharSequence cs) {
@@ -899,7 +941,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 重复字符到指定次数
+     * 重复指定字符到指定次数
      *
      * @param ch     字符
      * @param repeat 次数
@@ -919,7 +961,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 重复字符串到指定次数
+     * 重复指定字符串到指定次数
      *
      * @param str    字符串
      * @param repeat 次数
@@ -966,7 +1008,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 右侧填充字符串到最小长度，使用单一字符填充
+     * 左侧填充字符串到最小长度，使用单一字符填充
      *
      * @param str     待填充字符串
      * @param length  长度
@@ -1003,7 +1045,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 左侧填充字符串到指定长度
+     * 左侧填充字符串到指定长度，使用字符串填充
      *
      * @param str    待填充字符串
      * @param length 长度
@@ -1047,8 +1089,8 @@ public class Fun extends FunBase {
     /**
      * 右侧填充字符串到指定长度。使用单一字符填充
      *
-     * @param str    待填充字符
-     * @param length 长度
+     * @param str     待填充字符
+     * @param length  长度
      * @param padChar 填充字符
      * @return String
      */
@@ -1081,7 +1123,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 右侧填充字符串到指定长度
+     * 右侧填充字符串到指定长度，使用字符串填充
      *
      * @param str    待填充字符串
      * @param length 长度
@@ -1137,7 +1179,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 分割字符串为数组
+     * 分割字符串为数组，指定分割字符
      *
      * @param str       字符串
      * @param separator 分隔符
@@ -1152,7 +1194,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 分割字符串为数组
+     * 分割字符串为数组，指定分割字符串
      *
      * @param str       字符串
      * @param separator 分割字符串
@@ -1167,58 +1209,6 @@ public class Fun extends FunBase {
             return StringFun.split(str.toString(), 0, false, false);
         } else {
             return StringFun.split(str.toString(), separator.toString(), 0, false, false, false);
-        }
-    }
-
-    /**
-     * 分割字符串为列表
-     * <p>
-     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
-     *
-     * @param str 字符串
-     * @return String[]
-     */
-    public static List<String> splitToList(final CharSequence str) {
-        if (str == null) {
-            return Collections.emptyList();
-        }
-
-        return StringFun.splitToList(str.toString(), 0, false, false);
-    }
-
-    /**
-     * 分割字符串为列表
-     * <p>
-     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
-     *
-     * @param str       字符串
-     * @param separator 分隔符
-     * @return String[]
-     */
-    public static List<String> splitToList(final CharSequence str, final char separator) {
-        if (str == null) {
-            return Collections.emptyList();
-        }
-
-        return StringFun.splitToList(str.toString(), separator, 0, false, false, false);
-    }
-
-    /**
-     * 分割字符串为列表
-     *
-     * @param str       字符串
-     * @param separator 分割字符串
-     * @return String[]
-     */
-    public static List<String> splitToList(final CharSequence str, final CharSequence separator) {
-        if (str == null) {
-            return Collections.emptyList();
-        }
-
-        if (separator == null) {
-            return StringFun.splitToList(str.toString(), 0, false, false);
-        } else {
-            return StringFun.splitToList(str.toString(), separator.toString(), 0, false, false, false);
         }
     }
 
@@ -1241,24 +1231,7 @@ public class Fun extends FunBase {
     /**
      * 分割字符串为数组
      * <p>
-     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
-     *
-     * @param str 字符串
-     * @return int[]
-     */
-    public static int[] splitTrimToInt(final CharSequence str) {
-        if (str == null) {
-            return ArrayFun.EMPTY_INT;
-        }
-
-        String[] strings = StringFun.split(str.toString(), 0, true, true);
-        return Arrays.stream(strings).mapToInt(Integer::parseInt).toArray();
-    }
-
-    /**
-     * 分割字符串为数组
-     * <p>
-     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     * 指定单一字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
      * @param separator 分隔符
@@ -1274,6 +1247,8 @@ public class Fun extends FunBase {
 
     /**
      * 分割字符串为数组
+     * <p>
+     * 指定字符串分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
      * @param separator 分割字符串
@@ -1292,9 +1267,80 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 分割字符串为数组
+     * 分割字符串为列表
      * <p>
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return String[]
+     */
+    public static List<String> splitToList(final CharSequence str) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        return StringFun.splitToList(str.toString(), 0, false, false);
+    }
+
+    /**
+     * 分割字符串为列表
+     * <p>
+     * 指定单一字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param separator 分隔符
+     * @return String[]
+     */
+    public static List<String> splitToList(final CharSequence str, final char separator) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        return StringFun.splitToList(str.toString(), separator, 0, false, false, false);
+    }
+
+    /**
+     * 分割字符串为列表
+     * <p>
+     * 指定字符串分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str       字符串
+     * @param separator 分割字符串
+     * @return String[]
+     */
+    public static List<String> splitToList(final CharSequence str, final CharSequence separator) {
+        if (str == null) {
+            return Collections.emptyList();
+        }
+
+        if (separator == null) {
+            return StringFun.splitToList(str.toString(), 0, false, false);
+        } else {
+            return StringFun.splitToList(str.toString(), separator.toString(), 0, false, false, false);
+        }
+    }
+
+    /**
+     * 分割字符串为整型数组
+     * <p>
+     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return int[]
+     */
+    public static int[] splitTrimToInt(final CharSequence str) {
+        if (str == null) {
+            return ArrayFun.EMPTY_INT;
+        }
+
+        String[] strings = StringFun.split(str.toString(), 0, true, true);
+        return Arrays.stream(strings).mapToInt(Integer::parseInt).toArray();
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 指定字符串分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
      * @param separator 分隔符
@@ -1316,9 +1362,26 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 分割字符串为数组
+     * 分割字符串为整型数组
      * <p>
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     *
+     * @param str 字符串
+     * @return long[]
+     */
+    public static long[] splitTrimToLong(final CharSequence str) {
+        if (str == null) {
+            return ArrayFun.EMPTY_LONG;
+        }
+
+        String[] strings = StringFun.split(str.toString(), 0, true, true);
+        return Arrays.stream(strings).mapToLong(Long::parseLong).toArray();
+    }
+
+    /**
+     * 分割字符串为数组
+     * <p>
+     * 指定字符串分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
      * @param separator 分隔符
@@ -1340,30 +1403,6 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 分割字符串为数组
-     * <p>
-     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
-     *
-     * @param str       字符串
-     * @param separator 分隔符
-     * @return short[]
-     */
-    public static short[] splitTrimToShort(final CharSequence str, final CharSequence separator) {
-        if (str == null) {
-            return ArrayFun.EMPTY_SHORT;
-        }
-
-        String[] strings;
-        if (separator == null) {
-            strings = StringFun.split(str.toString(), 0, true, true);
-        } else {
-            strings = StringFun.split(str.toString(), separator.toString(), 0, true, true, false);
-        }
-
-        return ArrayFun.stringToShortArray(strings);
-    }
-
-    /**
      * 分割字符串为列表
      * <p>
      * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
@@ -1382,7 +1421,7 @@ public class Fun extends FunBase {
     /**
      * 分割字符串为列表
      * <p>
-     * 默认以空白字符分割。对分割后的值进行 trim ，并自动忽略空值
+     * 指定单一字符分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
      * @param separator 分隔符
@@ -1398,6 +1437,8 @@ public class Fun extends FunBase {
 
     /**
      * 分割字符串为列表
+     * <p>
+     * 指定字符串分割。对分割后的值进行 trim ，并自动忽略空值
      *
      * @param str       字符串
      * @param separator 分割字符串
@@ -1535,7 +1576,7 @@ public class Fun extends FunBase {
      *
      * @param array     数组
      * @param separator 分隔符
-     * @param <T> 范型
+     * @param <T>       范型
      * @return String
      */
     public static <T> String join(T[] array, CharSequence separator) {
@@ -1564,103 +1605,18 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 以 separator 为分隔符转换为字符串，支持字符串类容器
+     * 以 separator 为分隔符将数组转换为字符串，支持字符串类容器
      *
      * @param iterable  字符串容器
      * @param separator 分隔符
-     * @param <T> 范型
      * @return String
      */
-    public static <T> String join(final Iterable<?> iterable, String separator) {
+    public static String join(final Iterable<?> iterable, String separator) {
         if (iterable == null) {
             return null;
         }
 
         return join(iterable.iterator(), separator);
-    }
-
-    /**
-     * 获得匹配字符串的指定分组
-     * <p>
-     * 分组 0，表示全匹配的信息
-     *
-     * @param pattern    正则表达式模式
-     * @param content    字符串
-     * @param groupIndex 分组
-     * @return String
-     */
-    public static String regexMatch(Pattern pattern, CharSequence content, int groupIndex) {
-        if (pattern == null || content == null) {
-            return null;
-        }
-
-        Matcher matcher = pattern.matcher(content);
-        if (matcher.find()) {
-            return matcher.group(groupIndex);
-        }
-
-        return null;
-    }
-
-    /**
-     * 获得匹配字符串的所有分组
-     * <p>
-     * 分组 0，表示全匹配的信息
-     *
-     * @param pattern 正则表达式模式
-     * @param content 字符串
-     * @return List
-     */
-    public static List<String> regexMatch(Pattern pattern, CharSequence content) {
-        if (pattern == null || content == null) {
-            return null;
-        }
-
-        ArrayList<String> result = new ArrayList<>();
-        Matcher matcher = pattern.matcher(content);
-        if (matcher.find()) {
-            final int groupCount = matcher.groupCount();
-            for (int i = 0; i <= groupCount; i++) {
-                result.add(matcher.group(i));
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * 获得匹配字符串的指定分组
-     * <p>
-     * 分组 0，表示全匹配的信息
-     *
-     * @param regex      正则表达式字符串
-     * @param content    字符串
-     * @param groupIndex 分组
-     * @return String
-     */
-    public static String regexMatch(String regex, CharSequence content, int groupIndex) {
-        if (regex == null || content == null) {
-            return null;
-        }
-
-        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-        return regexMatch(pattern, content, groupIndex);
-    }
-
-    /**
-     * 获得匹配字符串的所有分组
-     *
-     * @param regex   正则表达式字符串
-     * @param content 字符串
-     * @return List
-     */
-    public static List<String> regexMatch(String regex, CharSequence content) {
-        if (regex == null || content == null) {
-            return null;
-        }
-
-        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-        return regexMatch(pattern, content);
     }
 
     /**
@@ -1711,6 +1667,90 @@ public class Fun extends FunBase {
     }
 
     /**
+     * 获取正则匹配字符串后的指定分组
+     * <p>
+     * 分组 0，表示全匹配的信息
+     *
+     * @param pattern    正则表达式模式
+     * @param content    字符串
+     * @param groupIndex 分组
+     * @return String
+     */
+    public static String regexMatch(Pattern pattern, CharSequence content, int groupIndex) {
+        if (pattern == null || content == null) {
+            return null;
+        }
+
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            return matcher.group(groupIndex);
+        }
+
+        return null;
+    }
+
+    /**
+     * 获取正则匹配字符串后的所有分组
+     * <p>
+     * 分组 0，表示全匹配的信息
+     *
+     * @param pattern 正则表达式模式
+     * @param content 字符串
+     * @return List
+     */
+    public static List<String> regexMatch(Pattern pattern, CharSequence content) {
+        if (pattern == null || content == null) {
+            return null;
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            final int groupCount = matcher.groupCount();
+            for (int i = 0; i <= groupCount; i++) {
+                result.add(matcher.group(i));
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 获取正则匹配字符串后的指定分组
+     * <p>
+     * 分组 0，表示全匹配的信息
+     *
+     * @param regex      正则表达式字符串
+     * @param content    字符串
+     * @param groupIndex 分组
+     * @return String
+     */
+    public static String regexMatch(String regex, CharSequence content, int groupIndex) {
+        if (regex == null || content == null) {
+            return null;
+        }
+
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+        return regexMatch(pattern, content, groupIndex);
+    }
+
+    /**
+     * 获取正则匹配字符串后的所有分组
+     *
+     * @param regex   正则表达式字符串
+     * @param content 字符串
+     * @return List
+     */
+    public static List<String> regexMatch(String regex, CharSequence content) {
+        if (regex == null || content == null) {
+            return null;
+        }
+
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+        return regexMatch(pattern, content);
+    }
+
+    /**
      * 字符串替换
      *
      * @param str        待替换的字符串
@@ -1735,7 +1775,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 移除字符串中所有给定字符串
+     * 移除指定字符串中所有给定字符串
      *
      * @param str    字符串
      * @param remove 被移除的字符串
@@ -1750,7 +1790,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 移除字符串左侧中所有给定字符串
+     * 移除指定字符串左侧中所有给定字符串
      *
      * @param str    字符串
      * @param remove 被移除的字符串
@@ -1769,7 +1809,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 完整的移除字符串左侧中所有给定字符串
+     * 完整的移除指定字符串左侧中所有给定字符串（多次）
      *
      * @param str    字符串
      * @param remove 被移除的字符串
@@ -1795,7 +1835,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 移除字符串右侧中所有给定字符串
+     * 移除指定字符串右侧中所有给定字符串
      *
      * @param str    字符串
      * @param remove 被移除的字符串
@@ -1814,7 +1854,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 完整的移除字符串右侧中所有给定字符串
+     * 完整的移除指定字符串右侧中所有给定字符串（多次）
      *
      * @param str    字符串
      * @param remove 被移除的字符串
@@ -1840,10 +1880,10 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 移除字符串中所有给定字符串列表
+     * 移除指定字符串中所有给定字符串列表
      *
      * @param str     字符串
-     * @param removes 被移除的字符串，一个或多个
+     * @param removes 被移除的字符串数组，一个或多个
      * @return String
      */
     public static String removeAny(final CharSequence str, final CharSequence... removes) {
@@ -1859,7 +1899,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 去除字符串中指定的多个字符集
+     * 去除指定字符串中指定的多个字符集
      *
      * @param str   字符串
      * @param chars 字符列表
@@ -1888,7 +1928,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 去除字符串中换行符
+     * 去除指定字符串中换行符
      *
      * @param str 字符串
      * @return String
@@ -1898,7 +1938,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 返回默认日期时间字符串
+     * 返回当前日期时间默认格式字符串
      * <p>
      * 默认格式：yyyy-MM-dd HH:mm:ss
      *
@@ -1909,7 +1949,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 根据时间戳，返回默认日期时间字符串
+     * 根据时间戳，返回指定日期时间默认格式字符串
      * <p>
      * 默认格式：yyyy-MM-dd HH:mm:ss
      *
@@ -1921,7 +1961,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 根据格式化参数返回日期时间字符串
+     * 根据格式化参数返回当前日期时间字符串
      *
      * @param pattern 日期时间格式
      * @return String
@@ -1931,7 +1971,7 @@ public class Fun extends FunBase {
     }
 
     /**
-     * 根据格式化参数，时间戳参数，返回时间字符串
+     * 根据格式化参数，时间戳，返回指定日期时间字符串
      *
      * @param pattern   日期时间格式
      * @param timestamp 时间戳
@@ -2016,7 +2056,7 @@ public class Fun extends FunBase {
     /**
      * 获得一个指定长度随机的字符串，排除指定的字符串列表集
      *
-     * @param length 字符串的长度
+     * @param length  字符串的长度
      * @param excepts 待排除列表
      * @return String
      */
